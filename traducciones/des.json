@@ -1,0 +1,34 @@
+{
+    "navmenu": {
+      "empower": "Potenciar",
+      "benefits": "Beneficios",
+      "massing": "Massing",
+      "team": "Clientes",
+      "pricing": "Servicios",
+      "PortFolio": "Portafolio",
+      "faq": "Preguntas",
+      "contact": "Contacto",
+      "send-request": "CONTACTANOS"
+    },
+    "empower": {
+      "t1": "Aviso Legal",
+      "t2": "Zero to Plan es una firma de consultoría y viabilidad en bienes raíces. El contenido de este sitio web es únicamente informativo y no constituye asesoramiento legal, financiero ni de inversión. Nuestros servicios incluyen estudios de viabilidad, modelado arquitectónico y proyecciones financieras. No actuamos como asesores financieros licenciados ni como asesores legales.",
+      "t3": "Cualquier estudio de caso, análisis de mercado o ejemplo proporcionado es ilustrativo de proyectos pasados y no representa promesas ni garantías de resultados futuros. Los resultados de los proyectos pueden variar en función de diversos factores del mercado, regulatorios y económicos.",
+      "t4": "Todos los medios y contenidos presentados en este sitio web son propiedad de Zero to Plan o se utilizan bajo licencia o atribución adecuada. Nos esforzamos por acreditar debidamente a todos los creadores y agradecemos cualquier notificación sobre posibles inconvenientes.",
+      "t5": "El uso de este sitio implica la aceptación de nuestros términos. Se recomienda a los visitantes que busquen asesoramiento independiente antes de tomar decisiones relacionadas con bienes raíces o inversiones basadas en la información proporcionada aquí."
+    },
+    "send-request":{
+      "t1":"Formulario de Proyecto de Masificación",
+      "t2":"Por favor, complete los siguientes campos para ayudarnos a entender las necesidades de su proyecto. Esta información nos permite proporcionar estudios de masificación precisos y desarrollar un plan de sitio integral.",
+      "t3":"Nombre completo",
+      "t4":"Correo electrónico",
+      "t5":"Número de teléfono (Opcional)",
+      "t6":"Dirección",
+      "t7":"Descripción",
+      "t8":"Cerrar",
+      "t9":"Enviar",
+      "t10":"Todos los derechos reservados",
+      "t11":"Las imágenes utilizadas son propiedad de Zero to Plan o se usan con los derechos correspondientes. Para más información, por favor revisa nuestro <a href='disclaimer.html'><strong>[Aviso Legal Completo]</strong></a>.",
+      "t12":"Diseñado por <a href='https://zerotoplan.com/'>Zerotoplan</a>"
+    }
+  }
