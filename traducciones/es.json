@@ -14,7 +14,9 @@
     "t1": "Plataforma de Viabilidad Inmobiliaria",
     "t2": "Bienvenido a <span>Zero to Plan</span>",
     "t3": "Potenciar su Toma de Decisiones con Nuestra <br> Experticia en Viabilidad Inmobiliaria",
-    "t4": "Comenzar"
+    "t4": "Comenzar",
+    "watch": "Ver Video",
+    "watch_title": "Video Introductorio"
   },
   "empower": {
     "t1": "Potenciar su Toma de Decisiones con Nuestra Experticia en Viabilidad Inmobiliaria",
@@ -134,5 +136,23 @@
     "t10":"Todos los derechos reservados",
     "t11":"Las imágenes utilizadas son propiedad de Zero to Plan o se usan con los derechos correspondientes. Para más información, por favor revisa nuestro <a href='disclaimer.html'><strong>[Aviso Legal Completo]</strong></a>.",
     "t12":"Diseñado por <a href='https://zerotoplan.com/'>Zerotoplan</a>"
+  },
+  
+  "process": {
+    "massing_title": "Proceso de Volumetría Arquitectónica",
+    "m1_text": "Discusión del proyecto con el propietario (visión y necesidades)",
+    "m2_text": "Desarrollo de volumetría con datos de mercado",
+    "m3_text": "Revisión con el propietario",
+    "m4_text": "Reunión previa con la ciudad",
+    "m5_text": "Estudio final de volumetría con comentarios y recomendaciones",
+
+    "fin_title": "Análisis Financiero y de Mercado",
+    "f1_text": "Estudio de mercado – Demografía (Esri), condiciones de mercado (CoStar y otros)",
+    "f2_text": "Proforma de desarrollo a partir del Estudio de Mercado y Volumetría",
+    "f3_text": "Cartas de opinión sobre seguro, préstamo y costos de construcción (empresas locales)",
+    "f4_text": "Revisión con el propietario",
+    "f5_text": "Informe final con análisis de sensibilidad y recomendaciones"
   }
+
+
   }

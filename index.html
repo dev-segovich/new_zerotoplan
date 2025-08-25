@@ -90,22 +90,63 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
+  <div class="container text-center">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <p data-aos="fade-up" data-aos-delay="100" data-section="hero" data-value="t1">
+        Real Estate Feasibility Platform
+      </p>
 
-      <div class="container text-center">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-          <p data-aos="fade-up" data-aos-delay="100" class="" data-section="hero" data-value="t1">Real Estate
-            Feasibility Platform<br></p>
-          <h1 data-aos="fade-up" class="" data-section="hero" data-value="t2">Welcome to <span>Zero to Plan</span></h1>
-          <p data-aos="fade-up" data-aos-delay="100" class="" data-section="hero" data-value="t3">Empower Your
-            Decision-Making with Our <br> Real Estate
-            Feasibility Expertise
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#pricing" class="btn-get-started" data-section="hero" data-value="t4">Get Started</a>
-          </div>
+      <h1 data-aos="fade-up" data-section="hero" data-value="t2">
+        Welcome to <span>Zero to Plan</span>
+      </h1>
+
+      <p data-aos="fade-up" data-aos-delay="100" data-section="hero" data-value="t3">
+        Empower Your Decision-Making with Our <br> Real Estate Feasibility Expertise
+      </p>
+
+      <div class="d-flex gap-2 flex-wrap justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <a href="#pricing" class="btn-get-started" data-section="hero" data-value="t4">Get Started</a>
+
+        <!-- Watch Video (abre modal) -->
+        <button type="button"
+                class="btn-watch"
+                data-bs-toggle="modal"
+                data-bs-target="#videoModal"
+                data-section="hero"
+                data-value="watch">
+          Watch Video
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal YouTube -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel" data-section="hero" data-value="watch_title">Zeroto plan Video</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                title="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="ratio ratio-16x9">
+          <!-- Cargamos src al abrir para evitar autoplay fuera de modal -->
+          <iframe id="heroVideo"
+                  data-src="https://www.youtube.com/embed/02Ymb920Ixo?autoplay=1&rel=0&modestbranding=1"
+                  title="Zero to Plan - Intro"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
-    </section><!-- /Hero Section -->
     <section class="hero-img section">
       <div class="hero-bg">
         <img src="assets/img/background.webp" alt="">
@@ -499,6 +540,19 @@
     <!-- Team Section -->
     <section id="team" class="team section">
 
+      <div class="container mb-5" data-aos="fade-up">
+        <div class="ratio ratio-16x9">
+          <iframe
+            src="https://www.youtube.com/embed/02Ymb920Ixo?rel=0&modestbranding=1"
+            title="Zero to Plan - Intro"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
+      </div>
+
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2 data-section="customers" data-value="t1">Built for the Deal Team</h2>
@@ -509,7 +563,7 @@
           <div class="member">
             <img src="assets/img/team/Developer.webp" class="img-fluid" alt="">
             <div class="card-bottom_content-wrapper">
-              <h4><strongdata-section="customers" data-value="t2">Developer</strong></h4>
+              <h4><strong data-section="customers" data-value="t2">Developer</strong></h4>
             </div>
           </div><!-- End Team Member -->
 
@@ -644,12 +698,83 @@
 
         </div>
       </div>
-      <div class="Arqui-Massing-Process d-flex justify-content-center align-items-center">
-        <img src="assets/img/Architectural Massing process.webp" alt="Architectural Massing Process" class="img-fluid">
+    </section><!-- /Pricing Section -->
+
+    <!-- Process Flows -->
+    <section id="process" class="process section">
+
+      <!-- Architectural Massing Process -->
+      <div class="container section-title pb-3" data-aos="fade-up">
+        <h2 data-section="process" data-value="massing_title">Architectural Massing Process</h2>
       </div>
 
+      <div class="container pb-5">
+        <div class="flow-row" data-flow="massing">
+          <article class="step">
+            <p data-section="process" data-value="m1_text">
+              Project Discussion with ownership (vision & needs)
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="m2_text">
+              Massing development with market data
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="m3_text">
+              Review with ownership
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="m4_text">
+              Pre-app meeting with City
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="m5_text">
+              Final massing study with comments & recommendations
+            </p>
+          </article>
+        </div>
+      </div>
 
-    </section><!-- /Pricing Section -->
+      <!-- Financial & Market Analysis -->
+      <div class="container section-title pb-3" data-aos="fade-up">
+        <h2 data-section="process" data-value="fin_title">Financial and Market Analysis</h2>
+      </div>
+
+      <div class="container">
+        <div class="flow-row" data-flow="financial">
+          <article class="step">
+            <p data-section="process" data-value="f1_text">
+              Market study – Demographics (Esri), Market conditions (CoStar & others)
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="f2_text">
+              Development proforma from Market & Massing study
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="f3_text">
+              Insurance, loan & construction cost opinion letters from local companies
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="f4_text">
+              Review with ownership
+            </p>
+          </article>
+          <article class="step">
+            <p data-section="process" data-value="f5_text">
+              Final report with sensitivity analysis & recommendations
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
 
     <!-- PortFolio Section -->
 

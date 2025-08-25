@@ -47,6 +47,17 @@
   scroll-behavior: smooth;
 }
 
+:root{
+  --proc-bg: #0b0c0e;
+  --card-bg: #0c2031;
+  --card-text: #ffffff;
+  --brand: #ffffff;          /* color principal */
+  --brand-2: #ffffff;        /* degradado flecha */
+  --muted: #5b6168;
+  --ring: rgba(0, 107, 166, .18);
+  --shadow: 0 8px 28px rgba(0,0,0,.12);
+}
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -126,6 +137,12 @@ h6 {
   }
 
   .header .btn-getstarted {
+    order: 2;
+    margin: 0 15px 0 0;
+    padding: 6px 15px;
+  }
+
+  .header .btn-watch {
     order: 2;
     margin: 0 15px 0 0;
     padding: 6px 15px;
@@ -948,8 +965,9 @@ section,
 }
 
 .hero .btn-get-started:hover {
-  color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  color: var(--accent-color);
+  background: var(--contrast-color);
+  border: var(--accent-color) 2px solid;
   box-shadow: 0 8px 28px
     color-mix(in srgb, var(--accent-color), transparent 55%);
 }
@@ -2580,4 +2598,167 @@ section,
   100% {
     width: 100%;
   }
+}
+
+
+#process.process {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  background: linear-gradient(180deg, #f7f9fb 0%, #eef3f7 100%);
+}
+
+#process .section-title h2{
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+#process .subtitle{
+  margin-top: .25rem;
+  color: var(--muted);
+}
+
+/* Row container */
+.flow-row{
+  --gap: 48px;
+  display: flex;
+  gap: var(--gap);
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;           /* horizontal en desktop */
+  overflow-x: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+}
+.flow-row::-webkit-scrollbar{ height: 8px; }
+.flow-row::-webkit-scrollbar-thumb{ background: #c6d4e0; border-radius: 99px; }
+
+/* Step cards */
+.step{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  min-width: 260px;
+  max-width: 320px;
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 18px 18px 16px;
+  box-shadow: var(--shadow);
+  position: relative;
+  border: 1px solid rgba(0,0,0,.04);
+  transition: transform .25s ease, box-shadow .25s ease;
+  isolation: isolate;
+}
+.step h4{
+  font-size: 1.05rem;
+  margin: 0 0 .35rem 0;
+  font-weight: 800;
+  color: var(--brand);
+}
+.step p{
+
+  color: var(--card-text);
+  margin: 0;
+  line-height: 1.4;
+  font-size: 1.2rem;
+}
+
+/* Ajusta a gusto */
+.flow-row { --gap: 48px; }
+.step:not(:last-child)::after{
+  /* tamaño de la caja donde se pinta la flecha */
+  --arrow-w: 70px;
+  --arrow-h: 30px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(-1.35 * (var(--arrow-w) / 2)); /* separa más la flecha del texto */
+  width: var(--arrow-w);
+  height: var(--arrow-h);
+  transform: translateY(-50%);
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='25' viewBox='0 0 90 25' fill='none' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' y1='12.5' x2='90' y2='12.5' gradientUnits='userSpaceOnUse'><stop stop-color='%23006BA6'/><stop offset='1' stop-color='%2300B4D8'/></linearGradient></defs><path d='M2 12.5 H74' stroke='url(%23g)' stroke-width='4.5' stroke-linecap='round'/><path d='M74 5 L88 12.5 L74 20' fill='none' stroke='url(%23g)' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center/100% 100%;
+  pointer-events: none;
+  z-index: -3;
+}
+
+/* Glow ring on hover */
+.step:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0,0,0,.16), 0 0 0 6px var(--ring);
+}
+
+/* Appear animation */
+.step{
+  opacity: 0;
+  transform: translateY(14px);
+}
+.step.in-view{
+  animation: step-in .5s ease forwards;
+}
+@keyframes step-in{
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* Labels (opcional) */
+.flow-row[data-flow="massing"] .step h4{ color: #0e7490; }
+.flow-row[data-flow="financial"] .step h4{ color: #2563eb; }
+
+/* ===== Responsive: vertical flow en pantallas pequeñas ===== */
+@media (max-width: 768px){
+  .flow-row{
+    flex-direction: column;
+    overflow: visible;
+  }
+  .step{
+    min-width: 100%;
+    max-width: 100%;
+    padding: 16px 16px 16px 18px;
+  }
+  .step:not(:last-child)::after{
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(90deg);
+    top: auto;
+    bottom: -35px;
+  }
+}
+
+/* Pequeñas mejoras de contraste con tu tema */
+#process .section-title{
+  text-align: center;
+  margin-bottom: .75rem;
+}
+
+#hero .btn-get-started {
+  margin-right: .25rem;
+}
+
+.hero .btn-watch {
+  color: var(--accent-color);
+  background: var(--contrast-color);
+  font-family: var(--heading-font);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  box-shadow: 0 8px 20px
+    color-mix(in srgb, var(--accent-color), transparent 80%);
+}
+
+.hero .btn-watch:hover {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  box-shadow: 0 8px 28px
+    color-mix(in srgb, var(--accent-color), transparent 55%);
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--heading-color);
 }

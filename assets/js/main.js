@@ -172,3 +172,40 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+
+  (function () {
+    const steps = document.querySelectorAll('#process .step');
+    if (!('IntersectionObserver' in window) || steps.length === 0) {
+      steps.forEach(s => s.classList.add('in-view'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // retraso escalonado para efecto "cascada"
+          setTimeout(() => e.target.classList.add('in-view'), (i % 5) * 90);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    steps.forEach(s => io.observe(s));
+  })();
+
+  (function () {
+    const modalEl = document.getElementById('videoModal');
+    const iframe = document.getElementById('heroVideo');
+    const src = iframe.getAttribute('data-src');
+
+    modalEl.addEventListener('show.bs.modal', () => {
+      // setea el src al abrir para que haga autoplay dentro del modal
+      iframe.setAttribute('src', src);
+    });
+
+    modalEl.addEventListener('hidden.bs.modal', () => {
+      // limpia el src para pausar el video al cerrar
+      iframe.setAttribute('src', '');
+    });
+  })();
+

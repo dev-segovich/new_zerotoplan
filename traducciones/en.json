@@ -11,10 +11,12 @@
       "send-request":"SEND REQUEST"
     },
     "hero":{
-      "t1":"Real Estate Feasibility Platform",
-      "t2":"Welcome to <span>Zero to Plan</span>",
-      "t3":"Empower Your Decision-Making with Our <br> Real Estate Feasibility Expertise",
-      "t4":"Get Started"
+      "t1": "Real Estate Feasibility Platform",
+      "t2": "Welcome to <span>Zero to Plan</span>",
+      "t3": "Empower Your Decision-Making with Our <br> Real Estate Feasibility Expertise",
+      "t4": "Get Started",
+      "watch": "Watch Video",
+      "watch_title": "Intro Video"
     },
     "empower":{
       "t1":"Empower Your Decision-Making with Our Real Estate Feasibility Expertise",
@@ -134,5 +136,20 @@
       "t10":"All Rights Reserved",
       "t11":"Images used are owned by Zero to Plan or used with the appropriate rights. For more information, please review our <a href='disclaimer.html'><strong>[Full Disclaimer]</strong></a>.",
       "t12":"Designed by <a href='https://zerotoplan.com/'>Zerotoplan</a>"
-    }
+    },
+    "process": {
+    "massing_title": "Architectural Massing Process",
+    "m1_text": "Project Discussion with ownership (vision & needs)",
+    "m2_text": "Massing development with market data",
+    "m3_text": "Review with ownership",
+    "m4_text": "Pre-app meeting with City",
+    "m5_text": "Final massing study with comments & recommendations",
+
+    "fin_title": "Financial and Market Analysis",
+    "f1_text": "Market study – Demographics (Esri), Market conditions (CoStar & others)",
+    "f2_text": "Development proforma from Market & Massing study",
+    "f3_text": "Insurance, loan & construction cost opinion letters from local companies",
+    "f4_text": "Review with ownership",
+    "f5_text": "Final report with sensitivity analysis & recommendations"
+  }
   }
