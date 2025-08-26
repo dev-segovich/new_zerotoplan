@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zero to Plan | Land Acquisition Intake Form</title>
+  <!-- Favicons -->
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+
+  <!-- Fonts (aligned with site) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      /* tokens from main.css */
+      --background-color:#ffffff;
+      --default-color:#0c2031;
+      --heading-color:#0c2031;
+      --accent-color:#0c2031;
+      --contrast-color:#ffffff;
+      /* local helpers */
+      --ztp-navy: var(--heading-color);
+      --ztp-blue: var(--accent-color);
+      --ztp-sky: #EAF1F6;
+      --ztp-slate: var(--default-color);
+      --card: #F9FAFB;
+    }
+    body{font-family: 'Avenir Next', 'Nunito', 'Inter', Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans'; color:var(--ztp-slate);}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--ztp-sky);padding:.25rem .5rem;border-radius:.75rem;font-size:.75rem;font-weight:600;color:var(--ztp-navy)}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:0.75rem}
+    .card-h{background:var(--ztp-sky);padding:.75rem 1rem;border-bottom:1px solid #e5e7eb;font-weight:700;color:var(--ztp-navy)}
+    .label{font-weight:600;font-size:.875rem;color:#111827}
+    .hint{font-size:.75rem;color:#6b7280}
+    .field{appearance:none;display:block;width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.6rem .75rem;line-height:1.3}
+    .field:focus{outline:none;box-shadow:0 0 0 3px rgba(31,106,165,.15);border-color:#9ac0df}
+    .section-gap{margin-top:1rem}
+  </style>
+</head>
+<body class="bg-white">
+  <!-- Sticky header mimic -->
+  <header class="w-full bg-[color:var(--ztp-navy)] text-white">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center gap-4">
+      <a href="index.html#hero" class="flex items-center">
+        <img src="assets/img/Zerotoplan.webp" alt="Zero to Plan" class="h-9 w-auto" />
+      </a>
+      <div class="h-8 w-px bg-white/30"></div>
+      <h1 class="text-xl md:text-2xl font-extrabold">Land Acquisition Intake Form</h1>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 md:px-8 py-6 md:py-8">
+    <!-- Intro -->
+    <div class="card p-5 md:p-6">
+      <div class="flex items-start gap-3">
+        <div class="chip">Zero to Plan</div>
+      </div>
+      <p class="mt-3 text-sm md:text-[15px] leading-6 text-gray-700">
+        Thank you for submitting your property for evaluation. You will receive an updated email with the Client Representation Agreement signed by us within 24 hours of your submittal. Thank you for your business.
+      </p>
+    </div>
+
+    <form class="mt-6 space-y-6" action="land_submit.php" method="POST" novalidate>
+      <!-- Broker Information -->
+      <section class="card">
+        <div class="card-h">Broker Information</div>
+        <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div>
+            <label class="label" for="agent_name">Name of the Agent</label>
+            <input class="field" id="agent_name" name="agent_name" type="text" required />
+          </div>
+          <div>
+            <label class="label" for="broker_name">Name of the Broker</label>
+            <input class="field" id="broker_name" name="broker_name" type="text" required />
+          </div>
+          <div>
+            <label class="label" for="dba">DBA (if applicable)</label>
+            <input class="field" id="dba" name="dba" type="text" />
+          </div>
+          <div>
+            <label class="label" for="broker_phone">Telephone Number</label>
+            <input class="field" id="broker_phone" name="broker_phone" type="tel" placeholder="+1 (___) ___‑____" required />
+          </div>
+          <div>
+            <label class="label" for="broker_email">Email Address</label>
+            <input class="field" id="broker_email" name="broker_email" type="email" required />
+          </div>
+          <div>
+            <label class="label" for="broker_website">Website (if applicable)</label>
+            <input class="field" id="broker_website" name="broker_website" type="url" placeholder="https://" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="label" for="broker_address">Broker Mailing Address</label>
+            <input class="field" id="broker_address" name="broker_address" type="text" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Client Information -->
+      <section class="card">
+        <div class="card-h">Client Information</div>
+        <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div>
+            <label class="label" for="client_name">Client Name</label>
+            <input class="field" id="client_name" name="client_name" type="text" required />
+          </div>
+          <div>
+            <label class="label" for="client_entity">Entity holding the land</label>
+            <input class="field" id="client_entity" name="client_entity" type="text" />
+          </div>
+          <div>
+            <label class="label" for="client_phone">Client Phone Number</label>
+            <input class="field" id="client_phone" name="client_phone" type="tel" placeholder="+1 (___) ___‑____" />
+          </div>
+          <div>
+            <label class="label" for="client_email">Client Email</label>
+            <input class="field" id="client_email" name="client_email" type="email" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="label" for="client_address">Client Mailing Address</label>
+            <input class="field" id="client_address" name="client_address" type="text" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="label" for="client_notes">Additional Notes</label>
+            <textarea class="field" id="client_notes" name="client_notes" rows="3" placeholder="Context, timeline, special considerations..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Property Information -->
+      <section class="card">
+        <div class="card-h">Property Information</div>
+        <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div>
+            <label class="label" for="acreage">Acreage</label>
+            <input class="field" id="acreage" name="acreage" type="number" step="0.01" min="0" placeholder="e.g., 25" />
+          </div>
+          <div>
+            <label class="label" for="zoning">Zoning</label>
+            <input class="field" id="zoning" name="zoning" type="text" />
+          </div>
+          <div>
+            <label class="label" for="density">Density (if known)</label>
+            <input class="field" id="density" name="density" type="text" placeholder="Units/acre" />
+          </div>
+          <div>
+            <label class="label" for="entitled">Entitled</label>
+            <select class="field" id="entitled" name="entitled">
+              <option value="">Select...</option>
+              <option>Yes</option>
+              <option>No</option>
+              <option>In Process</option>
+              <option>Unknown</option>
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="label" for="area">Area of Parcel</label>
+            <input class="field" id="area" name="area" type="text" placeholder="City, County, State" />
+          </div>
+          <div>
+            <label class="label" for="folio">Property Folio Number</label>
+            <input class="field" id="folio" name="folio" type="text" />
+          </div>
+          <div></div>
+
+          <!-- Additional Folios -->
+          <div class="md:col-span-2">
+            <div class="font-semibold text-sm mb-1">Additional Folios (up to 5)</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <input class="field" name="folio_1" type="text" placeholder="Folio Number 1" />
+              <input class="field" name="folio_2" type="text" placeholder="Folio Number 2" />
+              <input class="field" name="folio_3" type="text" placeholder="Folio Number 3" />
+              <input class="field" name="folio_4" type="text" placeholder="Folio Number 4" />
+              <input class="field" name="folio_5" type="text" placeholder="Folio Number 5" />
+            </div>
+          </div>
+
+          <div>
+            <label class="label" for="zoning_d1">Zoning District 1</label>
+            <input class="field" id="zoning_d1" name="zoning_d1" type="text" />
+          </div>
+          <div class="md:col-span-2 md:col-start-2">
+            <label class="label" for="zoning_notes">Zoning Notes</label>
+            <textarea class="field" id="zoning_notes" name="zoning_notes" rows="2" placeholder="e.g., change of zoning required, incentives available"></textarea>
+          </div>
+
+          <div class="md:col-span-2">
+            <div class="font-semibold text-sm mb-1">Additional Zoning Districts (if applicable)</div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <input class="field" name="zoning_d2" type="text" placeholder="Zoning District 2" />
+              <input class="field" name="zoning_d3" type="text" placeholder="Zoning District 3" />
+              <input class="field" name="zoning_d4" type="text" placeholder="Zoning District 4" />
+              <input class="field" name="zoning_d5" type="text" placeholder="Zoning District 5" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Expertise (static info) -->
+      <section class="card">
+        <div class="card-h">Our Expertise</div>
+        <div class="p-5 md:p-6 text-sm md:text-[15px] leading-6 text-gray-700">
+          <p class="mb-2">Zero to Plan offers a comprehensive suite of services to reduce risk and maximize the value of your land. Our team specializes in:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Code Analysis:</strong> Expert review of local zoning codes, evaluation of incentives like density bonuses, and design maximization.</li>
+            <li><strong>Massing Studies:</strong> Concept development and analysis of the project's scale to ensure seamless integration with the surrounding environment.</li>
+            <li><strong>Architectural Optimization:</strong> Designing spaces to minimize building and operating costs while ensuring functional and aesthetic appeal.</li>
+            <li><strong>Financial Feasibility:</strong> Detailed analysis of costs, potential revenues, and financing options to determine project viability and return on investment.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Site Compliance -->
+      <section class="card">
+        <div class="card-h">Site Compliance & Analysis</div>
+        <div class="p-5 md:p-6">
+          <p class="text-sm md:text-[15px] text-gray-700 mb-3">How does the land comply with our acquisition criteria? <a class="text-[color:var(--ztp-blue)] underline decoration-dotted" href="land-criteria.html" target="_blank" rel="noopener">View Our Acquisition Criteria</a></p>
+          <fieldset class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="compliance" value="all" required> <span>Complies with all criteria</span></label>
+            <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="compliance" value="most"> <span>Complies with most criteria</span></label>
+            <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="compliance" value="partial"> <span>Complies partially</span></label>
+            <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="compliance" value="no"> <span>Does not comply</span></label>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- Available Studies & Reports -->
+      <section class="card">
+        <div class="card-h">Available Studies & Reports</div>
+        <div class="p-5 md:p-6 space-y-4">
+          <p class="text-sm text-gray-600">Please indicate any of the following studies or reports you have available and provide links to them.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <!-- Each row: checkbox + url input (auto-enable) -->
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2"><input type="checkbox" class="sr" data-toggle="#env1"> <span class="label">Environmental Phase I</span></label>
+              <input class="field" id="env1" name="env_phase1_url" type="url" placeholder="Link to document" disabled>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2"><input type="checkbox" class="sr" data-toggle="#env2"> <span class="label">Environmental Phase II (if applicable)</span></label>
+              <input class="field" id="env2" name="env_phase2_url" type="url" placeholder="Link to document" disabled>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2"><input type="checkbox" class="sr" data-toggle="#survey"> <span class="label">Survey (ALTA preferred)</span></label>
+              <input class="field" id="survey" name="survey_url" type="url" placeholder="Link to document" disabled>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2"><input type="checkbox" class="sr" data-toggle="#geo"> <span class="label">Geotechnical Report</span></label>
+              <input class="field" id="geo" name="geotech_url" type="url" placeholder="Link to document" disabled>
+            </div>
+            <div class="flex flex-col gap-2 md:col-span-2">
+              <label class="flex items-center gap-2"><input type="checkbox" class="sr" data-toggle="#sketch"> <span class="label">Sketch or Previous Site Plan</span></label>
+              <input class="field" id="sketch" name="sketch_url" type="url" placeholder="Link to document" disabled>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Known Encumbrances -->
+      <section class="card">
+        <div class="card-h">Known Encumbrances</div>
+        <div class="p-5 md:p-6">
+          <p class="hint mb-2">Please disclose any known encumbrances such as utility easements, access easements, mineral rights, etc.</p>
+          <textarea class="field" name="encumbrances" rows="4" placeholder="Describe known encumbrances..."></textarea>
+        </div>
+      </section>
+
+      <!-- Disclaimer -->
+      <section class="card">
+        <div class="card-h">Disclaimer</div>
+        <div class="p-5 md:p-6 text-sm md:text-[15px] leading-6 text-gray-700 space-y-3">
+          <p><strong>Zero to Plan</strong> is a real estate feasibility consultant. The information presented on this form is intended solely for general informational purposes and should not be construed as an offer to sell or a solicitation of an offer to buy any securities.</p>
+          <p>Any potential investment opportunities described herein are offered exclusively to accredited investors, as defined by Rule 501 of Regulation D under the U.S. Securities Act of 1933. These opportunities, if and when available, will be made solely through a confidential private placement memorandum or other offering documents and will be subject to specific terms, risks, and disclosures outlined therein.</p>
+          <p>Nothing on this form constitutes legal, tax, or investment advice. All real estate investments involve risk, including possible loss of principal. Past performance is not indicative of future results.</p>
+          <p>Submitting studies and reports is not required. However, providing them will significantly reduce the time and uncertainty of our evaluation process, leading to a faster and more accurate analysis. All submitted information will be handled with strict confidentiality.</p>
+        </div>
+      </section>
+
+      <!-- Submit -->
+      <div class="flex items-center justify-between">
+        <div class="text-xs text-gray-500">By submitting, you agree to our terms of communication and privacy policy.</div>
+        <button type="submit" class="inline-flex items-center gap-2 bg-[color:var(--ztp-navy)] text-white font-semibold rounded-lg px-5 py-2.5 hover:opacity-95">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          Submit Form
+        </button>
+      </div>
+
+      <!-- Honeypot -->
+      <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    </form>
+
+    <!-- Footer contact strip -->
+    <div class="mt-8 rounded-lg border border-gray-200 overflow-hidden">
+      <div class="px-4 py-3 bg-[color:var(--ztp-navy)] text-white flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <img src="assets/img/Zerotoplan.webp" alt="Zero to Plan" class="h-6 w-auto"/>
+          <h3 class="font-semibold tracking-wide">Questions?</h3>
+        </div>
+        <a href="mailto:info@zerotoplan.com" class="text-white/90 text-sm hover:underline">info@zerotoplan.com</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Enable/disable URL fields when checkboxes are toggled
+    document.querySelectorAll('input.sr[data-toggle]').forEach(cb=>{
+      const target = document.querySelector(cb.getAttribute('data-toggle'));
+      const sync = ()=>{ if(!target) return; target.disabled = !cb.checked; if(cb.checked && !target.value) target.focus(); };
+      cb.addEventListener('change', sync); sync();
+    });
+  </script>
+</body>
+</html>
