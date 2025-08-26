@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zero to Plan | Land Acquisition Criteria</title>
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+  <!-- Fonts (match site header) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Brand tokens aligned to main.css */
+    :root{
+      /* global */
+      --background-color:#ffffff;
+      --default-color:#0c2031;
+      --heading-color:#0c2031;
+      --accent-color:#0c2031;
+      --contrast-color:#ffffff;
+      /* local UI tokens */
+      --ztp-navy: var(--heading-color);
+      --ztp-blue: var(--accent-color);
+      --ztp-sky: #EAF1F6;    /* light section bg */
+      --ztp-slate: var(--default-color);
+      --ztp-stone: var(--background-color);
+      --ztp-sand: #F9FAFB;   /* card bg */
+    }
+    html,body{height:100%;}
+    body{font-family: 'Avenir Next', 'Nunito', 'Inter', Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans'; background:var(--ztp-stone); color:var(--ztp-slate);}    
+
+    /* PRINT: force single page */
+    @page { size: Letter; margin: 0.5in; }
+    @media print {
+      body{ background:white; }
+      .page{ box-shadow:none; margin:0; }
+      .print\:hidden{ display:none !important; }
+      a[href]::after{ content:""; }
+    }
+    .page{ box-shadow:0 10px 30px rgba(2,8,20,.08); }
+    .logo-chip{ width:22px; height:22px; border-radius:9999px; display:inline-flex; align-items:center; justify-content:center; background:var(--ztp-blue); }
+    .logo-chip svg{ width:14px; height:14px; color:white; }
+  </style>
+</head>
+<body>
+  <main class="page max-w-[8.5in] mx-auto my-8 bg-white print:my-0 rounded-xl overflow-hidden">
+    <!-- HEADER / HERO STRIP -->
+    <header class="relative">
+      <div class="bg-[color:var(--ztp-navy)] text-white">
+        <div class="px-8 py-6 flex items-center gap-4">
+          <!-- Site logo -->
+          <a href="index.html#hero" class="flex items-center">
+            <img src="assets/img/Zerotoplan.webp" alt="Zero to Plan" class="h-10 w-auto" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'font-extrabold text-xl',textContent:'ZERO TO PLAN'}))">
+          </a>
+          <div class="h-10 w-px bg-white/30"></div>
+          <div class="min-w-0">
+            <h1 class="text-2xl font-extrabold tracking-tight leading-tight">Land Acquisition for Build‑to‑Rent Communities</h1>
+            <p class="text-white/80 text-sm">Midwest & Sunbelt growth corridors • Class A attainable housing</p>
+          </div>
+          <button onclick="window.print()" class="print:hidden ml-auto inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold bg-white/10 hover:bg-white/20 border border-white/20">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 9V2h12v7H6zm12 3h2a2 2 0 012 2v5h-4v3H6v-3H2v-5a2 2 0 012-2h2v4h12v-4z"/></svg>
+            <span>Print / Save PDF</span>
+          </button>
+        </div>
+      </div>
+      <!-- Intro blurb -->
+      <div class="px-8 py-5 bg-[color:var(--ztp-sky)]">
+        <p class="text-[13.6px] leading-6">
+          <span class="font-semibold">Zero to Plan (ZTP)</span> is actively acquiring land for clients developing high‑quality build‑to‑rent (BTR) communities. We focus on high‑growth corridors in the <span class="font-medium">Midwest</span> (KS, MO, IL, IA, IN) and the <span class="font-medium">Sunbelt</span> (FL, GA, SC, NC, TN). Our clients are developing 2,000+ rental units, leveraging strong regional fundamentals and robust demand. We design for community, walkability, and a pedestrian‑friendly experience—bringing human‑scale spaces to car‑dependent cities.
+        </p>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="px-8 pt-6 pb-7">
+      <!-- SECTION: CRITERIA GRID TITLE -->
+      <div class="flex items-center gap-2 mb-3">
+        <span class="logo-chip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1v-9z"/></svg>
+        </span>
+        <h2 class="text-[17px] font-extrabold tracking-wide text-[color:var(--ztp-blue)] uppercase">Our Land Target Criteria</h2>
+      </div>
+
+      <!-- CRITERIA GRID -->
+      <div class="grid grid-cols-3 gap-4 text-[13.6px]">
+        <!-- Size & Density -->
+        <div class="rounded-lg border border-gray-200 p-4 bg-[color:var(--ztp-sand)]">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V3"/></svg>
+            <h3 class="font-semibold text-[15px]">Size & Density</h3>
+          </div>
+          <ul class="list-disc pl-5 leading-6">
+            <li><span class="font-medium">Ideal acreage:</span> 10–50 usable acres</li>
+            <li><span class="font-medium">Potential units:</span> 200–350 (per phase)</li>
+            <li><span class="font-medium">Density:</span> 4–25 units/acre</li>
+          </ul>
+        </div>
+
+        <!-- Product & Construction -->
+        <div class="rounded-lg border border-gray-200 p-4 bg-[color:var(--ztp-sand)]">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8v8a2 2 0 01-2 2h-4v-6H9v6H5a2 2 0 01-2-2v-8z"/></svg>
+            <h3 class="font-semibold text-[15px]">Product & Construction</h3>
+          </div>
+          <ul class="list-disc pl-5 leading-6">
+            <li><span class="font-medium">Product:</span> Multi‑family build‑for‑rent</li>
+            <li><span class="font-medium">Horizontal MF:</span> duplex / fourplex / sixplex</li>
+            <li><span class="font-medium">Vertical MF:</span> garden‑style apartments</li>
+          </ul>
+        </div>
+
+        <!-- Market Targets -->
+        <div class="rounded-lg border border-gray-200 p-4 bg-[color:var(--ztp-sand)]">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-2.21 0-4 1.343-4 3s1.79 3 4 3 4 1.343 4 3-1.79 3-4 3m0-18v3m0 15v3"/></svg>
+            <h3 class="font-semibold text-[15px]">Market Targets</h3>
+          </div>
+          <ul class="list-disc pl-5 leading-6">
+            <li><span class="font-medium">Sunbelt rents:</span> $1,750+ (1BR), $2,000+ (2BR), $2,200+ (3BR)</li>
+            <li><span class="font-medium">Midwest rents:</span> $1,200+ (1BR), $1,500+ (2BR), $1,800+ (3BR)</li>
+            <li><span class="font-medium">Home values:</span> Sunbelt $300k+ • Midwest $250k+</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2-COLUMN DETAIL BOXES -->
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <!-- Good Site -->
+        <section class="rounded-xl border border-gray-200 bg-white">
+          <div class="px-4 py-3 border-b bg-[color:var(--ztp-sky)] flex items-center gap-2">
+            <span class="logo-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5h4v2h-6V7h2z"/></svg></span>
+            <h3 class="font-semibold tracking-wide text-[15px]">What Makes a Good Site?</h3>
+          </div>
+          <div class="p-4 text-[13.6px]">
+            <ul class="grid grid-cols-2 gap-x-4 gap-y-2 list-disc pl-5 leading-6">
+              <li>Utilities available to site</li>
+              <li>Easy ingress/egress</li>
+              <li>Population & job growth</li>
+              <li>Highly ranked school district</li>
+              <li>≤ 15‑min commute to major employment hubs</li>
+              <li>Proximity to amenities & neighborhood centers</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Opposition Plan -->
+        <section class="rounded-xl border border-gray-200 bg-white">
+          <div class="px-4 py-3 border-b bg-[color:var(--ztp-sky)] flex items-center gap-2">
+            <span class="logo-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2.5 7-7-4.5L5.5 20l2.5-7L2 9h7z"/></svg></span>
+            <h3 class="font-semibold tracking-wide text-[15px]">Dealing with Project Opposition</h3>
+          </div>
+          <div class="p-4 text-[13.6px]">
+            <ul class="list-disc pl-5 leading-6 space-y-1">
+              <li>Neighborhood charrettes to understand local needs</li>
+              <li>Proactive community‑outreach programming</li>
+              <li>Include political decision‑makers in all initiatives</li>
+              <li>Work with landowners & authorities to secure entitlements</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- FOOTER / CONTACT STRIP -->
+      <div class="mt-5 rounded-lg border border-gray-200 overflow-hidden">
+        <div class="px-4 py-3 bg-[color:var(--ztp-navy)] text-white flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <img src="assets/img/Zerotoplan.webp" alt="Zero to Plan" class="h-6 w-auto" onerror="this.remove()"/>
+            <h3 class="font-semibold tracking-wide">Connect with Us</h3>
+          </div>
+          <a href="https://www.zerotoplan.com" class="text-white/90 text-sm hover:underline">www.zerotoplan.com</a>
+        </div>
+        <div class="px-4 py-3 grid grid-cols-3 gap-2 text-[13.6px]">
+          <div>
+            <p class="text-gray-600"><span class="font-medium">Are you a broker</span> with a promising land opportunity that fits our criteria?</p>
+          </div>
+          <div>
+            <p><span class="font-medium">Phone:</span> +1 (954) 459‑3936</p>
+            <p><span class="font-medium">Email:</span> <a href="mailto:info@zerotoplan.com" class="underline decoration-dotted">info@zerotoplan.com</a></p>
+          </div>
+          <div class="text-right">
+            <p class="text-xs text-gray-500">© <span id="yr">2025</span> Zero to Plan</p>
+            <p class="text-xs text-gray-500">Build‑to‑Rent • Midwest & Sunbelt</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const y=document.getElementById('yr'); if(y) y.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
