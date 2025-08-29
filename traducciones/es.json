@@ -152,7 +152,45 @@
     "f3_text": "Cartas de opinión sobre seguro, préstamo y costos de construcción (empresas locales)",
     "f4_text": "Revisión con el propietario",
     "f5_text": "Informe final con análisis de sensibilidad y recomendaciones"
+  },
+    "serve": {
+    "title": "A quién servimos",
+
+    "dev_title": "Desarrolladores",
+    "dev_tagline": "Construye de manera más inteligente, rápida y eficiente.",
+    "dev_b1": "Avanza más rápido sin necesidad de contratar personal extra",
+    "dev_b2": "Información verificada de funcionarios municipales, servicios públicos y entidades estatales",
+    "dev_b3": "Visuales profesionales para departamentos de planificación, bancos y socios de capital",
+    "dev_b4": "Valida si un concepto funciona antes de invertir capital",
+    "dev_b5": "Herramientas para negociar el verdadero valor residual del terreno",
+    "dev_b6": "Paquetes listos para inversionistas que aceleran el financiamiento",
+
+    "arch_title": "Arquitectos",
+    "arch_tagline": "Mantén a tu equipo diseñando mientras nosotros gestionamos la viabilidad.",
+    "arch_b1": "Tiempos de respuesta más rápidos en fases clave de adquisición de terrenos",
+    "arch_b2": "Mantén a los equipos enfocados en el diseño, no en tareas de factibilidad",
+    "arch_b3": "Reduce costos generales y entrenamiento en áreas no esenciales",
+    "arch_b4": "Se establecen límites financieros desde el inicio, evitando ciclos de diseño desperdiciados",
+    "arch_b5": "Apoya a los clientes con claridad cuando están inseguros",
+
+    "broker_title": "Agentes y Corredores Inmobiliarios",
+    "broker_tagline": "Cierra acuerdos con confianza y descubre valor oculto.",
+    "broker_b1": "Cierra transacciones más rápido eliminando incertidumbre",
+    "broker_b2": "Confirma el potencial de desarrollo con gobiernos locales y servicios públicos",
+    "broker_b3": "Descubre valor oculto y fija precios más precisos a las propiedades",
+    "broker_b4": "Diferénciate como asesor estratégico, no solo como vendedor",
+    "broker_b5": "Genera confianza con compradores internacionales",
+
+    "inv_title": "Inversores Locales e Internacionales",
+    "inv_tagline": "Reduce riesgos y coloca capital con confianza.",
+    "inv_b1": "Identifica la mayor cantidad de incógnitas antes de comprometer capital",
+    "inv_b2": "Verifica el mejor uso del suelo con gobiernos locales",
+    "inv_b3": "Obtén herramientas para negociar y reducir riesgos",
+    "inv_b4": "Análisis profesional que refleja estándares institucionales",
+    "inv_b5": "Despliegue más rápido en proyectos listos para inversión",
+    "inv_b6": "Confianza en los patrocinadores con factibilidad verificada por agencias públicas"
   }
+
 
 
   }

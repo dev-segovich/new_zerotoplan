@@ -151,5 +151,43 @@
     "f3_text": "Insurance, loan & construction cost opinion letters from local companies",
     "f4_text": "Review with ownership",
     "f5_text": "Final report with sensitivity analysis & recommendations"
+  },
+  "serve": {
+    "title": "Who We Serve",
+
+    "dev_title": "Developers",
+    "dev_tagline": "Build smarter, faster, and leaner.",
+    "dev_b1": "Move faster without hiring extra staff",
+    "dev_b2": "Verified information from city staff, utilities, and state entities",
+    "dev_b3": "Professional visuals for planning departments, banks, and equity partners",
+    "dev_b4": "Validate if a concept works before spending capital",
+    "dev_b5": "Tools to negotiate true residual land value",
+    "dev_b6": "Investor-ready packages that speed up financing",
+
+    "arch_title": "Architects",
+    "arch_tagline": "Keep your team designing while we handle feasibility.",
+    "arch_b1": "Faster turnaround in crucial land acquisition phases",
+    "arch_b2": "Keep teams focused on design, not feasibility tasks",
+    "arch_b3": "Reduce overhead and training on non-core work",
+    "arch_b4": "Financial limits are set early, preventing wasted design cycles",
+    "arch_b5": "Support clients with clarity when they are uncertain",
+
+    "broker_title": "Real Estate Agents & Brokers",
+    "broker_tagline": "Close deals with confidence and uncover hidden value.",
+    "broker_b1": "Close transactions faster by removing uncertainty",
+    "broker_b2": "Confirm development potential with local governments and utilities",
+    "broker_b3": "Unlock hidden value and price properties more accurately",
+    "broker_b4": "Differentiate as strategic advisors, not just salespeople",
+    "broker_b5": "Build trust with international buyers",
+
+    "inv_title": "Local & International Investors",
+    "inv_tagline": "Reduce risks and deploy capital with confidence.",
+    "inv_b1": "Identify as many unknowns as possible before committing capital",
+    "inv_b2": "Verify highest-and-best use with local governments",
+    "inv_b3": "Gain tools to negotiate risks down",
+    "inv_b4": "Professional analysis that mirrors institutional standards",
+    "inv_b5": "Faster deployment into investment-ready projects",
+    "inv_b6": "Confidence in sponsors with feasibility verified by public agencies"
   }
+  
   }
