@@ -2845,3 +2845,61 @@ section,
   font-weight: 700;
   color: var(--heading-color);
 }
+
+/* ==== Language Switch (desktop y móvil) ==== */
+.lang-switch {
+  position: relative;
+}
+.btn-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  background: var(--contrast-color);
+  color: var(--default-color);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--default-color), transparent 92%);
+}
+.btn-lang i { font-size: 18px; color: var(--accent-color); }
+.btn-lang:hover { border-color: var(--accent-color); }
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: var(--contrast-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--default-color), transparent 88%);
+  padding: 6px;
+  display: none;
+  z-index: 10000;
+}
+.lang-menu li{
+  list-style: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--default-color);
+  font-weight: 600;
+}
+.lang-menu li:hover{ background: color-mix(in srgb, var(--accent-color), transparent 92%); }
+
+/* Mostrar menú cuando el contenedor tiene .open */
+.lang-switch.open .lang-menu{ display: block; }
+
+/* Versión móvil dentro de la lista */
+.lang-switch--mobile .btn-lang{ width: 100%; justify-content: center; }
+.lang-switch--mobile .lang-menu{ position: static; box-shadow: none; border-radius: 8px; }
+
+/* ==== FIX: bullets y espaciado en menú móvil ==== */
+@media (max-width:1199px){
+  .navmenu ul { list-style: none; padding-left: 0; } /* elimina los puntos */
+  .navmenu ul > li { margin: 6px 0; }               /* separa los items */
+  .navmenu a { gap: .5rem; }                         /* respiración extra */
+}

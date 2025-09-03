@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zero to Plan | Broker Partnership Program</title>
+  <!-- Favicons -->
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{
+      /* brand tokens (aligned with site) */
+      --background-color:#ffffff;
+      --default-color:#0c2031;
+      --heading-color:#0c2031;
+      --accent-color:#0c2031;
+      --contrast-color:#ffffff;
+      /* local */
+      --ztp-navy: var(--heading-color);
+      --ztp-blue: var(--accent-color);
+      --ztp-sky:#EAF1F6;
+      --ztp-sand:#F9FAFB;
+    }
+    body{font-family:'Avenir Next','Nunito','Inter',Roboto,system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,'Noto Sans'; color:#0c2031; background:#fff}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--ztp-sky);padding:.2rem .5rem;border-radius:.75rem;font-size:.72rem;font-weight:700;color:var(--ztp-navy)}
+    .page{box-shadow:0 10px 30px rgba(2,8,20,.08)}
+
+    /* --- PRINT one‑page setup --- */
+    @page{ size: Letter; margin: .5in; }
+    @media print{
+      html,body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; background:#fff }
+      .print\:hidden{ display:none !important }
+      .page{ box-shadow:none !important; margin:0 !important }
+
+      /* Allow large wrappers to split; avoid splitting individual cards */
+      header, section, .grid{ break-inside:auto; page-break-inside:auto }
+      .card, .rounded-lg, .rounded-xl{ break-inside:avoid; page-break-inside:avoid }
+
+      /* Fit-to-one-page scaling */
+      :root{ --print-scale:.92 }
+      .page.fit-one{ transform:scale(var(--print-scale)); transform-origin:top left; width:calc(8.5in / var(--print-scale)) !important; max-width:none !important; overflow:visible !important }
+      /* Compact paddings on print */
+      .page.fit-one [class*="py-6"], .page.fit-one [class*="py-5"]{ padding-top:.75rem !important; padding-bottom:.75rem !important }
+      .page.fit-one [class*="px-8"]{ padding-left:1.1rem !important; padding-right:1.1rem !important }
+      .page.fit-one .card{ padding:.85rem !important }
+      .page.fit-one .text-sm{ font-size: .8rem !important }
+      .page.fit-one .leading-6{ line-height:1.45 !important }
+
+      /* WebKit fallback */
+      @supports (-webkit-touch-callout:none){ .page.fit-one{ transform:none !important; zoom:var(--print-scale); width:8.5in !important } }
+    }
+  </style>
+</head>
+<body>
+  <main class="page fit-one max-w-[8.5in] mx-auto my-8 bg-white print:my-0 rounded-xl overflow-hidden">
+    <!-- Header strip -->
+    <header class="bg-[color:var(--ztp-navy)] text-white">
+      <div class="px-5 md:px-8 py-4 md:py-5 flex flex-wrap items-center gap-3 md:gap-4">
+        <a href="index.html#hero" class="flex items-center">
+          <img src="assets/img/Zerotoplan.webp" alt="Zero to Plan" class="h-9 w-auto"/>
+        </a>
+        <div class="h-8 w-px bg-white/30"></div>
+        <div class="min-w-0">
+          <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight">Zero To Plan – Broker Partnership Program</h1>
+          <p class="text-white/85 text-sm">Earn 4% Commission on Land Introductions</p>
+        </div>
+        <!-- Single button (Print only) -->
+        <button onclick="window.print()" class="print:hidden md:ml-auto mt-2 md:mt-0 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold bg-white/10 hover:bg-white/20 border border-white/20">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 9V2h12v7H6zm12 3h2a2 2 0 012 2v5h-4v3H6v-3H2v-5a2 2 0 012-2h2v4h12v-4z"/></svg>
+          Print / Save PDF
+        </button>
+      </div>
+      <!-- Intro blurb: force dark text over light sky bg -->
+      <div class="px-8 py-4 md:py-5 bg-[color:var(--ztp-sky)] text-[color:var(--ztp-navy)]">
+        <p class="text-[13.6px] leading-6">
+          Zero To Plan partners with landowners through a <span class="font-semibold">3‑phase development structure</span>. As a broker, you can introduce us to landowners/clients and <span class="font-semibold">earn 4% total commission</span> based on the feasibility‑determined land value.
+        </p>
+      </div>
+    </header>
+
+    <section class="px-8 pt-5 pb-6">
+      <!-- How it works -->
+      <div class="mb-2 flex items-center gap-2"><span class="chip">How It Works</span></div>
+      <div class="card rounded-xl border border-gray-200 overflow-hidden">
+        <div class="bg-[color:var(--ztp-navy)] text-white px-4 py-2 text-sm font-semibold">Phases & Commission Triggers</div>
+        <div class="divide-y divide-gray-200 text-[13.4px]">
+          <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3">
+            <div class="p-3 font-semibold">Phase I – LOI</div>
+            <div class="p-3 md:col-span-2 print:col-span-2">Zero To Plan analyzes property during a 90‑day LOI. <span class="font-medium">Feasibility Value</span> set at end of LOI.</div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3">
+            <div class="p-3 font-semibold">Phase II – Development Services Agreement (DSA)</div>
+            <div class="p-3 md:col-span-2 print:col-span-2">If project proceeds as JV, DSA executed. <span class="font-medium">Broker earns 2% commission at DSA signing.</span></div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3">
+            <div class="p-3 font-semibold">Phase III – Joint Venture / Operating Agreement (JV/OA)</div>
+            <div class="p-3 md:col-span-2 print:col-span-2"><span class="font-medium">Final JV executed.</span> Broker earns <span class="font-medium">2% commission</span> at JV signing.</div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3">
+            <div class="p-3 font-semibold">Option A – Purchase &amp; Sale Agreement (PSA)</div>
+            <div class="p-3 md:col-span-2 print:col-span-2">If landowner opts for sale instead of JV. <span class="font-medium">Broker earns full 4% commission</span> at PSA closing (purchase price).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-up cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-3 md:gap-4 mt-3">
+        <section class="card rounded-xl border border-gray-200">
+          <div class="px-4 py-3 print:py-2 border-b bg-[color:var(--ztp-sky)] font-semibold">Why Partner With Zero To Plan</div>
+          <div class="p-4 print:p-3 text-[13.4px]">
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li><span class="font-medium">Timely Payouts</span> – Commission split across milestones, <span class="font-medium">2%</span> as early as Phase II.</li>
+              <li><span class="font-medium">Protected Introductions</span> – Registered prospects locked for 12 months.</li>
+              <li><span class="font-medium">Clear Terms</span> – One commission per deal, no double payments.</li>
+              <li><span class="font-medium">Serious Backing</span> – We handle feasibility, entitlement, and capital stack.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="card rounded-xl border border-gray-200">
+          <div class="px-4 py-3 print:py-2 border-b bg-[color:var(--ztp-sky)] font-semibold">Broker Responsibilities</div>
+          <div class="p-4 print:p-3 text-[13.4px]">
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li>Submit Prospect Registration (owner name, landholding entity, property address).</li>
+              <li>Registration valid for <span class="font-medium">180 days</span>; renewable.</li>
+              <li>First complete registration accepted = broker of record.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- At a Glance -->
+      <div class="mt-3">
+        <div class="mb-2 flex items-center gap-2"><span class="chip">At a Glance</span></div>
+        <div class="card rounded-xl border border-gray-200 overflow-hidden">
+          <div class="divide-y divide-gray-200 text-[13.4px]">
+            <div class="grid grid-cols-1 md:grid-cols-5 print:grid-cols-5">
+              <div class="p-3 font-semibold bg-[color:var(--ztp-sand)]">Total Commission</div>
+              <div class="p-3 md:col-span-4 print:col-span-4">4% of Feasibility Value (or PSA purchase price)</div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 print:grid-cols-5">
+              <div class="p-3 font-semibold bg-[color:var(--ztp-sand)]">Payment Points</div>
+              <div class="p-3 md:col-span-4 print:col-span-4">2% at DSA signing • 2% at JV/OA signing <span class="text-gray-500">— OR —</span> 4% at PSA closing</div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 print:grid-cols-5">
+              <div class="p-3 font-semibold bg-[color:var(--ztp-sand)]">Tail Period</div>
+              <div class="p-3 md:col-span-4 print:col-span-4">12 months from registration</div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 print:grid-cols-5">
+              <div class="p-3 font-semibold bg-[color:var(--ztp-sand)]">Payment To</div>
+              <div class="p-3 md:col-span-4 print:col-span-4">Broker’s licensed brokerage, within 30 days of trigger</div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-2 text-xs text-gray-600">This sheet is a summary. All commissions are governed by the Broker Commission Agreement signed between your brokerage and Zero To Plan, LLC.</p>
+      </div>
+
+    </section>
+  </main>
+</body>
+</html>
