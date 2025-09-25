@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zero to Plan | Why Partner With Us</title>
+  <!-- Favicons -->
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{
+      /* brand tokens (aligned with site) */
+      --background-color:#ffffff;
+      --default-color:#0c2031;
+      --heading-color:#0c2031;
+      --accent-color:#0c2031;
+      --contrast-color:#ffffff;
+      /* local */
+      --ztp-navy: var(--heading-color);
+      --ztp-blue: var(--accent-color);
+      --ztp-sky:#EAF1F6;
+      --ztp-sand:#F9FAFB;
+    }
+    body{font-family:'Avenir Next','Nunito','Inter',Roboto,system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,'Noto Sans'; color:#0c2031; background:#fff}
+    .page{box-shadow:0 10px 30px rgba(2,8,20,.08)}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--ztp-sky);padding:.2rem .55rem;border-radius:.75rem;font-size:.72rem;font-weight:700;color:var(--ztp-navy)}
+    .card{background:#fff}
+
+    /* --- PRINT one‑page setup (no print button on this page) --- */
+    @page{ size: Letter; margin: .5in; }
+    @media print{
+      html,body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; background:#fff }
+      .print\:hidden{ display:none !important }
+      .page{ box-shadow:none !important; margin:0 !important }
+
+      /* allow wrappers to split; avoid splitting small cards */
+      header, section, .grid{ break-inside:auto; page-break-inside:auto }
+      .card, .rounded-lg, .rounded-xl{ break-inside:avoid; page-break-inside:avoid }
+
+      /* Fit-to-one-page scaling */
+      :root{ --print-scale:.92; --print-gutter-x:.85rem }
+      .page.fit-one{ transform:scale(var(--print-scale)); transform-origin:top left; width:calc(8.5in / var(--print-scale)) !important; max-width:none !important; overflow:visible !important }
+
+      /* unify lateral paddings to save space */
+      .page.fit-one .px-5, .page.fit-one .px-8{ padding-left:var(--print-gutter-x) !important; padding-right:var(--print-gutter-x) !important }
+
+      /* compact paddings */
+      .page.fit-one .p-4{ padding:.70rem !important }
+      .page.fit-one .p-3{ padding:.50rem .60rem !important }
+      .page.fit-one [class*="py-5"], .page.fit-one [class*="py-6"]{ padding-top:.70rem !important; padding-bottom:.70rem !important }
+      .page.fit-one table th, .page.fit-one table td{ padding:.48rem .55rem !important }
+      .page.fit-one .mt-3{ margin-top:.5rem !important }
+      .page.fit-one .mb-2{ margin-bottom:.35rem !important }
+
+      /* hide chips to win space */
+      .page.fit-one .chip{ display:none !important }
+
+      /* WebKit fallback */
+      @supports (-webkit-touch-callout:none){ .page.fit-one{ transform:none !important; zoom:var(--print-scale); width:8.5in !important } }
+    }
+  </style>
+</head>
+<body>
+  <main class="page fit-one max-w-[8.5in] mx-auto my-8 bg-white print:my-0 rounded-xl overflow-hidden">
+    <!-- Header strip (NO print button on this page) -->
+    <header class="bg-[color:var(--ztp-navy)] text-white">
+      <div class="px-5 md:px-8 py-4 md:py-5 flex flex-wrap items-center gap-3 md:gap-4">
+        <a href="index.html#hero" class="flex items-center">
+          <img src="assets/img/Zerotoplan.webp" alt="Zero to Plan" class="h-9 w-auto"/>
+        </a>
+        <div class="h-8 w-px bg-white/30"></div>
+        <div class="min-w-0">
+          <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight">Strategic Partner Value Proposition: 10% Consulting Commission</h1>
+          <p class="text-white/85 text-sm">Maximize Client Value, Maximize Your Commission.</p>
+        </div>
+      </div>
+      <div class="px-8 py-4 md:py-5 bg-[color:var(--ztp-sky)] text-[color:var(--ztp-navy)]">
+        <p class="text-[13.6px] leading-6">
+          Partner with Zero To Plan to provide your clients (landowners and investors) with objective clarity and accelerate deal‑making. Unlock a new, substantial commission stream while strengthening your position as a trusted advisor.
+        </p>
+      </div>
+    </header>
+
+    <section class="px-8 pt-5 pb-6">
+      <!-- Why Partner -->
+      <div class="mb-2 flex items-center gap-2"><span class="chip">Why Partner With Us?</span></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-3">
+        <section class="card rounded-xl border border-gray-200">
+          <div class="p-4 text-[13.6px]">
+            <p class="font-semibold mb-1">Two Ways to Win:</p>
+            <p>You earn a <span class="font-semibold">10% fee</span> for bringing clarity, simultaneously securing and speeding up your primary closing commission.</p>
+            <p class="mt-2">Earn a flat <span class="font-semibold">10% commission</span> on the fees paid by any client you refer who executes a consulting service agreement with us.</p>
+          </div>
+        </section>
+        <section class="card rounded-xl border border-gray-200 overflow-hidden">
+          <div class="bg-[color:var(--ztp-navy)] text-white px-4 py-2 text-sm font-semibold">Payout Scenarios</div>
+          <div class="overflow-hidden">
+            <table class="w-full text-[13.4px]">
+              <thead class="bg-[color:var(--ztp-sand)] text-left">
+                <tr class="border-b border-gray-200">
+                  <th class="p-3 font-semibold">Payout Scenario</th>
+                  <th class="p-3 font-semibold">Commission Structure</th>
+                  <th class="p-3 font-semibold">Benefits to You</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="p-3">Annual Membership (e.g., Plan 2 at $5,400/mo)</td>
+                  <td class="p-3">$6,480 Commission (10% of first year's total)</td>
+                  <td class="p-3">Recurring Revenue Model: Benefit from high‑value annual contracts.</td>
+                </tr>
+                <tr>
+                  <td class="p-3">One‑Time Service (e.g., Plan 4 at $30k)</td>
+                  <td class="p-3">$3,000 Commission (10% of total fee)</td>
+                  <td class="p-3">Fast Payout: Paid within 30 days of Zero To Plan receiving the full fee.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- AI + Human Advantage -->
+      <div class="mt-3">
+        <div class="mb-2 flex items-center gap-2"><span class="chip">The AI‑Driven, Human‑Verified Advantage</span></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-3">
+          <section class="card rounded-xl border border-gray-200">
+            <div class="p-4 print:p-3 text-[13.4px]">
+              <p class="mb-2">Our process combines AI speed with professional oversight to transform uncertainty into clarity.</p>
+              <ul class="list-disc pl-5 space-y-1.5">
+                <li><span class="font-medium">AI Driven:</span> We use AI tools to analyze sites, zoning, and financial data in seconds, cutting weeks off the early planning stage.</li>
+                <li><span class="font-medium">Human Verified:</span> Every report is validated by our team and cross‑checked with local government staff and third‑party professionals (surveyors, engineers, and others).</li>
+              </ul>
+            </div>
+          </section>
+          <section class="card rounded-xl border border-gray-200 overflow-hidden">
+            <div class="bg-[color:var(--ztp-sand)] px-4 py-2 font-semibold">How We Help Your Clients</div>
+            <div class="overflow-hidden">
+              <table class="w-full text-[13.4px]">
+                <thead class="text-left">
+                  <tr class="border-b border-gray-200">
+                    <th class="p-3 font-semibold">Scenario</th>
+                    <th class="p-3 font-semibold">Client Goal</th>
+                    <th class="p-3 font-semibold">Zero To Plan's Empowering Action</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr>
+                    <td class="p-3">Selling a Property (Landowner)</td>
+                    <td class="p-3">Maximize Price &amp; Expedite Sale.</td>
+                    <td class="p-3">We provide the Feasibility Value (LVM) and a vetted development concept to justify the asking price and eliminate the buyer's guesswork.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3">Buying a Property (Investor/Developer)</td>
+                    <td class="p-3">De‑Risk Acquisition &amp; Secure Terms.</td>
+                    <td class="p-3">We validate the investment (proforma, unit count) and empower the buyer to negotiate a better price by citing verified costs and risks.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Next Steps -->
+      <div class="mt-3">
+        <div class="mb-2 flex items-center gap-2"><span class="chip">Next Steps: Register Your Prospect</span></div>
+        <section class="card rounded-xl border border-gray-200">
+          <div class="p-4 print:p-3 text-[13.4px]">
+            <p>To qualify for your 10% commission, simply submit a <span class="font-semibold">Registration Request</span> with the client’s name, entity, and property address.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- CTA button (visible only on screen) -->
+      <div class="print:hidden px-8 pt-4">
+        <a href="register.html" class="block w-full md:w-[340px] mx-auto text-center rounded-lg px-6 py-3 font-semibold bg-[color:var(--ztp-navy)] text-white shadow hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--ztp-navy)]">Go to Registration</a>
+      </div>
+
+    </section>
+  </main>
+</body>
+</html>

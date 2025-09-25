@@ -47,17 +47,42 @@
       .card, .rounded-lg, .rounded-xl{ break-inside:avoid; page-break-inside:avoid }
 
       /* Fit-to-one-page scaling */
-      :root{ --print-scale:.915 }
+      :root{ --print-scale:.915;
+        --print-gutter-x: .80rem;     /* NUEVO: gutter lateral unificado en print */
+      }
+      
       .page.fit-one{ transform:scale(var(--print-scale)); transform-origin:top left; width:calc(8.5in / var(--print-scale)) !important; max-width:none !important; overflow:visible !important }
 
       /* Compact paddings & type on print */
-      .page.fit-one [class*="py-6"], .page.fit-one [class*="py-5"]{ padding-top:.75rem !important; padding-bottom:.75rem !important }
-      .page.fit-one [class*="px-8"]{ padding-left:1.1rem !important; padding-right:1.1rem !important }
-      .page.fit-one .p-4{ padding:0.85rem !important }
+      .page.fit-one [class*="py-6"], .page.fit-one [class*="py-5"]{ padding-top:.70rem !important; padding-bottom:.70rem !important }
+      .page.fit-one [class*="px-8"]{ padding-left:0.8rem !important; padding-right:0.8rem !important }
+      .page.fit-one .p-4{ padding:0.80rem !important }
       .page.fit-one .p-3{ padding:0.6rem 0.75rem !important }
       .page.fit-one .text-sm{ font-size:.8rem !important }
       .page.fit-one .text-xs{ font-size:.7rem !important }
       .page.fit-one .chip{ display:none !important } /* ahorrar espacio */
+
+        /* 1) Gutter uniforme: header (px-5) y contenido (px-8) */
+    .page.fit-one .px-5,
+    .page.fit-one .px-8 {
+        padding-left:  var(--print-gutter-x) !important;
+        padding-right: var(--print-gutter-x) !important;
+    }
+
+    /* 2) Compactar paddings de tablas/filas para ganar líneas */
+    .page.fit-one table th,
+    .page.fit-one table td {           /* Plan Options + Commission Structure */
+        padding: .50rem .55rem !important;
+    }
+    .page.fit-one .p-4 { padding: .70rem !important; }
+    .page.fit-one .p-3 { padding: .50rem .60rem !important; }
+
+    /* 3) Reducir gaps verticales suaves en secciones repetidas */
+    .page.fit-one .mt-3 { margin-top: .45rem !important; }
+    .page.fit-one .mb-2 { margin-bottom: .35rem !important; }
+
+    /* 4) (ya lo tenías) chips fuera en print para ahorrar alto */
+    .page.fit-one .chip { display: none !important; }
 
       /* WebKit fallback */
       @supports (-webkit-touch-callout:none){ .page.fit-one{ transform:none !important; zoom:var(--print-scale); width:8.5in !important } }
@@ -92,7 +117,7 @@
       </div>
     </header>
 
-    <section class="px-8 pt-5 pb-6">
+    <section class="px-8 pt-3 pb-6">
       <!-- Plans & Scope -->
       <div class="mb-2 flex items-center gap-2"><span class="chip">Plans & Scope</span></div>
       <div class="card rounded-xl border border-gray-200 overflow-hidden">
@@ -209,6 +234,19 @@
       </div>
 
     </section>
+
+    <!-- CTA: Why Us (oculto en impresión) -->
+    <div class="print:hidden px-8 pb-8">
+    <a href="why_us_strategic.html"
+        class="block w-full md:w-[340px] mx-auto text-center
+                rounded-lg px-6 py-3 font-semibold
+                bg-[color:var(--ztp-navy)] text-white
+                shadow hover:opacity-90 active:opacity-80
+                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--ztp-navy)]">
+        Why Us
+    </a>
+    </div>
+
   </main>
 </body>
 </html>
