@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zero to Plan | Agent/Broker Referral Program</title>
+  <!-- Favicons -->
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{
+      /* brand tokens (aligned with site) */
+      --background-color:#ffffff;
+      --default-color:#0c2031;
+      --heading-color:#0c2031;
+      --accent-color:#0c2031;
+      --contrast-color:#ffffff;
+      /* local */
+      --ztp-navy: var(--heading-color);
+      --ztp-blue: var(--accent-color);
+      --ztp-sky:#EAF1F6;
+      --ztp-sand:#F9FAFB;
+    }
+    body{font-family:'Avenir Next','Nunito','Inter',Roboto,system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,'Noto Sans'; color:#0c2031; background:#fff}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--ztp-sky);padding:.2rem .55rem;border-radius:.75rem;font-size:.72rem;font-weight:700;color:var(--ztp-navy)}
+    .page{box-shadow:0 10px 30px rgba(2,8,20,.08)}
+    .card{background:#fff}
+
+    /* --- PRINT one‑page setup --- */
+    @page{ size: Letter; margin: .5in; }
+    @media print{
+      html,body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; background:#fff }
+      .print\:hidden{ display:none !important }
+      .page{ box-shadow:none !important; margin:0 !important }
+
+      /* Let big wrappers split; avoid splitting the small cards */
+      header, section, .grid{ break-inside:auto; page-break-inside:auto }
+      .card, .rounded-lg, .rounded-xl{ break-inside:avoid; page-break-inside:avoid }
+
+      /* Fit-to-one-page scaling */
+      :root{ --print-scale:.915 }
+      .page.fit-one{ transform:scale(var(--print-scale)); transform-origin:top left; width:calc(8.5in / var(--print-scale)) !important; max-width:none !important; overflow:visible !important }
+
+      /* Compact paddings & type on print */
+      .page.fit-one [class*="py-6"], .page.fit-one [class*="py-5"]{ padding-top:.75rem !important; padding-bottom:.75rem !important }
+      .page.fit-one [class*="px-8"]{ padding-left:1.1rem !important; padding-right:1.1rem !important }
+      .page.fit-one .p-4{ padding:0.85rem !important }
+      .page.fit-one .p-3{ padding:0.6rem 0.75rem !important }
+      .page.fit-one .text-sm{ font-size:.8rem !important }
+      .page.fit-one .text-xs{ font-size:.7rem !important }
+      .page.fit-one .chip{ display:none !important } /* ahorrar espacio */
+
+      /* WebKit fallback */
+      @supports (-webkit-touch-callout:none){ .page.fit-one{ transform:none !important; zoom:var(--print-scale); width:8.5in !important } }
+    }
+  </style>
+</head>
+<body>
+  <main class="page fit-one max-w-[8.5in] mx-auto my-8 bg-white print:my-0 rounded-xl overflow-hidden">
+    <!-- Header strip -->
+    <header class="bg-[color:var(--ztp-navy)] text-white">
+      <div class="px-5 md:px-8 py-4 md:py-5 flex flex-wrap items-center gap-3 md:gap-4">
+        <a href="index.html#hero" class="flex items-center">
+          <img src="assets/img/Zerotoplan.webp" alt="Zero to Plan" class="h-9 w-auto"/>
+        </a>
+        <div class="h-8 w-px bg-white/30"></div>
+        <div class="min-w-0">
+          <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight">Zero to Plan – Agent/Broker Referral Program</h1>
+          <p class="text-white/85 text-sm">Earn 10% Commission on Feasibility Services Referrals</p>
+        </div>
+        <!-- Single button (Print only) -->
+        <button onclick="window.print()" class="print:hidden md:ml-auto mt-2 md:mt-0 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold bg-white/10 hover:bg-white/20 border border-white/20">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 9V2h12v7H6zm12 3h2a2 2 0 012 2v5h-4v3H6v-3H2v-5a2 2 0 012-2h2v4h12v-4z"/></svg>
+          Print / Save PDF
+        </button>
+      </div>
+      <!-- Intro blurb -->
+      <div class="px-8 py-4 md:py-5 bg-[color:var(--ztp-sky)] text-[color:var(--ztp-navy)]">
+        <p class="text-[13.6px] leading-6">
+          Zero To Plan offers comprehensive feasibility and financial analysis services to landowners, developers, and investors. This program is for agents who introduce clients to our fee‑for‑service consulting model, distinct from our Land Owner Partnership Program.
+          Partner with us to provide your clients with the critical, objective analysis they need for smart development decisions, while you earn a substantial commission on successful referrals.
+        </p>
+      </div>
+    </header>
+
+    <section class="px-8 pt-5 pb-6">
+      <!-- Plans & Scope -->
+      <div class="mb-2 flex items-center gap-2"><span class="chip">Plans & Scope</span></div>
+      <div class="card rounded-xl border border-gray-200 overflow-hidden">
+        <div class="bg-[color:var(--ztp-navy)] text-white px-4 py-2 text-sm font-semibold">Plan Options</div>
+        <div class="overflow-hidden">
+          <table class="w-full text-[13.4px]">
+            <thead class="bg-[color:var(--ztp-sand)] text-left">
+              <tr class="border-b border-gray-200">
+                <th class="p-3 font-semibold">Plan</th>
+                <th class="p-3 font-semibold">Type</th>
+                <th class="p-3 font-semibold">Monthly / One‑Time Cost</th>
+                <th class="p-3 font-semibold">Included Services &amp; Scope</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="p-3 font-semibold">Plan 1</td>
+                <td class="p-3">Annual Membership</td>
+                <td class="p-3">$1,900 per month</td>
+                <td class="p-3">3 Massing Studies per year (up to 10 acres)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">Plan 2</td>
+                <td class="p-3">Annual Membership</td>
+                <td class="p-3">$5,400 per month</td>
+                <td class="p-3">3 Massing Studies per year (up to 10 acres)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">Plan 3</td>
+                <td class="p-3">One Payment</td>
+                <td class="p-3">$10,000 (One‑Time)</td>
+                <td class="p-3">1 Massing Study (up to 10 acres)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">Plan 4</td>
+                <td class="p-3">One Payment</td>
+                <td class="p-3">$30,000 (One‑Time)</td>
+                <td class="p-3">1 Massing Study (up to 10 acres)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Commission Structure -->
+      <div class="mt-3">
+        <div class="mb-2 flex items-center gap-2"><span class="chip">Commission Structure</span></div>
+        <div class="card rounded-xl border border-gray-200 overflow-hidden">
+          <div class="overflow-hidden">
+            <table class="w-full text-[13.4px]">
+              <thead class="bg-[color:var(--ztp-sand)] text-left">
+                <tr class="border-b border-gray-200">
+                  <th class="p-3 font-semibold">Referral Scenario</th>
+                  <th class="p-3 font-semibold">Commission Base</th>
+                  <th class="p-3 font-semibold">Your Commission (10%)</th>
+                  <th class="p-3 font-semibold">Payout Timing</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="p-3">First‑Year Membership (Plan 1 or 2)</td>
+                  <td class="p-3">Total fees paid monthly for the first twelve (12) months</td>
+                  <td class="p-3">10% of First Year's Total</td>
+                  <td class="p-3">Paid on the first anniversary of the agreement's start date, upon confirmation of 12 months of payments.</td>
+                </tr>
+                <tr>
+                  <td class="p-3">One‑Time Service (Plan 3 or 4)</td>
+                  <td class="p-3">Total fee for the One‑Payment Plan (e.g., $10,000 or $30,000)</td>
+                  <td class="p-3">10% of Total Fee</td>
+                  <td class="p-3">Paid within thirty (30) days after Zero To Plan's receipt of the full service fee.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment plan options & core services -->
+      <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-3 mt-3">
+        <section class="card rounded-xl border border-gray-200">
+          <div class="px-4 py-3 print:py-2 border-b bg-[color:var(--ztp-sky)] font-semibold">Zero to Plan’s Payment Plan Options</div>
+          <div class="p-4 print:p-3 text-[13.4px]">
+            <p>Clients can choose between two service models: the flexible <span class="font-medium">Annual Membership Plan</span> or the defined <span class="font-medium">One‑Payment Plan</span>.</p>
+            <p>Core Services Include: Property Analysis, Code Analysis, Massing Study, and Architectural Optimization, fortified by integrated feedback from local government staff and third-party professionals (surveyors, engineers, and others).</p>
+        </div>
+        </section>
+        <section class="card rounded-xl border border-gray-200">
+          <div class="px-4 py-3 print:py-2 border-b bg-[color:var(--ztp-sky)] font-semibold">Core Services Include</div>
+          <div class="p-4 print:p-3 text-[13.4px]">
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li>Property Analysis</li>
+              <li>Code Analysis</li>
+              <li>Massing Study</li>
+              <li>Architectural Optimization</li>
+              <li>Integrated feedback from local government staff and third‑party professionals (surveyors, engineers, others)</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- Agent Responsibilities -->
+      <div class="mt-3">
+        <div class="mb-2 flex items-center gap-2"><span class="chip">Agent Responsibilities, Program Terms & Conditions</span></div>
+        <section class="card rounded-xl border border-gray-200">
+          <div class="p-4 print:p-3 text-[13.4px]">
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li><span class="font-medium">Prospect Registration:</span> For each client, you must submit a Registration Request with the client’s full name, landholding entity, and property address. Commission is payable only for a Registered Prospect.</li>
+              <li><span class="font-medium">Payout Mechanics:</span> All Commission payments are made solely to your licensed brokerage firm within thirty (30) days after the trigger event.</li>
+              <li><span class="font-medium">Non‑Exclusivity:</span> This agreement is non‑exclusive; Zero To Plan may source opportunities directly.</li>
+              <li><span class="font-medium">No Authority:</span> You have no authority to bind Zero To Plan or make any offers on our behalf.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+    </section>
+  </main>
+</body>
+</html>
