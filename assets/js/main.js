@@ -209,3 +209,82 @@
     });
   })();
 
+document.addEventListener("DOMContentLoaded", () => {
+    const messagesEl = document.getElementById("chat-messages");
+    const fakeText   = document.getElementById("fakeText");
+    const fakeCaret  = document.getElementById("fakeCaret");
+
+    const questions = [
+      "Are there incentives or funding programs for this site?",
+      "What are the zoning height and density limits?",
+      "How does my unit mix compare with competitors?",
+      "What is the projected exit cap rate over five years?",
+      "How fast did comparable projects lease and at what rent?"
+    ];
+
+    let idx = 0;
+    const TYPE_MS = 50;        // velocidad de tipeo por carácter
+    const THINK_MS = 3000;     // IA pensando…
+    const GAP_AFTER_SEND = 400; // pausa tras “enviar”
+
+    async function typeIntoFake(text){
+      fakeText.textContent = "";
+      fakeCaret.style.display = "inline-block";
+      for (let i = 0; i < text.length; i++){
+        fakeText.textContent += text[i];
+        await wait(TYPE_MS + jitter(8));
+      }
+      // pequeña pausa al final del tipeo
+      await wait(150);
+    }
+
+    function createUserBubble(text){
+      const b = document.createElement("div");
+      b.className = "message user enter";
+      b.textContent = text;
+      return b;
+    }
+
+    function createAIThinking(){
+      const a = document.createElement("div");
+      a.className = "message ai";
+      a.innerHTML = `<span class="thinking">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </span>`;
+      return a;
+    }
+
+    function clearHistory(){
+      messagesEl.innerHTML = "";
+    }
+
+    function wait(ms){ return new Promise(res => setTimeout(res, ms)); }
+    function jitter(n){ return Math.round((Math.random()-0.5)*n); }
+
+    async function cycle(){
+      clearHistory();
+
+      // 1) Tipeo en el “input”
+      const q = questions[idx];
+      await typeIntoFake(q);
+
+      // 2) “Enviar”: mover al historial, limpiar input
+      const userBubble = createUserBubble(q);
+      messagesEl.appendChild(userBubble);
+      fakeText.textContent = "";
+      fakeCaret.style.display = "none";
+      await wait(GAP_AFTER_SEND);
+
+      // 3) IA pensando…
+      const aiBubble = createAIThinking();
+      messagesEl.appendChild(aiBubble);
+      await wait(THINK_MS);
+
+      // 4) Siguiente ciclo
+      idx = (idx + 1) % questions.length;
+      await wait(350);
+      cycle();
+    }
+
+    cycle();
+  });
