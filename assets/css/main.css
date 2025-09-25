@@ -2908,7 +2908,7 @@ section,
     --bubble-user: var(--accent-color, #006BA6);
     --bubble-ai-bg: #eceff3;
     --ink: var(--default-color, #0c2031);
-    max-width: 720px;
+    max-width: auto;
     background: #f7f9fb;
     border-radius: 16px;
     padding: 20px;
@@ -2951,6 +2951,7 @@ section,
   .fake-input{
     position: relative;
     display: flex;
+    height: 50px;
     align-items: center;
     gap: 8px;
     border: 1px solid rgba(0,0,0,.08);

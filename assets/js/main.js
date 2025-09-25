@@ -209,82 +209,116 @@
     });
   })();
 
-document.addEventListener("DOMContentLoaded", () => {
-    const messagesEl = document.getElementById("chat-messages");
-    const fakeText   = document.getElementById("fakeText");
-    const fakeCaret  = document.getElementById("fakeCaret");
+  document.addEventListener("DOMContentLoaded", () => {
+  const messagesEl = document.getElementById("chat-messages");
+  const fakeText   = document.getElementById("fakeText");
+  const fakeCaret  = document.getElementById("fakeCaret");
+  const i18nBox    = document.getElementById("aichat-i18n");
 
-    const questions = [
+  function readQuestions(){
+    const items = i18nBox ? i18nBox.querySelectorAll('[data-section="aichat"]') : [];
+    const list = [];
+    items.forEach(el => {
+      const txt = (el.textContent || "").trim();
+      if (txt) list.push(txt);
+    });
+    return list.length ? list : [
       "Are there incentives or funding programs for this site?",
       "What are the zoning height and density limits?",
       "How does my unit mix compare with competitors?",
       "What is the projected exit cap rate over five years?",
       "How fast did comparable projects lease and at what rent?"
     ];
+  }
 
-    let idx = 0;
-    const TYPE_MS = 50;        // velocidad de tipeo por carácter
-    const THINK_MS = 3000;     // IA pensando…
-    const GAP_AFTER_SEND = 400; // pausa tras “enviar”
+  let questions = readQuestions();
+  let idx = 0;
+  const TYPE_MS = 50;
+  const THINK_MS = 3000;
+  const GAP_AFTER_SEND = 400;
 
-    async function typeIntoFake(text){
-      fakeText.textContent = "";
-      fakeCaret.style.display = "inline-block";
-      for (let i = 0; i < text.length; i++){
-        fakeText.textContent += text[i];
-        await wait(TYPE_MS + jitter(8));
+  function wait(ms){ return new Promise(res => setTimeout(res, ms)); }
+  function jitter(n){ return Math.round((Math.random()-0.5)*n); }
+
+  // 🔑 Control de ciclo único
+  let currentRunId = 0; // identificador único de cada loop
+
+  async function typeIntoFake(text, runId){
+    fakeText.textContent = "";
+    fakeCaret.style.display = "inline-block";
+    for (let i = 0; i < text.length; i++){
+      // si cambió el idioma/ciclo, abortamos y limpiamos
+      if (runId !== currentRunId) { 
+        fakeText.textContent = "";
+        return;
       }
-      // pequeña pausa al final del tipeo
-      await wait(150);
+      fakeText.textContent += text[i];
+      await wait(TYPE_MS + jitter(8));
     }
+    await wait(150);
+  }
 
-    function createUserBubble(text){
-      const b = document.createElement("div");
-      b.className = "message user enter";
-      b.textContent = text;
-      return b;
-    }
+  function createUserBubble(text){
+    const b = document.createElement("div");
+    b.className = "message user enter";
+    b.textContent = text;
+    return b;
+  }
 
-    function createAIThinking(){
-      const a = document.createElement("div");
-      a.className = "message ai";
-      a.innerHTML = `<span class="thinking">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-      </span>`;
-      return a;
-    }
+  function createAIThinking(){
+    const a = document.createElement("div");
+    a.className = "message ai";
+    a.innerHTML = `<span class="thinking">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </span>`;
+    return a;
+  }
 
-    function clearHistory(){
-      messagesEl.innerHTML = "";
-    }
+  function clearHistory(){ messagesEl.innerHTML = ""; }
 
-    function wait(ms){ return new Promise(res => setTimeout(res, ms)); }
-    function jitter(n){ return Math.round((Math.random()-0.5)*n); }
-
-    async function cycle(){
+  async function cycle(runId){
+    while (runId === currentRunId) {
       clearHistory();
 
-      // 1) Tipeo en el “input”
       const q = questions[idx];
-      await typeIntoFake(q);
+      await typeIntoFake(q, runId);
+      if (runId !== currentRunId) return;
 
-      // 2) “Enviar”: mover al historial, limpiar input
       const userBubble = createUserBubble(q);
       messagesEl.appendChild(userBubble);
       fakeText.textContent = "";
       fakeCaret.style.display = "none";
       await wait(GAP_AFTER_SEND);
+      if (runId !== currentRunId) return;
 
-      // 3) IA pensando…
       const aiBubble = createAIThinking();
       messagesEl.appendChild(aiBubble);
       await wait(THINK_MS);
 
-      // 4) Siguiente ciclo
       idx = (idx + 1) % questions.length;
       await wait(350);
-      cycle();
     }
+  }
 
-    cycle();
-  });
+  function startCycle(){
+    currentRunId++;
+    cycle(currentRunId);
+  }
+
+  // Arranque inicial (pequeño delay por si tu i18n setea EN en load)
+  setTimeout(startCycle, 20);
+
+  // 🛑 Debounce del observer para no reiniciar varias veces
+  if (i18nBox && "MutationObserver" in window){
+    let debounceTimer = null;
+    const obs = new MutationObserver(() => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        questions = readQuestions();
+        idx = 0;
+        startCycle();
+      }, 120); // espera a que terminen todos los cambios del i18n
+    });
+    obs.observe(i18nBox, { childList: true, subtree: true, characterData: true });
+  }
+});

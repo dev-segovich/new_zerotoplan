@@ -5,8 +5,8 @@
       "massing":"Massing",
       "team":"Customers",
       "pricing":"Services",
-      "PortFolio":"PortFolio",
-      "faq":"Questions",
+      "PortFolio":"Portfolio",
+      "faq":"FAQ",
       "contact":"Contact",
       "send-request":"SEND REQUEST"
     },
@@ -88,7 +88,7 @@
       "t15":"Coming Soon..."
     },
     "portfolio":{
-      "t1":"PortFolio",
+      "t1":"Portfolio",
       "t2":"Discover the Art and Innovation Behind Our Projects"
     },
     "faq":{
@@ -155,6 +155,13 @@
   "aihuman": {
     "title": "AI Driven Human Verified",
     "desc": "We combine the speed of AI with expert oversight to deliver accurate, actionable analysis. Our tools evaluate sites, zoning, and financial data in seconds, cutting weeks off early planning. Each report is validated with local governments, planners, community stakeholders, and, when available, environmental and engineering input. Designs are refined if feedback uncovers restrictions or opportunities that affect value, reducing acquisition risk, guiding construction, and strengthening your case when selling for top dollar."
+  },
+  "aichat": {
+    "q1": "Are there incentives or funding programs for this site?",
+    "q2": "What are the zoning height and density limits?",
+    "q3": "How does my unit mix compare with competitors?",
+    "q4": "What is the projected exit cap rate over five years?",
+    "q5": "How fast did comparable projects lease and at what rent?"
   },
   "serve": {
     "title": "Who We Serve",

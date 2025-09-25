@@ -157,6 +157,13 @@
       "title": "Impulsado por IA, Verificado por Expertos",
       "desc": "Combinamos la velocidad de la IA con la supervisión de expertos para ofrecer análisis precisos y accionables. Nuestras herramientas evalúan terrenos, normativa y datos financieros en segundos, recortando semanas de la planificación inicial. Cada informe se valida con gobiernos locales, planificadores, actores comunitarios y, cuando corresponde, con insumos ambientales y de ingeniería. Los diseños se refinan si el feedback revela restricciones u oportunidades que afectan el valor, reduciendo el riesgo de adquisición, guiando la construcción y fortaleciendo tu posición al vender al mejor precio."
   },
+  "aichat": {
+    "q1": "¿Existen incentivos o programas de financiamiento para este sitio?",
+    "q2": "¿Cuáles son los límites de altura y densidad de la zonificación?",
+    "q3": "¿Cómo se compara mi mezcla de unidades con la de los competidores?",
+    "q4": "¿Cuál es la tasa de capitalización de salida proyectada a cinco años?",
+    "q5": "¿Qué tan rápido se arrendaron proyectos comparables y a qué renta?"
+  },
     "serve": {
     "title": "A quién servimos",
 

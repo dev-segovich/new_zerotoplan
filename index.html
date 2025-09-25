@@ -62,8 +62,8 @@
           <li><a href="index.html#massing" data-section="navmenu" data-value="massing">Massing</a></li>
           <li><a href="index.html#team" data-section="navmenu" data-value="team">Customers</a></li>
           <li><a href="index.html#pricing" data-section="navmenu" data-value="pricing">Services</a></li>
-          <li><a href="index.html#PortFolio" data-section="navmenu" data-value="PortFolio">PortFolio</a></li>
-          <li><a href="index.html#faq" data-section="navmenu" data-value="faq">Questions</a></li>
+          <li><a href="index.html#PortFolio" data-section="navmenu" data-value="PortFolio">Portfolio</a></li>
+          <li><a href="index.html#faq" data-section="navmenu" data-value="faq">FAQ</a></li>
           <li><a href="index.html#contact" data-section="navmenu" data-value="contact">Contact</a></li>
 
           <!-- Selector de idioma (solo móvil dentro del menú) -->
@@ -217,6 +217,16 @@
           <!-- Historial de chat (se limpia en cada ciclo) -->
           <div id="chat-messages" class="chat-messages"></div>
 
+          <!-- i18n placeholders (ocultos) -->
+          <div id="aichat-i18n" class="visually-hidden" aria-hidden="true" style="position:absolute; left:-9999px; top:auto;">
+            <span data-section="aichat" data-value="q1">Are there incentives or funding programs for this site?</span>
+            <span data-section="aichat" data-value="q2">What are the zoning height and density limits?</span>
+            <span data-section="aichat" data-value="q3">How does my unit mix compare with competitors?</span>
+            <span data-section="aichat" data-value="q4">What is the projected exit cap rate over five years?</span>
+            <span data-section="aichat" data-value="q5">How fast did comparable projects lease and at what rent?</span>
+          </div>
+
+
           <!-- Input simulado -->
           <div class="chat-input" aria-hidden="true">
             <div class="fake-input">
@@ -227,7 +237,7 @@
                 <i class="bi bi-send"></i>
               </button>
             </div>
-            <small class="hint">Demo · This is a simulated chat</small>
+            <small class="hint">Demo · This is a simulated AI chat</small>
           </div>
 
         </div>
@@ -597,12 +607,7 @@
       </div>
     </section><!-- /Massing Section -->
 
-
-
-
-    <!-- Who We Serve -->
-    <section id="team" class="team section">
-
+    <section id="videos" class="section">
       <!-- Video arriba (lo que ya tenías) -->
       <div class="container mb-5" data-aos="fade-up">
         <div class="ratio ratio-16x9">
@@ -628,6 +633,10 @@
           </iframe>
         </div>
       </div>
+    </section>
+
+    <!-- Who We Serve -->
+    <section id="team" class="team section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -913,7 +922,7 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2 data-section="portfolio" data-value="t1">PortFolio</h2>
+        <h2 data-section="portfolio" data-value="t1">Portfolio</h2>
         <p data-section="portfolio" data-value="t2">Discover the Art and Innovation Behind Our Projects</p>
       </div><!-- End Section Title -->
 
