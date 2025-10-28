@@ -3015,3 +3015,16 @@ section,
   @media (prefers-reduced-motion: reduce){
     .message, .fake-caret, .dot { animation: none !important; }
   }
+
+  .hoverable-box {
+  transition: all 0.25s ease;
+  border-radius: 10px;
+  padding: 1.5rem 0;
+}
+
+.hoverable-box:hover {
+  background-color: rgba(0, 107, 166, 0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+  color: #006BA6 !important;
+}
