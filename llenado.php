@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         try {
             // Insertar datos en la base de datos
             $stmt = $pdo->prepare("
-                INSERT INTO contact_form (fullName, email, phoneNumber, direc, descr, created_at)
+                INSERT INTO new_people (fullName, email, phoneNumber, direc, descr, created_at)
                 VALUES (:fullName, :email, :phoneNumber, :direc, :descr, CURDATE())
             ");
             $stmt->execute([
