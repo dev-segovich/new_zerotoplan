@@ -322,3 +322,43 @@
     obs.observe(i18nBox, { childList: true, subtree: true, characterData: true });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll(".counter");
+
+  counters.forEach(counter => {
+    const target = +counter.getAttribute("data-target");
+    const duration = 7000; // duración del ciclo completo (ms)
+    let startTime = null;
+
+    function animateCountUp(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = (timestamp - startTime) / duration;
+      const eased = Math.sin(progress * Math.PI / 2); // animación más natural
+      const value = Math.floor(target * eased);
+      counter.textContent = value.toLocaleString();
+
+      if (progress < 1) {
+        requestAnimationFrame(animateCountUp);
+      } else {
+        // Reinicia el conteo tras una pequeña pausa
+        setTimeout(() => {
+          startTime = null;
+          requestAnimationFrame(animateCountUp);
+        }, 3200);
+      }
+    }
+
+    // Activa la animación al hacer scroll hasta la sección
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(animateCountUp);
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    observer.observe(counter);
+  });
+});

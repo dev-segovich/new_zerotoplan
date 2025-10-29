@@ -114,6 +114,34 @@
     "t20":"¿Cómo puedo utilizar los resultados de un estudio de masificación para negociar con vendedores o compradores?",
     "t21":"Los resultados de un estudio de masificación proporcionan una base sólida para las negociaciones al presentar una comprensión clara y detallada del potencial de desarrollo de la propiedad. Esta información se puede utilizar para justificar ofertas, evaluar el valor de la tierra y negociar términos basados en la factibilidad y rentabilidad del proyecto propuesto. Tener datos precisos fortalece su posición y apoya la toma de decisiones informadas durante las negociaciones."
   },
+  "testimonials": {
+    "title": "Testimonios de Clientes",
+    "subtitle": "Historias reales de desarrolladores, inversionistas y socios que confían en Zero to Plan",
+    "t1_name": "Drew Neubauer",
+    "t1_role": "Agente Inmobiliario Residencial y Comercial",
+    "t1_text": "Zero to Plan se convirtió en la oficina administrativa esencial que me permitió incursionar finalmente en el desarrollo inmobiliario. Durante el último año, hemos explorado seis proyectos y estamos cerrando dos. Los estudios respaldados por datos que proporcionan, basados en cotizaciones y datos reales, me dan un gran impulso de confianza, haciendo que la comunicación con las ciudades, los prestamistas y los socios de capital sea significativamente más fácil. Nuestro éxito ha evolucionado a una asociación completa con una compañía hermana de Zero to Plan, donde ahora estamos estructurando acuerdos complejos, incluidos aquellos que involucran LIHTC (Crédito Fiscal para Viviendas de Bajos Ingresos). Estoy muy contento con el servicio y espero muchos más proyectos rentables en el futuro.",
+    "t2_name": "Rafael Pecchio",
+    "t2_role": "ILP Developers",
+    "t2_text": "Mi asociación con el equipo de Zero to Plan abarca más de cuatro años. Han sido un recurso invaluable, apoyando constantemente el análisis de varios desarrollos cruciales. Esto incluye el proyecto completado de Dania Beach y un nuevo proyecto actualmente en desarrollo en North Miami. Estoy extremadamente satisfecho con la profundidad de la experiencia del equipo y los resultados confiables y respaldados por datos que brindan.",
+    "t3_name": "Nicolas Polini",
+    "t3_role": "Agente Inmobiliario de Berkshire Hathaway HomeServices",
+    "t3_text": "Durante tres años, Zero to Plan ha sido un cambio radical. Como agente inmobiliario internacional, mi reputación se basa en recomendar negocios que son absolutamente seguros. El equipo proporciona toda la consultoría esencial, modelado financiero y análisis arquitectónico para mis clientes en Estados Unidos, México y Turquía. La claridad y profesionalismo que ofrecen se mantienen incluso frente a inversores sofisticados, dándome un nivel de confianza que realmente me distingue.",
+    "t4_name": "Rubén Torres",
+    "t4_role": "CEO, Altura Capital",
+    "t4_text": "Zero to Plan entregó mucho más que solo análisis cuando los contratamos para la representación del comprador en un edificio de condominios de 74 unidades en Miami. Proporcionaron datos esenciales y en profundidad y, de manera crucial, nos ayudaron a debatir y validar con éxito los fundamentos del negocio directamente con el representante del vendedor. Su enfoque riguroso y basado en datos nos dio una ventaja decisiva en el proceso de adquisición. Recomiendo encarecidamente su servicio para adquisiciones inmobiliarias sofisticadas."
+  },
+  "stats": {
+    "title": "Indicadores de Desarrollo",
+    "subtitle": "Una visión general de nuestra huella y logros inmobiliarios",
+    "acres": "Área desarrollada (acres)",
+    "construction": "Área de construcción (pies²)",
+    "retail": "Espacio comercial / de oficinas (pies²)",
+    "apartments": "Apartamentos",
+    "sfu": "Viviendas unifamiliares (SFU)",
+    "townhomes": "Casas adosadas",
+    "duplexes": "Dúplex",
+    "total": "Total de unidades residenciales"
+  },
   "contact":{
     "t1":"Contacto",
     "t2":"Dirección",

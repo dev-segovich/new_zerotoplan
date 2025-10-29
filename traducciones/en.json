@@ -114,6 +114,34 @@
       "t20":"How can I use the results of a massing study to negotiate with sellers or buyers?",
       "t21":"The results of a massing study provide a solid foundation for negotiations by presenting a clear and detailed understanding of the property’s development potential. This information can be used to justify offers, assess the value of the land, and negotiate terms based on the feasibility and profitability of the proposed project. Having accurate data strengthens your position and supports informed decision-making during negotiations."
     },
+    "testimonials": {
+    "title": "Client Testimonials",
+    "subtitle": "Real stories from developers, investors, and partners who trust Zero to Plan",
+    "t1_name": "Drew Neubauer",
+    "t1_role": "NEU Development, LLC",
+    "t1_text": "Zero to Plan became the essential back office that allowed me to finally venture into real estate development. Over the past year, we’ve explored six projects and are now closing on two. The data-backed studies they provide—based on actual quotes and real data—give me a huge confidence boost, making communication with cities, lenders, and capital partners significantly easier. Our success has evolved into a full partnership with a sister company of Zero to Plan, where we are now structuring complex deals, including those involving LIHTC (Low-Income Housing Tax Credit). I'm very happy with the service and look forward to many more profitable projects to come.",
+    "t2_name": "Rafael Pecchio",
+    "t2_role": "ILP Developers",
+    "t2_text": "My partnership with the Zero to Plan team spans over four years. They have been an invaluable resource, consistently supporting the analysis for several crucial developments. This includes the completed Dania Beach project and a new project currently under development in North Miami. I am extremely satisfied with the team's depth of expertise and the reliable, data-backed results they provide.",
+    "t3_name": "Nicolas Polini",
+    "t3_role": "Berkshire Hathaway HomeServices Realtor",
+    "t3_text": "For three years, Zero to Plan has been a game-changer. As an international realtor, my reputation relies on recommending deals that are absolutely certain. The team provides all the essential consulting, financial modeling, and architectural analysis for my clients in the US, Mexico, and Turkey. The clarity and professionalism they deliver consistently hold up even when we're sitting across from sophisticated investors, giving me a level of trust that truly sets me apart.",
+    "t4_name": "Rubén Torres",
+    "t4_role": "CEO, Altura Capital",
+    "t4_text": "Zero to Plan delivered far more than just analysis when we engaged them for buyer representation on a 74-unit condo building in Miami. They provided essential, in-depth data and, crucially, helped us successfully debate and validate the deal fundamentals directly with the seller's representation. Their rigorous, data-driven approach gave us a decisive edge in the acquisition process. Highly recommend their service for sophisticated real estate acquisitions."
+  },
+  "stats": {
+    "title": "Project Metrics",
+    "subtitle": "A snapshot of our development footprint and achievements",
+    "acres": "Developed Area (acres)",
+    "construction": "Construction Area (sq.ft)",
+    "retail": "Retail / Office Space (sq.ft)",
+    "apartments": "Apartments",
+    "sfu": "SFU",
+    "townhomes": "Townhomes",
+    "duplexes": "Duplexes",
+    "total": "Total Residential Units"
+  },
     "contact":{
       "t1":"Contact",
       "t2":"Address",
