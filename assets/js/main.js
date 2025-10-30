@@ -362,3 +362,23 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(counter);
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Solo si es mobile
+  if (window.innerWidth <= 768) {
+    document.querySelectorAll(".flow-row").forEach(flow => {
+      const steps = flow.querySelectorAll(".step");
+      steps.forEach((step, i) => {
+        if (i < steps.length - 1) {
+          const arrowWrapper = document.createElement("div");
+          arrowWrapper.className = "arrow-wrapper";
+          arrowWrapper.innerHTML = `
+            <div class="flow-arrow"></div>
+          `;
+          step.insertAdjacentElement("afterend", arrowWrapper);
+        }
+      });
+    });
+  }
+});
+
