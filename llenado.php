@@ -102,8 +102,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <br><br>
                 <p>Sincerely,</p>
-                <p><strong>The Zero to Plan Team</strong></p>
-                <img src='https://zerotoplan.com/assets/email-signature.png' alt='Zero to Plan Signature' style='max-width:300px; margin-top:10px;'>
+                
+                <!-- Firma corporativa -->
+                <table style='font-family:Arial,sans-serif;width:100%;max-width:500px;margin-top:10px;border-top:1px solid #ccc;padding-top:15px;'>
+                <tr>
+                    <td style='vertical-align:middle;padding-right:15px;width:90px;'>
+                    <img src='https://zerotoplan.com/assets/img/Zerotoplan.webp' alt='Zero to Plan' style='max-width:90px;'>
+                    </td>
+                    <td style='vertical-align:middle;font-size:14px;color:#333;'>
+                    <strong style='font-size:16px;color:#006BA6;'>The Zero to Plan Team</strong><br>
+                    <span>Real Estate Feasibility Platform</span><br>
+                    <a href='https://zerotoplan.com' style='color:#006BA6;text-decoration:none;'>www.zerotoplan.com</a><br>
+                    <a href='mailto:info@zerotoplan.com' style='color:#006BA6;text-decoration:none;'>info@zerotoplan.com</a><br>
+                    <a href='tel:+19544593936' style='color:#006BA6;text-decoration:none;'>+1 (954) 459-3936</a>
+                    <div style='margin-top:8px;'>
+                        <a href='https://www.linkedin.com/company/zero-to-plan/' style='margin-right:8px;'>
+                        <img src='https://zerotoplan.com/assets/icons/linkedin.png' alt='LinkedIn' width='20'>
+                        </a>
+                        <a href='https://www.instagram.com/zerotoplan/' style='margin-right:8px;'>
+                        <img src='https://zerotoplan.com/assets/icons/instagram.png' alt='Instagram' width='20'>
+                        </a>
+                    </div>
+                    </td>
+                </tr>
+                </table>
+
             </body>
             </html>
             ";
