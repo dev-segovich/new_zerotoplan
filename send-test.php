@@ -14,7 +14,7 @@ $m->Password='5)}dQ&%jli4j!8bc';
 $m->SMTPSecure=PHPMailer::ENCRYPTION_SMTPS;
 $m->Port=465;
 $m->setFrom('no-reply@zerotoplan.com','Zero to Plan');
-$m->addAddress('jesus.blondell@zerotoplan.com');
+$m->addAddress('jsegovich55@gmail.com');
 $m->isHTML(true);
 $m->Subject='SMTP OK test';
 $m->Body='Funciona ✅';
