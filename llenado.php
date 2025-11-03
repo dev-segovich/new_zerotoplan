@@ -1,20 +1,35 @@
 <?php
 // ====================================
-// CONFIGURACIÓN DE CONEXIÓN
+// CONFIGURACIÓN INICIAL
+// ====================================
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// RUTAS A PHPMailer
+require __DIR__ . '/PHPMailer-master/PHPMailer-master/src/PHPMailer.php';
+require __DIR__ . '/PHPMailer-master/PHPMailer-master/src/SMTP.php';
+require __DIR__ . '/PHPMailer-master/PHPMailer-master/src/Exception.php';
+
+// CREDENCIALES SMTP
+$smtpHost = 'mail.zerotoplan.com';
+$smtpUser = 'no-reply@zerotoplan.com';
+$smtpPass = '5)}dQ&%jli4j!8bc'; // cámbiala por la real
+$smtpPort = 465; // o 587 si usas STARTTLS
+
+// ====================================
+// CONEXIÓN A LA BASE DE DATOS
 // ====================================
 $host = 'localhost';
 $dbname = 'zero9111_landing';
 $username = 'zero9111_jesusrey';
 $password = 'o+[ZdH33O£RhD2/';
 
-// ====================================
-// CONEXIÓN A LA BASE DE DATOS
-// ====================================
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("❌ Error de conexión: " . $e->getMessage());
+    die("❌ Database connection error: " . $e->getMessage());
 }
 
 // ====================================
@@ -29,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($fullName && $email && $direc && $descr) {
         try {
-            // Insertar datos en la base de datos
+            // Insertar en base de datos
             $stmt = $pdo->prepare("
                 INSERT INTO new_people (fullName, email, phoneNumber, direc, descr, created_at)
                 VALUES (:fullName, :email, :phoneNumber, :direc, :descr, CURDATE())
@@ -43,88 +58,79 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ]);
 
             // ====================================
-            // CORREO DE CONFIRMACIÓN AL USUARIO
+            // CONFIGURAR CORREO (PHPMailer)
             // ====================================
-            $toUser = $email;
-            $subjectUser = "Welcome to Zero to Plan: Your Founder Pricing is Confirmed!";
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = $smtpHost;
+            $mail->SMTPAuth = true;
+            $mail->Username = $smtpUser;
+            $mail->Password = $smtpPass;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // o STARTTLS si usas 587
+            $mail->Port = $smtpPort;
+            $mail->CharSet = 'UTF-8';
 
-            $messageUser = "
+            // ====================================
+            // ENVÍO AL CLIENTE
+            // ====================================
+            $mail->setFrom($smtpUser, 'Zero to Plan');
+            $mail->addAddress($email, $fullName);
+            $mail->Subject = "Welcome to Zero to Plan: Your Founder Pricing is Confirmed!";
+            $mail->isHTML(true);
+
+            $mail->Body = "
             <html>
-            <body style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
-            <h2 style='color:#006BA6;'>Dear $fullName,</h2>
-            <p>Thank you so much for considering <strong>Zero to Plan</strong> as your dedicated real estate feasibility and pre-development platform.</p>
+            <body style='font-family: Arial, sans-serif; color:#333;'>
+                <h2>Dear {$fullName},</h2>
+                <p>Thank you so much for considering <strong>Zero to Plan</strong> as your dedicated real estate feasibility and pre-development platform.</p>
+                <p>We are happy to inform you that we've received an overwhelming response to our platform! As quality is our top priority, we are currently busy processing existing requests and will be responding to you as soon as possible.</p>
+                <p>We would like to confirm that with this submission, you have successfully locked in our <strong>exclusive Founder Pricing</strong>. This special rate is now reserved for you as we begin our partnership.</p>
 
-            <p>We are happy to inform you that we've received an overwhelming response to our platform! As quality is our top priority, we are currently busy processing existing requests and will be responding to you as soon as possible. Thank you for your patience as we ensure every client receives the best possible service.</p>
+                <p>Our team will be reaching out shortly with two critical items:</p>
+                <ol>
+                    <li>A dedicated scheduling link to book a quick introductory call with our team.</li>
+                    <li>Your personalized onboarding link, giving you access to your client portal.</li>
+                </ol>
 
-            <p>We would like to confirm that with this submission, you have successfully <strong>locked in our exclusive Founder Pricing</strong>. This special rate is now reserved for you as we begin our partnership.</p>
+                <p>You may use the client portal to upload any specific project information you may have (site plans, zoning notes, financial goals, etc.). This is optional, but the more information you can provide upfront, the more accurate our initial analysis will be.</p>
 
-            <p><strong>Our team will be reaching out shortly with two critical items:</strong></p>
-            <ul>
-                <li>A dedicated scheduling link so you can book a quick introductory call with our team.</li>
-                <li>Your personalized onboarding link, which will give you access to your client portal.</li>
-            </ul>
+                <p>This communication will also include a detailed quote based on your site’s size and complexity, along with the estimated delivery time for your Zero to Plan study.</p>
 
-            <p>You may use the client portal to upload any specific project information you may have (site plans, zoning notes, financial goals, etc.). This detail is not strictly required to begin, but the more information you can provide upfront, the better and more accurate our initial analysis can be.</p>
+                <p>We are glad to have you here. Welcome to the Zero to Plan family, where every critical decision is built upon robust data and precise numbers.</p>
 
-            <p>This communication will also include a detailed quote based on the size and complexity of your site, along with the estimated delivery time for your Zero to Plan study.</p>
+                <p>We look forward to partnering with you on your next successful development.</p>
 
-            <p>We are glad to have you here with us. Welcome to the Zero to Plan family, where every critical decision is built upon robust data and precise numbers.</p>
-
-            <p><strong>We look forward to partnering with you on your next successful development.</strong></p>
-
-            <p>Sincerely,<br>The Zero to Plan Team</p>
-
-            <!-- Firma visual -->
-            <table cellpadding='6' cellspacing='0' border='0' style='border-top:1px solid #ccc;margin-top:25px;'>
-                <tr>
-                <td style='vertical-align:middle;'>
-                    <img src='https://zerotoplan.com/assets/img/Zerotoplan.webp' alt='Zero to Plan' width='120' style='display:block;border:0;'>
-                </td>
-                <td style='vertical-align:middle; padding-left:10px; border-left:1px solid #ccc;'>
-                    <p style='margin:0;font-size:14px;color:#000;'>
-                    <strong>Zero to Plan</strong><br>
-                    <em>Real Estate Feasibility Platform</em><br>
-                    +1&nbsp;954&nbsp;459&nbsp;3936<br>
-                    Email: <a href='mailto:info@zerotoplan.com' style='color:#006BA6;text-decoration:none;'>info@zerotoplan.com</a><br>
-                    Website: <a href='https://zerotoplan.com' style='color:#006BA6;text-decoration:none;'>zerotoplan.com</a>
-                    </p>
-                </td>
-                </tr>
-            </table>
+                <br><br>
+                <p>Sincerely,</p>
+                <p><strong>The Zero to Plan Team</strong></p>
+                <img src='https://zerotoplan.com/assets/email-signature.png' alt='Zero to Plan Signature' style='max-width:300px; margin-top:10px;'>
             </body>
-            </html>";
+            </html>
+            ";
 
-            $headersUser = "MIME-Version: 1.0" . "\r\n";
-            $headersUser .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headersUser .= "From: Zero to Plan <no-reply@zerotoplan.com>\r\n";
-
-            @mail($toUser, $subjectUser, $messageUser, $headersUser);
-
+            $mail->send();
 
             // ====================================
-            // CORREO INTERNO AL EQUIPO
+            // ENVÍO INTERNO AL EQUIPO
             // ====================================
-            $toAdmin = "info@zerotoplan.com";
-            $subjectAdmin = "📩 New Contact Form Submission - $fullName";
-            $messageAdmin = "
+            $mail->clearAddresses();
+            $mail->addAddress("info@zerotoplan.com");
+            $mail->Subject = "📩 New Contact Form Submission - {$fullName}";
+            $mail->Body = "
             <html>
             <body style='font-family:Arial,sans-serif;color:#333;'>
               <h3>New Contact Received</h3>
-              <p><strong>Name:</strong> $fullName</p>
-              <p><strong>Email:</strong> $email</p>
-              <p><strong>Phone:</strong> $phoneNumber</p>
-              <p><strong>Address:</strong> $direc</p>
+              <p><strong>Name:</strong> {$fullName}</p>
+              <p><strong>Email:</strong> {$email}</p>
+              <p><strong>Phone:</strong> {$phoneNumber}</p>
+              <p><strong>Address:</strong> {$direc}</p>
               <p><strong>Message:</strong></p>
-              <blockquote style='border-left:3px solid #ccc;padding-left:10px;color:#555;'>$descr</blockquote>
+              <blockquote style='border-left:3px solid #ccc;padding-left:10px;color:#555;'>{$descr}</blockquote>
               <p><em>Submitted on " . date('Y-m-d H:i:s') . "</em></p>
             </body>
             </html>";
 
-            $headersAdmin = "MIME-Version: 1.0" . "\r\n";
-            $headersAdmin .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headersAdmin .= "From: Zero to Plan <no-reply@zerotoplan.com>\r\n";
-
-            @mail($toAdmin, $subjectAdmin, $messageAdmin, $headersAdmin);
+            $mail->send();
 
             // ====================================
             // CONFIRMACIÓN VISUAL AL USUARIO
@@ -134,22 +140,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 window.location.href='index.html';
             </script>";
 
+        } catch (Exception $e) {
+            echo "<script>
+                alert('⚠️ Mail error: " . addslashes($e->getMessage()) . "');
+                window.history.back();
+            </script>";
         } catch (PDOException $e) {
             echo "<script>
-                alert('⚠️ Error saving data: " . addslashes($e->getMessage()) . "');
+                alert('⚠️ Database error: " . addslashes($e->getMessage()) . "');
                 window.history.back();
             </script>";
         }
     } else {
-        echo "<script>
-            alert('Please fill in all required fields.');
-            window.history.back();
-        </script>";
+        echo "<script>alert('Please fill in all required fields.'); window.history.back();</script>";
     }
 } else {
-    echo "<script>
-        alert('Invalid request.');
-        window.history.back();
-    </script>";
+    echo "<script>alert('Invalid request.'); window.history.back();</script>";
 }
-?>
