@@ -46,18 +46,51 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // CORREO DE CONFIRMACIÓN AL USUARIO
             // ====================================
             $toUser = $email;
-            $subjectUser = "Thank you for contacting Zero to Plan";
+            $subjectUser = "Welcome to Zero to Plan: Your Founder Pricing is Confirmed!";
+
             $messageUser = "
             <html>
-            <body style='font-family:Arial,sans-serif;color:#333;'>
-              <h2>Hi $fullName,</h2>
-              <p>Thank you for reaching out to <strong>Zero to Plan</strong>.</p>
-              <p>We’ve received your message and one of our team members will get in touch with you soon.</p>
-              <p><strong>Your message:</strong></p>
-              <blockquote style='border-left:3px solid #006BA6;padding-left:10px;color:#555;'>$descr</blockquote>
-              <p style='margin-top:20px;'>Best regards,<br>
-              <strong>The Zero to Plan Team</strong><br>
-              <a href='https://zerotoplan.com' style='color:#006BA6;'>zerotoplan.com</a></p>
+            <body style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+            <h2 style='color:#006BA6;'>Dear $fullName,</h2>
+            <p>Thank you so much for considering <strong>Zero to Plan</strong> as your dedicated real estate feasibility and pre-development platform.</p>
+
+            <p>We are happy to inform you that we've received an overwhelming response to our platform! As quality is our top priority, we are currently busy processing existing requests and will be responding to you as soon as possible. Thank you for your patience as we ensure every client receives the best possible service.</p>
+
+            <p>We would like to confirm that with this submission, you have successfully <strong>locked in our exclusive Founder Pricing</strong>. This special rate is now reserved for you as we begin our partnership.</p>
+
+            <p><strong>Our team will be reaching out shortly with two critical items:</strong></p>
+            <ul>
+                <li>A dedicated scheduling link so you can book a quick introductory call with our team.</li>
+                <li>Your personalized onboarding link, which will give you access to your client portal.</li>
+            </ul>
+
+            <p>You may use the client portal to upload any specific project information you may have (site plans, zoning notes, financial goals, etc.). This detail is not strictly required to begin, but the more information you can provide upfront, the better and more accurate our initial analysis can be.</p>
+
+            <p>This communication will also include a detailed quote based on the size and complexity of your site, along with the estimated delivery time for your Zero to Plan study.</p>
+
+            <p>We are glad to have you here with us. Welcome to the Zero to Plan family, where every critical decision is built upon robust data and precise numbers.</p>
+
+            <p><strong>We look forward to partnering with you on your next successful development.</strong></p>
+
+            <p>Sincerely,<br>The Zero to Plan Team</p>
+
+            <!-- Firma visual -->
+            <table cellpadding='6' cellspacing='0' border='0' style='border-top:1px solid #ccc;margin-top:25px;'>
+                <tr>
+                <td style='vertical-align:middle;'>
+                    <img src='https://zerotoplan.com/assets/img/Zerotoplan.webp' alt='Zero to Plan' width='120' style='display:block;border:0;'>
+                </td>
+                <td style='vertical-align:middle; padding-left:10px; border-left:1px solid #ccc;'>
+                    <p style='margin:0;font-size:14px;color:#000;'>
+                    <strong>Zero to Plan</strong><br>
+                    <em>Real Estate Feasibility Platform</em><br>
+                    +1&nbsp;954&nbsp;459&nbsp;3936<br>
+                    Email: <a href='mailto:info@zerotoplan.com' style='color:#006BA6;text-decoration:none;'>info@zerotoplan.com</a><br>
+                    Website: <a href='https://zerotoplan.com' style='color:#006BA6;text-decoration:none;'>zerotoplan.com</a>
+                    </p>
+                </td>
+                </tr>
+            </table>
             </body>
             </html>";
 
@@ -66,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $headersUser .= "From: Zero to Plan <no-reply@zerotoplan.com>\r\n";
 
             @mail($toUser, $subjectUser, $messageUser, $headersUser);
+
 
             // ====================================
             // CORREO INTERNO AL EQUIPO
