@@ -110,19 +110,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <img src='https://zerotoplan.com/assets/img/Zerotoplan.webp' alt='Zero to Plan' style='max-width:90px;'>
                     </td>
                     <td style='vertical-align:middle;font-size:14px;color:#333;'>
-                    <strong style='font-size:16px;color:#006BA6;'>The Zero to Plan Team</strong><br>
+                    <strong style='font-size:16px;color:#001b29;'>The Zero to Plan Team</strong><br>
                     <span>Real Estate Feasibility Platform</span><br>
-                    <a href='https://zerotoplan.com' style='color:#006BA6;text-decoration:none;'>www.zerotoplan.com</a><br>
-                    <a href='mailto:info@zerotoplan.com' style='color:#006BA6;text-decoration:none;'>info@zerotoplan.com</a><br>
-                    <a href='tel:+19544593936' style='color:#006BA6;text-decoration:none;'>+1 (954) 459-3936</a>
-                    <div style='margin-top:8px;'>
-                        <a href='https://www.linkedin.com/company/zero-to-plan/' style='margin-right:8px;'>
-                        <img src='https://zerotoplan.com/assets/icons/linkedin.png' alt='LinkedIn' width='20'>
-                        </a>
-                        <a href='https://www.instagram.com/zerotoplan/' style='margin-right:8px;'>
-                        <img src='https://zerotoplan.com/assets/icons/instagram.png' alt='Instagram' width='20'>
-                        </a>
-                    </div>
+                    <span style= 'font-size:10px;color:#8282;'>Website: </span><a href='https://zerotoplan.com' style='color:#003f61;text-decoration:none;'>www.zerotoplan.com</a><br>
+                    <span style= 'font-size:10px;color:#8282;'>Mail: </span><a href='mailto:info@zerotoplan.com' style='color:#003f61;text-decoration:none;'>info@zerotoplan.com</a><br>
+                    <span style= 'font-size:10px;color:#8282;'>Mail: </span><a href='tel:+19547305416' style='color:#003f61;text-decoration:none;'>+1 (954) 459-3936</a>
                     </td>
                 </tr>
                 </table>
@@ -138,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // ====================================
             $mail->clearAddresses();
             $mail->addAddress("info@zerotoplan.com");
-            $mail->Subject = "📩 New Contact Form Submission - {$fullName}";
+            $mail->Subject = "📩 New Quotation Form Submission - {$fullName}";
             $mail->Body = "
             <html>
             <body style='font-family:Arial,sans-serif;color:#333;'>
@@ -149,7 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               <p><strong>Address:</strong> {$direc}</p>
               <p><strong>Message:</strong></p>
               <blockquote style='border-left:3px solid #ccc;padding-left:10px;color:#555;'>{$descr}</blockquote>
-              <p><em>Submitted on " . date('Y-m-d H:i:s') . "</em></p>
+              <p><em>Submitted on " . date('Y-m-d H:i:s') . "</em><br></p>
+              <h5>FZTP - #001</h5>
             </body>
             </html>";
 
