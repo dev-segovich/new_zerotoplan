@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require __DIR__ . 'PHPMailer-master/PHPMailer-master/src/PHPMailer.php';
-require __DIR__ . 'PHPMailer-master/PHPMailer-master/src/SMTP.php';
-require __DIR__ . 'PHPMailer-master/PHPMailer-master/src/Exception.php';
+require __DIR__ . '/PHPMailer-master/PHPMailer-master/src/PHPMailer.php';
+require __DIR__ . '/PHPMailer-master/PHPMailer-master/src/SMTP.php';
+require __DIR__ . '/PHPMailer-master/PHPMailer-master/src/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 $m = new PHPMailer(true);
 $m->isSMTP();
