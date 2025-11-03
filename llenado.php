@@ -112,9 +112,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <td style='vertical-align:middle;font-size:14px;color:#333;'>
                     <strong style='font-size:16px;color:#001b29;'>The Zero to Plan Team</strong><br>
                     <span>Real Estate Feasibility Platform</span><br>
-                    <span style= 'font-size:10px;color:#8282;'>Website: </span><a href='https://zerotoplan.com' style='color:#003f61;text-decoration:none;'>www.zerotoplan.com</a><br>
-                    <span style= 'font-size:10px;color:#8282;'>Mail: </span><a href='mailto:info@zerotoplan.com' style='color:#003f61;text-decoration:none;'>info@zerotoplan.com</a><br>
-                    <span style= 'font-size:10px;color:#8282;'>Mail: </span><a href='tel:+19547305416' style='color:#003f61;text-decoration:none;'>+1 (954) 459-3936</a>
+                    <span style= 'font-size:12px;color:#575757;'>Website: </span><a href='https://zerotoplan.com' style='color:#003f61;text-decoration:none;'>www.zerotoplan.com</a><br>
+                    <span style= 'font-size:12px;color:#575757;'>Mail: </span><a href='mailto:info@zerotoplan.com' style='color:#003f61;text-decoration:none;'>info@zerotoplan.com</a><br>
+                    <span style= 'font-size:12px;color:#575757;'>Number: </span><a href='tel:+19547305416' style='color:#003f61;text-decoration:none;'>+1 (954) 459-3936</a>
                     </td>
                 </tr>
                 </table>
