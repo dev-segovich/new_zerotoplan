@@ -42,11 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die('Bot detected. Submission blocked.');
     }
 
-    // --- Time-trap ---
-    $minElapsed = 3; // segundos mínimos permitidos
-    if (isset($_POST['timestamp']) && (time() - $_POST['timestamp'] < $minElapsed)) {
-        die('Suspiciously fast submission.');
+    $timestamp = 0;
+    if (isset($_POST["timestamp"]) && is_numeric($_POST["timestamp"])) {
+        $timestamp = (int) $_POST["timestamp"];
     }
+
+    // Si no hay timestamp o la diferencia es menor a 3 segundos → bot
+    if ($timestamp === 0 || (time() - $timestamp) < 3) {
+        die("Suspiciously fast submission. Possible bot detected.");
+    }
+
 
     $fullName     = trim($_POST["fullName"] ?? "");
     $email        = trim($_POST["email"] ?? "");
