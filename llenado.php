@@ -36,11 +36,29 @@ try {
 // PROCESAMIENTO DEL FORMULARIO
 // ====================================
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // --- Anti-bot honeypot ---
+    if (!empty($_POST['website'])) {
+        die('Bot detected. Submission blocked.');
+    }
+
+    // --- Time-trap ---
+    $minElapsed = 3; // segundos mínimos permitidos
+    if (isset($_POST['timestamp']) && (time() - $_POST['timestamp'] < $minElapsed)) {
+        die('Suspiciously fast submission.');
+    }
+
     $fullName     = trim($_POST["fullName"] ?? "");
     $email        = trim($_POST["email"] ?? "");
     $phoneNumber  = trim($_POST["phoneNumber"] ?? "");
     $direc        = trim($_POST["address"] ?? "");
     $descr        = trim($_POST["description"] ?? "");
+
+    // Validar email real
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<script>alert('Please enter a valid email address.'); window.history.back();</script>";
+        exit;
+    }
 
     if ($fullName && $email && $direc && $descr) {
         try {
@@ -114,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <span>Real Estate Feasibility Platform</span><br>
                     <span style= 'font-size:12px;color:#575757;'>Website: </span><a href='https://zerotoplan.com' style='color:#003f61;text-decoration:none;'>www.zerotoplan.com</a><br>
                     <span style= 'font-size:12px;color:#575757;'>Mail: </span><a href='mailto:info@zerotoplan.com' style='color:#003f61;text-decoration:none;'>info@zerotoplan.com</a><br>
-                    <span style= 'font-size:12px;color:#575757;'>Number: </span><a href='tel:+19547305416' style='color:#003f61;text-decoration:none;'>+1 (954) 459-3936</a>
+                    <span style= 'font-size:12px;color:#575757;'>Number: </span><a href='tel:+19547305416' style='color:#003f61;text-decoration:none;'>+1 (954) 730-5416</a>
                     </td>
                 </tr>
                 </table>

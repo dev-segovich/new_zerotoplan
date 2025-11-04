@@ -197,14 +197,14 @@
         <!-- Texto descriptivo -->
         <div class="col-lg-12 mx-auto bg-light-gray p-4">
           <div class="ai-human text-center">
-            <p style="text-align: justify;" data-section="aihuman" data-value="desc">
+            <h5 style="text-align: justify;" data-section="aihuman" data-value="desc">
               We combine the speed of AI with expert oversight to deliver accurate, actionable analysis. 
               Our tools evaluate sites, zoning, and financial data in seconds, cutting weeks off early planning. 
               Each report is validated with local governments, planners, community stakeholders, and, when available, 
               environmental and engineering input. Designs are refined if feedback uncovers restrictions or 
               opportunities that affect value, reducing acquisition risk, guiding construction, and strengthening 
               your case when selling for top dollar.
-            </p>
+            </h5>
           </div>
         </div>
       </div>
@@ -1426,6 +1426,11 @@
                 <textarea class="form-control" id="description" name="description" rows="3" required
                   placeholder="Additional comments or project description"></textarea>
               </div>
+
+              <!-- Honeypot + Time-trap -->
+              <input type="text" name="website" id="website" style="display:none">
+              <input type="hidden" name="timestamp" value="<?php echo time(); ?>">
+
             </form>
           </div>
           <div class="modal-footer">

@@ -328,28 +328,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   counters.forEach(counter => {
     const target = +counter.getAttribute("data-target");
-    const duration = 7000; // duración del ciclo completo (ms)
+    const startValue = target * 0.9; // inicia al 90% del valor final
+    const duration = 7000; // duración total (ms)
     let startTime = null;
 
     function animateCountUp(timestamp) {
       if (!startTime) startTime = timestamp;
       const progress = (timestamp - startTime) / duration;
-      const eased = Math.sin(progress * Math.PI / 2); // animación más natural
-      const value = Math.floor(target * eased);
+      const eased = Math.sin(progress * Math.PI / 2); // animación suave (ease-out)
+
+      // Interpolación desde el valor inicial al final
+      const value = Math.floor(startValue + (target - startValue) * eased);
       counter.textContent = value.toLocaleString();
 
       if (progress < 1) {
         requestAnimationFrame(animateCountUp);
       } else {
-        // Reinicia el conteo tras una pequeña pausa
-        setTimeout(() => {
-          startTime = null;
-          requestAnimationFrame(animateCountUp);
-        }, 3200);
+        counter.textContent = target.toLocaleString(); // asegúrate de terminar exacto
       }
     }
 
-    // Activa la animación al hacer scroll hasta la sección
+    // Dispara animación cuando entra en pantalla
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -362,6 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(counter);
   });
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
   // Solo si es mobile
