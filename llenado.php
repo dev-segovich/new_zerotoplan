@@ -45,12 +45,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $timestamp = 0;
     if (isset($_POST["timestamp"]) && is_numeric($_POST["timestamp"])) {
         $timestamp = (int) $_POST["timestamp"];
-        echo "Timestamp received: " . $timestamp . "\n";
-        echo time() . "\n";
     }
 
-    // Si no hay timestamp o la diferencia es menor a 3 segundos → bot
-    if ($timestamp === 0 || (time() - $timestamp) < 3) {
+    // Calcula diferencia absoluta en segundos
+    $delta = abs(time() - $timestamp);
+
+    // Si el timestamp no existe, es menor a 3 segundos, o tiene más de 24 h → sospechoso
+    if ($timestamp === 0 || $delta < 3 || $delta > 86400) {
+        echo "Server time: " . time() . "<br>";
+        echo "Timestamp received: " . $timestamp . "<br>";
+        echo "Delta: " . abs(time() - $timestamp) . " seconds<br>";
         die("Suspiciously fast submission. Possible bot detected.");
     }
 
