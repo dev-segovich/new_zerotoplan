@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $timestamp = 0;
     if (isset($_POST["timestamp"]) && is_numeric($_POST["timestamp"])) {
         $timestamp = (int) $_POST["timestamp"];
+        echo "Timestamp received: " . $timestamp . "\n";
     }
 
     // Si no hay timestamp o la diferencia es menor a 3 segundos → bot
