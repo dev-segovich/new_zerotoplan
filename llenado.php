@@ -111,21 +111,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <html>
             <body style='font-family: Arial, sans-serif; color:#333;'>
                 <h2>Dear {$fullName},</h2>
-                <p>Thank you so much for considering <strong>Zero to Plan</strong> as your dedicated real estate feasibility and pre-development platform.</p>
-                <p>We are happy to inform you that we've received an overwhelming response to our platform! As quality is our top priority, we are currently busy processing existing requests and will be responding to you as soon as possible.</p>
-                <p>We would like to confirm that with this submission, you have successfully locked in our <strong>exclusive Founder Pricing</strong>. This special rate is now reserved for you as we begin our partnership.</p>
+                <p>Thank you for selecting <strong>Zero to Plan</strong> as your dedicated real estate feasibility and pre-development platform.</p>
+                <p>We are pleased to confirm the successful submission of your request. Due to the <strong>overwhelming demand</strong> for our platform, and as quality remains our top priority, we are diligently processing existing requests and will be in contact with you shortly. </p>
+                <p>We would like to confirm that your submission has </strong>successfully locked in our exclusive Founder Pricing.</strong> This special rate is now reserved for you as we initiate our partnership.</p>
 
-                <p>Our team will be reaching out shortly with two critical items:</p>
+                <p>Our team will be reaching out soon with two essential items:</p>
                 <ol>
-                    <ul>A dedicated scheduling link to book a quick introductory call with our team.</ul>
-                    
+                    <li>A dedicated <strong>scheduling link</strong> to book an introductory call with our team.</li>
+                    <li>Your personalized <strong>onboarding link.</strong></li>
                 </ol>
 
-                <p>You may use the client portal to upload any specific project information you may have (site plans, zoning notes, financial goals, etc.). This is optional, but the more information you can provide upfront, the more accurate our initial analysis will be.</p>
+                <p><strong>Next Steps and Project Details</stong></p>
+
+                <p>The personalized onboarding link allows you to upload any specific project information you may have (e.g., site plans, zoning notes, financial goals). Providing this information is optional, but the <strong>more detailed data you provide upfront, the more accurate our initial analysis will be.</strong></p>
 
                 <p>This communication will also include a detailed quote based on your site’s size and complexity, along with the estimated delivery time for your Zero to Plan study.</p>
 
-                <p>We are glad to have you here. Welcome to the Zero to Plan family, where every critical decision is built upon robust data and precise numbers.</p>
+                <p>We are delighted to welcome you. Every critical decision you make will now be built upon the <strong>robust data and precise numbers</strong> delivered by Zero to Plan. </p>
 
                 <p>We look forward to partnering with you on your next successful development.</p>
 
@@ -139,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <img src='https://zerotoplan.com/assets/img/Zerotoplan.webp' alt='Zero to Plan' style='max-width:90px;'>
                     </td>
                     <td style='vertical-align:middle;font-size:14px;color:#333;'>
-                    <strong style='font-size:16px;color:#001b29;'>The Zero to Plan Team</strong><br>
+                    <strong style='font-size:16px;color:#001b29;'>Zero to Plan Team</strong><br>
                     <span>Real Estate Feasibility Platform</span><br>
                     <span style= 'font-size:12px;color:#575757;'>Website: </span><a href='https://zerotoplan.com' style='color:#003f61;text-decoration:none;'>www.zerotoplan.com</a><br>
                     <span style= 'font-size:12px;color:#575757;'>Mail: </span><a href='mailto:info@zerotoplan.com' style='color:#003f61;text-decoration:none;'>info@zerotoplan.com</a><br>
