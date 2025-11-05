@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <h2>Dear {$fullName},</h2>
                 <p>Thank you for selecting <strong>Zero to Plan</strong> as your dedicated real estate feasibility and pre-development platform.</p>
                 <p>We are pleased to confirm the successful submission of your request. Due to the <strong>overwhelming demand</strong> for our platform, and as quality remains our top priority, we are diligently processing existing requests and will be in contact with you shortly. </p>
-                <p>We would like to confirm that your submission has </strong>successfully locked in our exclusive Founder Pricing.</strong> This special rate is now reserved for you as we initiate our partnership.</p>
+                <p>We would like to confirm that your submission has <strong>successfully locked in our exclusive Founder Pricing</strong>. This special rate is now reserved for you as we initiate our partnership.</p>
 
                 <p>Our team will be reaching out soon with two essential items:</p>
                 <ol>
