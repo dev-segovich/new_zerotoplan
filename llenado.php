@@ -117,8 +117,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <p>Our team will be reaching out shortly with two critical items:</p>
                 <ol>
-                    <li>A dedicated scheduling link to book a quick introductory call with our team.</li>
-                    <li>Your personalized onboarding link, giving you access to your client portal.</li>
+                    <ul>A dedicated scheduling link to book a quick introductory call with our team.</ul>
+                    
                 </ol>
 
                 <p>You may use the client portal to upload any specific project information you may have (site plans, zoning notes, financial goals, etc.). This is optional, but the more information you can provide upfront, the more accurate our initial analysis will be.</p>
