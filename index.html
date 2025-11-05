@@ -1432,6 +1432,19 @@
               <input type="hidden" name="timestamp" id="timestamp">
 
             </form>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                const timestampField = document.getElementById("timestamp");
+                if (timestampField) {
+                  timestampField.value = Math.floor(Date.now() / 1000);
+                  console.log("Timestamp set:", timestampField.value); // <-- puedes verificarlo en consola
+                } else {
+                  console.warn("Timestamp field not found!");
+                }
+              });
+            </script>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-section="send-request" data-value="t8">Close</button>

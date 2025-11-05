@@ -382,10 +382,3 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-  document.addEventListener("DOMContentLoaded", function() {
-    // Guarda el timestamp en segundos
-    const timestampField = document.getElementById("timestamp");
-    if (timestampField) {
-      timestampField.value = Math.floor(Date.now() / 1000);
-    }
-  });
