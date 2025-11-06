@@ -1465,76 +1465,193 @@
 
     <script>
     (function () {
-      const form = document.getElementById("contactForm");
-      const iframe = document.getElementById("iframeGHL");
+      // ====== CONFIG ======
+      const FORM_ID = "contactForm";
+      const MODAL_ID = "contactFormModal";
+      const IFRAME_ID = "iframeGHL";
+      const MAX_RETRIES = 3;
+      const RETRY_DELAY_MS = 900;
 
-      let ghlReady = false;
+      // ====== ELEMENTOS ======
+      const form = document.getElementById(FORM_ID);
+      const iframe = document.getElementById(IFRAME_ID);
 
-      // 🧭 Escuchar mensajes desde el iframe
+      if (!form) {
+        console.error("[GHL Bridge] No se encontró el form con id:", FORM_ID);
+        return;
+      }
+      if (!iframe || !iframe.contentWindow) {
+        console.error("[GHL Bridge] No se encontró el iframe GHL o no está listo todavía.");
+      }
+
+      // ====== ESTADO ======
+      let ghlReady = false;        // si el iframe ya está operativo para recibir mensajes
+      let lastPayloadQS = "";      // última preconstrucción de datos (querystring para strings)
+      let tries = 0;
+
+      // ====== HELPERS ======
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+      // Constrúyelo SIEMPRE como strings. Nada de objetos sueltos en el array.
+      function buildMessagesFromFormData(fd) {
+        // OJO: mapeamos tus inputs locales -> names reales del iframe
+        const full_name = String(fd.get("fullName") || "");
+        const email     = String(fd.get("email") || "");
+        const phone     = String(fd.get("phoneNumber") || "");
+
+        // Armamos un JSON SOLO PARA STRINGIFICAR (porque el protocolo interno
+        // tolera un JSON en texto, tal como vimos que ellos mismos mandan).
+        const payload = {
+          full_name,
+          email,
+          phone
+        };
+
+        // 1) Mensaje para poblar, 100% strings:
+        //    ['populate-form', '{"full_name":"...","email":"...","phone":"..."}']
+        const populateMsg = [
+          "populate-form",
+          JSON.stringify(payload)
+        ];
+
+        // 2) Mensaje para intentar enviar (mantenerlo ultra simple)
+        const submitMsg = ["submit-form"];
+
+        // Para fallback por query params si hiciera falta:
+        const qs = new URLSearchParams(payload).toString();
+
+        return { populateMsg, submitMsg, qs };
+      }
+
+      // Enviar mensajes (siempre arrays de strings)
+      function postMessageToIframe(msgArray) {
+        try {
+          if (!iframe || !iframe.contentWindow) {
+            console.warn("[GHL Bridge] iframe aún no disponible, reintentando…");
+            return false;
+        }
+          // Por si acaso, aseguramos que todos los elementos sean strings:
+          const allStrings = msgArray.every((x) => typeof x === "string");
+          if (!allStrings) {
+            console.error("[GHL Bridge] El mensaje contiene valores no-string. Abortado:", msgArray);
+            return false;
+          }
+          console.log("%c[→ Parent → Iframe]", "color:blue", msgArray);
+          iframe.contentWindow.postMessage(msgArray, "*");
+          return true;
+        } catch (err) {
+          console.error("[GHL Bridge] Error en postMessage:", err);
+          return false;
+        }
+      }
+
+      // ====== ESCUCHAR MENSAJES DEL IFRAME (solo para marcar readiness / debug) ======
       window.addEventListener("message", (ev) => {
-        const data = ev.data || {};
-        console.log("[GHL] Mensaje recibido del iframe:", data);
-        if (
-          data === "ghl:form:ready" ||
-          data?.event === "ghl:form:ready" ||
-          data?.type === "ghl:form:ready" ||
-          data === "hl:form:ready"
-        ) {
-          ghlReady = true;
-          console.log("%c[GHL] iframe listo ✅", "color:green");
+        const data = ev.data;
+
+        // GHL nos manda arrays de strings. Ejemplos que viste:
+        // ['iframeLoaded']
+        // ['fetch-sticky-contacts', 'Ae9CWqvLhRrWhbtnbr9Q']
+        // ['fetch-query-params', '', 'Ae9CWqvLhRrWhbtnbr9Q', 'ijaNwi1qbCdBT5XUT41z', '{...json...}']
+        if (Array.isArray(data)) {
+          console.log("[GHL] Mensaje recibido del iframe:", data);
+
+          const head = data[0];
+          if (typeof head === "string") {
+            // Consideramos el iframe listo ante cualquiera de estas “señales”
+            if (
+              head === "iframeLoaded" ||
+              head === "iFrameReady" ||
+              head === "fetch-sticky-contacts" ||
+              head === "fetch-query-params"
+            ) {
+              ghlReady = true;
+
+              // Si el iframe nos pidió query params y ya tenemos un payload previo,
+              // le devolvemos en el mismo formato (array de strings) un "query-params"
+              // con el string. Así usamos el canal "oficial" que ya vimos circular.
+              if (head === "fetch-query-params" && lastPayloadQS) {
+                // Responder con ['query-params', 'full_name=...&email=...&phone=...']
+                postMessageToIframe(["query-params", lastPayloadQS]);
+              }
+            }
+          }
+        } else if (typeof data === "string") {
+          // GHL a veces manda líneas como '[iFrameSizer]...'
+          if (data.indexOf("[iFrameSizer]") > -1 || data.indexOf("iFrame script is ready!") > -1) {
+            ghlReady = true;
+          }
+          console.log("[GHL raw]", data);
+        } else {
+          // No nos interesa otro tipo de payload (evitamos tocarlo)
+          // console.log("[GHL] Mensaje no esperado (ignorado)", data);
         }
       });
 
-      // 🧱 Envío del formulario
-      form.addEventListener("submit", function (e) {
-        e.preventDefault(); // Bloquear envío nativo
+      // ====== SUBMIT DEL FORM LOCAL ======
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
         const fd = new FormData(form);
 
-        // 🔹 Paso 1: Enviar a tu backend (llenado.php)
-        fetch(form.action, { method: "POST", body: fd })
-          .then((r) => console.log("[PHP] OK:", r.status))
-          .catch((err) => console.error("[PHP] Error:", err));
-
-        // 🔹 Paso 2: Preparar datos para GHL (sin 'data' anidado)
-        const message = {
-          event: "ghl:populateForm", // 👈 formato más estable
-          full_name: String(fd.get("fullName") || ""),
-          email: String(fd.get("email") || ""),
-          phone: String(fd.get("phoneNumber") || ""),
-          submit: true
-        };
-
-        // 🔹 Paso 3: Enviar al iframe
-        const postMessageToGHL = () => {
-          try {
-            console.log("%c[→ Enviando a GHL]", "color:blue", message);
-            iframe.contentWindow.postMessage(message, "*");
-          } catch (error) {
-            console.error("Error enviando mensaje al iframe:", error);
-          }
-        };
-
-        if (ghlReady) {
-          postMessageToGHL();
-        } else {
-          console.warn("[GHL] No listo, esperando 1s para reintentar...");
-          setTimeout(postMessageToGHL, 1000);
+        // 1) Primero tu backend (llenado.php)
+        try {
+          const r = await fetch(form.action, { method: "POST", body: fd });
+          console.log("[PHP] OK:", r.status);
+        } catch (err) {
+          console.error("[PHP] Error:", err);
+          // Seguimos intentando GHL igual, para no perder el lead
         }
 
-        // 🔹 Paso 4: Feedback local
+        // 2) Construimos mensajes seguros para GHL (solo strings)
+        const { populateMsg, submitMsg, qs } = buildMessagesFromFormData(fd);
+        lastPayloadQS = qs;
+
+        // 3) Intentamos enviar al iframe (hasta MAX_RETRIES)
+        tries = 0;
+        while (tries < MAX_RETRIES) {
+          if (!ghlReady) {
+            console.warn("[GHL] No listo, esperando", RETRY_DELAY_MS, "ms… (try", tries + 1, "de", MAX_RETRIES, ")");
+            await sleep(RETRY_DELAY_MS);
+            tries++;
+            continue;
+          }
+
+          // 3.a) Poblar
+          const populated = postMessageToIframe(populateMsg);
+
+          // 3.b) Intento de submit
+          const submitted = postMessageToIframe(submitMsg);
+
+          if (populated || submitted) {
+            break;
+          }
+
+          // Si no se pudo postear por readiness intermitente, reintentamos
+          await sleep(RETRY_DELAY_MS);
+          tries++;
+        }
+
+        // 4) Feedback local — ojo con el warning de aria-hidden: cierra el modal un tick después
         alert("Form submitted successfully!");
+
+        // Cerrar modal con un pequeño delay para evitar el warning de focus + aria-hidden
+        setTimeout(() => {
+          try {
+            const modalEl = document.getElementById(MODAL_ID);
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal && modal.hide();
+          } catch (_) {}
+        }, 50);
+
+        // Limpiar
         form.reset();
-
-        // 🔹 Paso 5: Cerrar modal Bootstrap
-        const modalEl = document.getElementById("contactFormModal");
-        const modal = bootstrap.Modal.getInstance(modalEl);
-        modal?.hide();
-
         return false;
       });
     })();
     </script>
+
+
 
 
 
