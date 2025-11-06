@@ -87,13 +87,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ]);
 
             // Envío a GoHighLevel Form
-            $ghlUrl = "https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z";
+            $ghlUrl = "https://backend.leadconnectorhq.com/forms/submit";
 
-            // Si no tienes el campo de teléfono, puedes omitirlo o enviarlo vacío
             $ghlData = [
-                "fullName"    => $fullName,
+                "full_name"   => $fullName,
                 "email"       => $email,
-                "phoneNumber" => $phoneNumber
+                "phone"       => $phoneNumber,
+                "formId"      => "ijaNwi1qbCdBT5XUT41z", // <-- tu formId
+                "location_id" => "Ae9CWqvLhRrWhbtnbr9Q"  // <-- aparece también en la respuesta
             ];
 
             $ch = curl_init($ghlUrl);
@@ -103,11 +104,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 "Content-Type: application/json"
             ]);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10); // seguridad
             $response = curl_exec($ch);
             curl_close($ch);
 
-            // Si quieres registrar el resultado (opcional)
-            file_put_contents("ghl_log.txt", date('Y-m-d H:i:s')." - ".$response.PHP_EOL, FILE_APPEND);
+            // Registrar respuesta en log (opcional)
+            file_put_contents(__DIR__ . "/ghl_log.txt", date('Y-m-d H:i:s')." - ".$response.PHP_EOL, FILE_APPEND);
+
 
             // ====================================
             // CONFIGURAR CORREO (PHPMailer)
