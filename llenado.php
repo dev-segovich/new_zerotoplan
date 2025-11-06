@@ -86,6 +86,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 ":descr" => $descr
             ]);
 
+            // Envío a GoHighLevel Form
+            $ghlUrl = "https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z";
+
+            // Si no tienes el campo de teléfono, puedes omitirlo o enviarlo vacío
+            $ghlData = [
+                "fullName"    => $fullName,
+                "email"       => $email,
+                "phoneNumber" => $phoneNumber
+            ];
+
+            $ch = curl_init($ghlUrl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($ghlData));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                "Content-Type: application/json"
+            ]);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            // Si quieres registrar el resultado (opcional)
+            file_put_contents("ghl_log.txt", date('Y-m-d H:i:s')." - ".$response.PHP_EOL, FILE_APPEND);
+
             // ====================================
             // CONFIGURAR CORREO (PHPMailer)
             // ====================================
