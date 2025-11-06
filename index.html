@@ -1452,6 +1452,7 @@
     </div>
 
     <!-- Iframe GHL oculto -->
+        
     <iframe
       src="https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z"
       id="iframeGHL"
@@ -1495,19 +1496,17 @@
           .then((r) => console.log("[PHP] OK:", r.status))
           .catch((err) => console.error("[PHP] Error:", err));
 
-        // 🔹 Paso 2: Preparar datos para GHL
-        const fields = [
-          { name: "full_name", value: String(fd.get("fullName") || "") },
-          { name: "email", value: String(fd.get("email") || "") },
-          { name: "phone", value: String(fd.get("phoneNumber") || "") },
-          { name: "address", value: String(fd.get("address") || "") },
-          { name: "description", value: String(fd.get("description") || "") },
-        ];
-
+        // 🔹 Paso 2: Preparar datos para GHL (estructura compatible)
         const message = {
-          event: "populate", // formato neutro compatible
-          fields,            // array de pares { name, value }
-          submit: true,      // auto-submit dentro del iframe
+          event: "populateForm", // formato oficial que entiende el iframe
+          data: {
+            full_name: String(fd.get("fullName") || ""),
+            email: String(fd.get("email") || ""),
+            phone: String(fd.get("phoneNumber") || ""),
+            address: String(fd.get("address") || ""),
+            description: String(fd.get("description") || "")
+          },
+          submit: true // envía automáticamente dentro del iframe
         };
 
         // 🔹 Paso 3: Enviar al iframe
@@ -1540,7 +1539,6 @@
       });
     })();
     </script>
-
 
 
   </main>
