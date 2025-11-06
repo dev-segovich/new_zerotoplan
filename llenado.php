@@ -90,11 +90,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $ghlUrl = "https://backend.leadconnectorhq.com/forms/submit";
 
             $ghlData = [
-                "full_name"   => $fullName,
-                "email"       => $email,
-                "phone"       => $phoneNumber,
-                "formId"      => "ijaNwi1qbCdBT5XUT41z", // <-- tu formId
-                "location_id" => "Ae9CWqvLhRrWhbtnbr9Q"  // <-- aparece también en la respuesta
+                "formId"      => "ijaNwi1qbCdBT5XUT41z",
+                "location_id" => "Ae9CWqvLhRrWhbtnbr9Q",
+                "fields"      => [
+                    "full_name" => $fullName,
+                    "email"     => $email,
+                    "phone"     => $phoneNumber
+                ]
             ];
 
             $ch = curl_init($ghlUrl);
@@ -104,12 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 "Content-Type: application/json"
             ]);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 10); // seguridad
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
             $response = curl_exec($ch);
             curl_close($ch);
 
-            // Registrar respuesta en log (opcional)
-            file_put_contents(__DIR__ . "/ghl_log.txt", date('Y-m-d H:i:s')." - ".$response.PHP_EOL, FILE_APPEND);
+            // Registrar respuesta en log
+            file_put_contents(__DIR__ . "/ghl_log.txt", date('Y-m-d H:i:s') . " - " . $response . PHP_EOL, FILE_APPEND);
 
 
             // ====================================
