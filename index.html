@@ -1452,78 +1452,95 @@
     </div>
 
     <!-- Iframe GHL oculto -->
-          <iframe
-            src="https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z"
-            id="iframeGHL"
-            title="Auto Test"
-            style="position:absolute;left:-99999px;top:-99999px;width:1px;height:1px;opacity:0;border:0"
-            aria-hidden="true"
-            tabindex="-1"
-          ></iframe>
-          <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z"
+      id="iframeGHL"
+      title="Auto Test"
+      style="position:absolute;left:-99999px;top:-99999px;width:1px;height:1px;opacity:0;border:0"
+      aria-hidden="true"
+      tabindex="-1"
+    ></iframe>
+    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
 
-          <script>
-          (function() {
-            const form = document.getElementById("contactForm");
-            const iframe = document.getElementById("iframeGHL");
+    <script>
+    (function () {
+      const form = document.getElementById("contactForm");
+      const iframe = document.getElementById("iframeGHL");
 
-            let ghlReady = false;
+      let ghlReady = false;
 
-            // Escuchar cuando el iframe esté listo
-            window.addEventListener("message", (ev) => {
-              const data = ev.data || {};
-              if (data.event === "ghl:form:ready" || data.type === "ghl:form:ready") {
-                ghlReady = true;
-                console.log("[GHL] iframe listo");
-              }
-            });
+      // 🧭 Escuchar mensajes desde el iframe
+      window.addEventListener("message", (ev) => {
+        const data = ev.data || {};
+        console.log("[GHL] Mensaje recibido del iframe:", data);
+        if (
+          data === "ghl:form:ready" ||
+          data?.event === "ghl:form:ready" ||
+          data?.type === "ghl:form:ready" ||
+          data === "hl:form:ready"
+        ) {
+          ghlReady = true;
+          console.log("%c[GHL] iframe listo ✅", "color:green");
+        }
+      });
 
-            form.addEventListener("submit", function(e) {
-              e.preventDefault(); // 🔒 bloquea el submit nativo
+      // 🧱 Envío del formulario
+      form.addEventListener("submit", function (e) {
+        e.preventDefault(); // Bloquear envío nativo
 
-              // Capturamos datos
-              const payload = new FormData(form);
-              const nombre = payload.get("fullName");
-              const email = payload.get("email");
-              const phone = payload.get("phoneNumber");
-              const address = payload.get("address");
-              const description = payload.get("description");
+        const fd = new FormData(form);
 
-              // Enviar a tu backend
-              fetch(form.action, { method: "POST", body: payload })
-                .then((r) => console.log("PHP OK", r.status))
-                .catch((err) => console.error("Error PHP", err));
+        // 🔹 Paso 1: Enviar a tu backend (llenado.php)
+        fetch(form.action, { method: "POST", body: fd })
+          .then((r) => console.log("[PHP] OK:", r.status))
+          .catch((err) => console.error("[PHP] Error:", err));
 
-              // Enviar al iframe de GHL cuando esté listo
-              const message = {
-                event: "populateForm", // <-- formato más compatible
-                fields: {
-                  full_name: nombre,
-                  email: email,
-                  phone: phone,
-                  address: address,
-                  description: description
-                },
-                submit: true
-              };
+        // 🔹 Paso 2: Preparar datos para GHL
+        const fields = [
+          { name: "full_name", value: String(fd.get("fullName") || "") },
+          { name: "email", value: String(fd.get("email") || "") },
+          { name: "phone", value: String(fd.get("phoneNumber") || "") },
+          { name: "address", value: String(fd.get("address") || "") },
+          { name: "description", value: String(fd.get("description") || "") },
+        ];
 
-              //const sendToGHL = () => iframe.contentWindow.postMessage(message, "*");
+        const message = {
+          event: "populate", // formato neutro compatible
+          fields,            // array de pares { name, value }
+          submit: true,      // auto-submit dentro del iframe
+        };
 
-              if (ghlReady) sendToGHL();
-              else setTimeout(sendToGHL, 1000); // espera un poco si no está listo aún
+        // 🔹 Paso 3: Enviar al iframe
+        const postMessageToGHL = () => {
+          try {
+            console.log("%c[→ Enviando a GHL]", "color:blue", message);
+            iframe.contentWindow.postMessage(message, "*");
+          } catch (error) {
+            console.error("Error enviando mensaje al iframe:", error);
+          }
+        };
 
-              // Feedback visual opcional
-              alert("Form submitted successfully!");
-              form.reset();
+        if (ghlReady) {
+          postMessageToGHL();
+        } else {
+          console.warn("[GHL] No listo, esperando 1s para reintentar...");
+          setTimeout(postMessageToGHL, 1000);
+        }
 
-              // Cerrar modal (Bootstrap)
-              const modalEl = document.getElementById("contactFormModal");
-              const modal = bootstrap.Modal.getInstance(modalEl);
-              modal?.hide();
-              return false;
-            });
-          })();
-          </script>
+        // 🔹 Paso 4: Feedback local
+        alert("Form submitted successfully!");
+        form.reset();
+
+        // 🔹 Paso 5: Cerrar modal Bootstrap
+        const modalEl = document.getElementById("contactFormModal");
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal?.hide();
+
+        return false; // Bloquear cualquier acción residual
+      });
+    })();
+    </script>
+
 
 
   </main>
