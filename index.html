@@ -1496,17 +1496,15 @@
           .then((r) => console.log("[PHP] OK:", r.status))
           .catch((err) => console.error("[PHP] Error:", err));
 
-        // 🔹 Paso 2: Preparar datos para GHL (estructura compatible)
+        // 🔹 Paso 2: Preparar datos para GHL (sin 'data' anidado)
         const message = {
-          event: "populateForm", // formato oficial que entiende el iframe
-          data: {
-            full_name: String(fd.get("fullName") || ""),
-            email: String(fd.get("email") || ""),
-            phone: String(fd.get("phoneNumber") || ""),
-            address: String(fd.get("address") || ""),
-            description: String(fd.get("description") || "")
-          },
-          submit: true // envía automáticamente dentro del iframe
+          event: "ghl:populateForm", // 👈 formato más estable
+          full_name: String(fd.get("fullName") || ""),
+          email: String(fd.get("email") || ""),
+          phone: String(fd.get("phoneNumber") || ""),
+          address: String(fd.get("address") || ""),
+          description: String(fd.get("description") || ""),
+          submit: true
         };
 
         // 🔹 Paso 3: Enviar al iframe
@@ -1535,10 +1533,11 @@
         const modal = bootstrap.Modal.getInstance(modalEl);
         modal?.hide();
 
-        return false; // Bloquear cualquier acción residual
+        return false;
       });
     })();
     </script>
+
 
 
   </main>
