@@ -1447,8 +1447,11 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-section="send-request" data-value="t8">Close</button>
             <button type="submit" form="contactForm" class="cta-btn" data-section="send-request" data-value="t9">Submit</button>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- Iframe GHL oculto -->
+    <!-- Iframe GHL oculto -->
           <iframe
             src="https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z"
             style="width:0;height:0;border:none;visibility:hidden;display:none"
@@ -1457,103 +1460,67 @@
           ></iframe>
           <script src="https://link.msgsndr.com/js/form_embed.js"></script>
           <script>
-            (function() {
-              const form = document.getElementById("contactForm");
-              const iframe = document.getElementById("iframeGHL");
+          (function() {
+            const form = document.getElementById("contactForm");
+            const iframe = document.getElementById("iframeGHL");
 
-              // 1) Handshake: saber cuándo el iframe está listo
-              let ghlReady = false;
-              window.addEventListener("message", function(ev) {
-                try {
-                  const data = ev.data || {};
-                  // GHL suele emitir eventos cuando el form está listo/cargado y cuando se envía
-                  // Cubrimos varias posibles keys por compatibilidad:
-                  if (
-                    data.type === "ghl:form:ready" ||
-                    data.type === "ghl:loaded" ||
-                    data.event === "ghl:form:ready"
-                  ) {
-                    ghlReady = true;
-                    console.log("[GHL] Iframe listo");
-                  }
+            let ghlReady = false;
 
-                  if (data.type === "ghl:form:submitted" || data.event === "ghl:form:submitted") {
-                    // console.log("[GHL] Envío OK", data);
-                  }
+            // Escuchar cuando el iframe esté listo
+            window.addEventListener("message", (ev) => {
+              const data = ev.data || {};
+              if (data.event === "ghl:form:ready" || data.type === "ghl:form:ready") {
+                ghlReady = true;
+                console.log("[GHL] iframe listo");
+              }
+            });
 
-                  if (data.type === "ghl:form:error" || data.event === "ghl:form:error") {
-                    console.error("[GHL] Error en envío:", data);
-                  }
-                } catch(e) {
-                  // noop
-                }
-              });
+            form.addEventListener("submit", function(e) {
+              e.preventDefault(); // 🔒 bloquea el submit nativo
 
-              // 2) Envío
-              form.addEventListener("submit", function(e) {
-                e.preventDefault();
+              // Capturamos datos
+              const payload = new FormData(form);
+              const nombre = payload.get("fullName");
+              const email = payload.get("email");
+              const phone = payload.get("phoneNumber");
+              const address = payload.get("address");
+              const description = payload.get("description");
 
-                // a) Capturamos datos de TU formulario
-                const payloadLocal = new FormData(form);
+              // Enviar a tu backend
+              fetch(form.action, { method: "POST", body: payload })
+                .then((r) => console.log("PHP OK", r.status))
+                .catch((err) => console.error("Error PHP", err));
 
-                const full_name   = (document.getElementById("fullName")?.value || "").trim();
-                const email       = (document.getElementById("email")?.value || "").trim();
-                const phone       = (document.getElementById("phoneNumber")?.value || "").trim();
+              // Enviar al iframe de GHL cuando esté listo
+              const message = {
+                event: "populateForm", // <-- formato más compatible
+                fields: {
+                  full_name: nombre,
+                  email: email,
+                  phone: phone,
+                  address: address,
+                  description: description
+                },
+                submit: true
+              };
 
-                // b) Enviar a TU PHP (no bloquea el flujo)
-                fetch(form.action, { method: "POST", body: payloadLocal })
-                  .catch(() => { /* si falla, igual seguimos con GHL */ });
+              const sendToGHL = () => iframe.contentWindow.postMessage(message, "*");
 
-                // c) Enviar a GHL por postMessage
-                const ghlMessage = {
-                  type: "populateForm",      // el embed de GHL lo interpreta para prellenar
-                  data: {
-                    // Estos 3 existen en tu form GHL actual:
-                    full_name: full_name,
-                    email: email,
-                    phone: phone,
-                  },
-                  // Opcional: podemos decirle que lo envíe al terminar el prefill
-                  submit: true
-                };
+              if (ghlReady) sendToGHL();
+              else setTimeout(sendToGHL, 1000); // espera un poco si no está listo aún
 
-                // Esperar a que el iframe esté listo (hasta 2s) y luego enviar
-                const start = Date.now();
-                (function pump() {
-                  if (ghlReady || Date.now() - start > 2000) {
-                    iframe.contentWindow.postMessage(ghlMessage, "*");
+              // Feedback visual opcional
+              alert("Form submitted successfully!");
+              form.reset();
 
-                    // Plan B (por si alguna cuenta no soporta submit automático por mensaje):
-                    // re-envía SOLO el "submit" a los 400ms
-                    setTimeout(() => {
-                      iframe.contentWindow.postMessage({ type: "submitForm" }, "*");
-                    }, 400);
-                  } else {
-                    requestAnimationFrame(pump);
-                  }
-                })();
-
-                // d) Feedback al usuario y cierre modal
-                // Aquí puedes mostrar un toast, spinner, etc.
-                // Si usas Bootstrap, puedes cerrar el modal:
-                // const modal = bootstrap.Modal.getInstance(document.getElementById('contactFormModal'));
-                // modal?.hide();
-
-                // Limpiar tu formulario
-                form.reset();
-              });
-
-              // (Opcional) Modo debug: descomenta para ver el iframe durante pruebas
-               iframe.style.cssText = "width:100%;height:520px;border:1px solid #ccc;visibility:visible;display:block";
-            })();
-            </script>
-
-
-
-
-        </div>
-      </div>
-    </div>
+              // Cerrar modal (Bootstrap)
+              const modalEl = document.getElementById("contactFormModal");
+              const modal = bootstrap.Modal.getInstance(modalEl);
+              modal?.hide();
+              return false;
+            });
+          })();
+          </script>
 
 
   </main>
