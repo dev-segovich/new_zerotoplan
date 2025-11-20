@@ -153,7 +153,7 @@
       "t7":"info@zerotoplan.com"
     },
     "send-request":{
-      "t1":"Massing Project Form",
+      "t1":"Request for Quotation",
       "t2":"Please fill out the following fields to help us understand your project needs. This information allows us to provide accurate massing studies and develop a comprehensive site plan.",
       "t3":"Full Name",
       "t4":"Email",
@@ -164,7 +164,7 @@
       "t9":"Submit",
       "t10":"All Rights Reserved",
       "t11":"Images used are owned by Zero to Plan or used with the appropriate rights. For more information, please review our <a href='disclaimer.html'><strong>[Full Disclaimer]</strong></a>.",
-      "t12":"Designed by <a href='https://zerotoplan.com/'>Zerotoplan</a>"
+      "t12":"Designed by <a href='https://zerotoplan.com/'>Zero to Plan</a>"
     },
     "process": {
     "massing_title": "Architectural Massing Process",

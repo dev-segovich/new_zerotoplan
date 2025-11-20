@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Zerotoplan
+  <title>Zero to Plan
 
   </title>
   <meta content="" name="description">
@@ -784,15 +784,18 @@
         <div class="row gy-4 justify-content-center">
 
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="pricing-item disabled">
+            <div class="pricing-item">
               <h3><strong data-section="services" data-value="t2">Financial Feasibility Analysis Services</strong></h3>
               <p class="description" data-section="services" data-value="t3">Financial feasibility analysis is essential
                 in real estate investment. It assesses
                 costs, potential revenues, and financing options to determine if the return on investment justifies
                 risks. It also helps identify challenges, assess market impact, and understand long-term financial
                 commitments. This analysis is crucial for making sound investment decisions.</p>
-              <a href="#" class="cta-btn disabled" data-section="services" data-value="t4">Coming Soon...</a>
-              <ul></ul>
+              <div class="boton-send">
+                <button type="button" class="cta-btn" data-bs-toggle="modal" data-bs-target="#contactFormModal"
+                  data-section="services" data-value="t7">Send
+                  Request for Quotation</button>
+              </div>
             </div>
           </div><!-- End Pricing Item -->
 
@@ -821,7 +824,7 @@
           </div><!-- End Pricing Item -->
 
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="pricing-item disabled">
+            <div class="pricing-item">
               <h3><strong data-section="services" data-value="t13">Market Analysis Services</strong></h3>
               <p class="description" data-section="services" data-value="t14">A market analysis is essential in real
                 estate investment as it provides valuable insights into the current and future demand for properties in
@@ -831,8 +834,11 @@
                 investors identify lucrative opportunities, assess risks, and tailor their investment strategies to meet
                 the needs of the market. Ultimately, a comprehensive market analysis is essential for determining the
                 viability of a real estate investment and maximizing the potential for long-term success.</p>
-              <a href="#" class="cta-btn disabled" data-section="services" data-value="t15">Coming Soon...</a>
-              <ul></ul>
+              <div class="boton-send">
+                <button type="button" class="cta-btn" data-bs-toggle="modal" data-bs-target="#contactFormModal"
+                  data-section="services" data-value="t7">Send
+                  Request for Quotation</button>
+              </div>
             </div>
           </div><!-- End Pricing Item -->
 
@@ -1391,16 +1397,37 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="contactFormModalLabel"><strong data-section="send-request" data-value="t1">Massing Project Form</strong></h5>
+            <h5 class="modal-title" id="contactFormModalLabel"><strong data-section="send-request" data-value="t1">Request for Quotation</strong></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <iframe
+                src="https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z"
+                style="width:100%;height:100%;border:none;border-radius:3px; padding:0"
+                id="inline-ijaNwi1qbCdBT5XUT41z" 
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Form Quotation"
+                data-height="702"
+                data-layout-iframe-id="inline-ijaNwi1qbCdBT5XUT41z"
+                data-form-id="ijaNwi1qbCdBT5XUT41z"
+                title="Form Quotation"
+                    >
+            </iframe>
+            <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+          </div>
+          <!-- <div class="modal-body">
             <p class="modal-description" data-section="send-request" data-value="t2">
               Please fill out the following fields to help us understand your project needs. This information allows us
               to provide accurate massing studies and develop a comprehensive site plan.
-            </p>
+            </p> -->
             <!-- Formulario -->
-            <form id="contactForm" action="llenado.php" method="POST">
+            <!-- <form id="contactForm" action="llenado.php" method="POST">
               <div class="mb-3">
                 <label for="fullName" class="form-label" data-section="send-request" data-value="t3">Full Name</label>
                 <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Your Full Name..."
@@ -1425,10 +1452,10 @@
                 <label for="description" class="form-label" data-section="send-request" data-value="t7">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="3" required
                   placeholder="Additional comments or project description"></textarea>
-              </div>
+              </div> -->
 
               <!-- Honeypot + Time-trap -->
-              <input type="text" name="website" id="website" style="display:none">
+              <!-- <input type="text" name="website" id="website" style="display:none">
               <input type="hidden" name="timestamp" id="timestamp">
 
             </form>
@@ -1446,210 +1473,11 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-section="send-request" data-value="t8">Close</button>
             <button type="submit" form="contactForm" class="cta-btn" data-section="send-request" data-value="t9">Submit</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
 
-    <!-- Iframe GHL oculto -->
-        
-    <iframe
-      src="https://api.leadconnectorhq.com/widget/form/ijaNwi1qbCdBT5XUT41z"
-      id="iframeGHL"
-      title="Auto Test"
-      style="position:absolute;left:-99999px;top:-99999px;width:1px;height:1px;opacity:0;border:0"
-      aria-hidden="true"
-      tabindex="-1"
-    ></iframe>
-    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-
-    <script>
-    (function () {
-      // ====== CONFIG ======
-      const FORM_ID = "contactForm";
-      const MODAL_ID = "contactFormModal";
-      const IFRAME_ID = "iframeGHL";
-      const MAX_RETRIES = 3;
-      const RETRY_DELAY_MS = 900;
-
-      // ====== ELEMENTOS ======
-      const form = document.getElementById(FORM_ID);
-      const iframe = document.getElementById(IFRAME_ID);
-
-      if (!form) {
-        console.error("[GHL Bridge] No se encontró el form con id:", FORM_ID);
-        return;
-      }
-      if (!iframe || !iframe.contentWindow) {
-        console.error("[GHL Bridge] No se encontró el iframe GHL o no está listo todavía.");
-      }
-
-      // ====== ESTADO ======
-      let ghlReady = false;        // si el iframe ya está operativo para recibir mensajes
-      let lastPayloadQS = "";      // última preconstrucción de datos (querystring para strings)
-      let tries = 0;
-
-      // ====== HELPERS ======
-      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-
-      // Constrúyelo SIEMPRE como strings. Nada de objetos sueltos en el array.
-      function buildMessagesFromFormData(fd) {
-        // OJO: mapeamos tus inputs locales -> names reales del iframe
-        const full_name = String(fd.get("fullName") || "");
-        const email     = String(fd.get("email") || "");
-        const phone     = String(fd.get("phoneNumber") || "");
-
-        // Armamos un JSON SOLO PARA STRINGIFICAR (porque el protocolo interno
-        // tolera un JSON en texto, tal como vimos que ellos mismos mandan).
-        const payload = {
-          full_name,
-          email,
-          phone
-        };
-
-        // 1) Mensaje para poblar, 100% strings:
-        //    ['populate-form', '{"full_name":"...","email":"...","phone":"..."}']
-        const populateMsg = [
-          "populate-form",
-          JSON.stringify(payload)
-        ];
-
-        // 2) Mensaje para intentar enviar (mantenerlo ultra simple)
-        const submitMsg = ["submit-form"];
-
-        // Para fallback por query params si hiciera falta:
-        const qs = new URLSearchParams(payload).toString();
-
-        return { populateMsg, submitMsg, qs };
-      }
-
-      // Enviar mensajes (siempre arrays de strings)
-      function postMessageToIframe(msgArray) {
-        try {
-          if (!iframe || !iframe.contentWindow) {
-            console.warn("[GHL Bridge] iframe aún no disponible, reintentando…");
-            return false;
-        }
-          // Por si acaso, aseguramos que todos los elementos sean strings:
-          const allStrings = msgArray.every((x) => typeof x === "string");
-          if (!allStrings) {
-            console.error("[GHL Bridge] El mensaje contiene valores no-string. Abortado:", msgArray);
-            return false;
-          }
-          console.log("%c[→ Parent → Iframe]", "color:blue", msgArray);
-          iframe.contentWindow.postMessage(msgArray, "*");
-          return true;
-        } catch (err) {
-          console.error("[GHL Bridge] Error en postMessage:", err);
-          return false;
-        }
-      }
-
-      // ====== ESCUCHAR MENSAJES DEL IFRAME (solo para marcar readiness / debug) ======
-      window.addEventListener("message", (ev) => {
-        const data = ev.data;
-
-        // GHL nos manda arrays de strings. Ejemplos que viste:
-        // ['iframeLoaded']
-        // ['fetch-sticky-contacts', 'Ae9CWqvLhRrWhbtnbr9Q']
-        // ['fetch-query-params', '', 'Ae9CWqvLhRrWhbtnbr9Q', 'ijaNwi1qbCdBT5XUT41z', '{...json...}']
-        if (Array.isArray(data)) {
-          console.log("[GHL] Mensaje recibido del iframe:", data);
-
-          const head = data[0];
-          if (typeof head === "string") {
-            // Consideramos el iframe listo ante cualquiera de estas “señales”
-            if (
-              head === "iframeLoaded" ||
-              head === "iFrameReady" ||
-              head === "fetch-sticky-contacts" ||
-              head === "fetch-query-params"
-            ) {
-              ghlReady = true;
-
-              // Si el iframe nos pidió query params y ya tenemos un payload previo,
-              // le devolvemos en el mismo formato (array de strings) un "query-params"
-              // con el string. Así usamos el canal "oficial" que ya vimos circular.
-              if (head === "fetch-query-params" && lastPayloadQS) {
-                // Responder con ['query-params', 'full_name=...&email=...&phone=...']
-                postMessageToIframe(["query-params", lastPayloadQS]);
-              }
-            }
-          }
-        } else if (typeof data === "string") {
-          // GHL a veces manda líneas como '[iFrameSizer]...'
-          if (data.indexOf("[iFrameSizer]") > -1 || data.indexOf("iFrame script is ready!") > -1) {
-            ghlReady = true;
-          }
-          console.log("[GHL raw]", data);
-        } else {
-          // No nos interesa otro tipo de payload (evitamos tocarlo)
-          // console.log("[GHL] Mensaje no esperado (ignorado)", data);
-        }
-      });
-
-      // ====== SUBMIT DEL FORM LOCAL ======
-      form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        const fd = new FormData(form);
-
-        // 1) Primero tu backend (llenado.php)
-        try {
-          const r = await fetch(form.action, { method: "POST", body: fd });
-          console.log("[PHP] OK:", r.status);
-        } catch (err) {
-          console.error("[PHP] Error:", err);
-          // Seguimos intentando GHL igual, para no perder el lead
-        }
-
-        // 2) Construimos mensajes seguros para GHL (solo strings)
-        const { populateMsg, submitMsg, qs } = buildMessagesFromFormData(fd);
-        lastPayloadQS = qs;
-
-        // 3) Intentamos enviar al iframe (hasta MAX_RETRIES)
-        tries = 0;
-        while (tries < MAX_RETRIES) {
-          if (!ghlReady) {
-            console.warn("[GHL] No listo, esperando", RETRY_DELAY_MS, "ms… (try", tries + 1, "de", MAX_RETRIES, ")");
-            await sleep(RETRY_DELAY_MS);
-            tries++;
-            continue;
-          }
-
-          // 3.a) Poblar
-          const populated = postMessageToIframe(populateMsg);
-
-          // 3.b) Intento de submit
-          const submitted = postMessageToIframe(submitMsg);
-
-          if (populated || submitted) {
-            break;
-          }
-
-          // Si no se pudo postear por readiness intermitente, reintentamos
-          await sleep(RETRY_DELAY_MS);
-          tries++;
-        }
-
-        // 4) Feedback local — ojo con el warning de aria-hidden: cierra el modal un tick después
-        alert("Form submitted successfully!");
-
-        // Cerrar modal con un pequeño delay para evitar el warning de focus + aria-hidden
-        setTimeout(() => {
-          try {
-            const modalEl = document.getElementById(MODAL_ID);
-            const modal = bootstrap.Modal.getInstance(modalEl);
-            modal && modal.hide();
-          } catch (_) {}
-        }, 50);
-
-        // Limpiar
-        form.reset();
-        return false;
-      });
-    })();
-    </script>
 
 
 
@@ -1660,12 +1488,12 @@
   <footer id="footer" class="footer position-relative">
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>2025</span> <strong class="px-1 sitename">Zerotoplan</strong><span data-section="send-request" data-value="t10">All Rights Reserved</span></p>
+      <p>© <span>2025</span> <strong class="px-1 sitename">Zero to plan</strong><span data-section="send-request" data-value="t10">All Rights Reserved</span></p>
       <p data-section="send-request" data-value="t11">
         Images used are owned by Zero to Plan or used with the appropriate rights. For more information, please review our <a href="disclaimer.html"><strong>[Full Disclaimer]</strong></a>.
       </p>
       <div class="credits" data-section="send-request" data-value="t12">
-        Designed by <a href="https://zerotoplan.com/">Zerotoplan</a>
+        Designed by <a href="https://zerotoplan.com/">Zero to Plan</a>
       </div>
     </div>
 
