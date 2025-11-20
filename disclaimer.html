@@ -52,35 +52,47 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="index.html#hero" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/Zerotoplan.webp" class="img-fluid" alt="">
+        <img src="assets/img/Zerotoplan.webp" class="img-fluid" alt="Zero to Plan">
       </a>
 
-      <nav id="navmenu" class="navmenu" navbar-color: #ffffff>
+      <nav id="navmenu" class="navmenu">
         <ul>
-          <!-- <li><a href="index.html#hero" class="">Product</a></li> -->
-          <li><a href="index.html#empower" class="" data-section="navmenu" data-value="empower">Empower</a></li>
-          <li><a href="index.html#benefits" class="" data-section="navmenu" data-value="benefits">Benefits</a></li>
+          <li><a href="index.html#empower" data-section="navmenu" data-value="empower">Empower</a></li>
+          <li><a href="index.html#benefits" data-section="navmenu" data-value="benefits">Benefits</a></li>
           <li><a href="index.html#massing" data-section="navmenu" data-value="massing">Massing</a></li>
           <li><a href="index.html#team" data-section="navmenu" data-value="team">Customers</a></li>
           <li><a href="index.html#pricing" data-section="navmenu" data-value="pricing">Services</a></li>
-          <li><a href="index.html#PortFolio" data-section="navmenu" data-value="PortFolio">PortFolio</a></li>
-          <li><a href="index.html#faq" data-section="navmenu" data-value="faq">Questions</a></li>
+          <li><a href="index.html#testimonials" data-section="navmenu" data-value="Testimonials">Testimonials</a></li>
+          <li><a href="index.html#faq" data-section="navmenu" data-value="faq">FAQ</a></li>
           <li><a href="index.html#contact" data-section="navmenu" data-value="contact">Contact</a></li>
 
+          <!-- Selector de idioma (solo móvil dentro del menú) -->
+          <li class="d-xl-none">
+            <div class="lang-switch lang-switch--mobile">
+              <button class="btn-lang w-100" id="langBtnMobile" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <i class="bi bi-globe2"></i><span id="langCodeMobile">EN</span>
+              </button>
+              <ul class="lang-menu" role="listbox" aria-label="Language">
+                <li data-language="en" role="option">English</li>
+                <li data-language="es" role="option">Español</li>
+              </ul>
+            </div>
+          </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted text-center" href="index.html#pricing" data-section="navmenu"
-        data-value="send-request">SEND REQUEST</a>
+      <a class="btn-getstarted text-center d-none d-sm-inline-block" href="index.html#pricing" data-section="navmenu" data-value="send-request">SEND REQUEST</a>
 
-      <div class="flags" id="flags">
-        <div class="flags_item" data-language="en">
-          <img src="assets/img/en.webp" alt="">
-        </div>
-        <div class="flags_item" data-language="es">
-          <img src="assets/img/es.webp" alt="">
-        </div>
+      <!-- Selector de idioma (desktop, fuera del menú) -->
+      <div class="lang-switch d-none d-xl-block ms-2">
+        <button class="btn-lang" id="langBtnDesk" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <i class="bi bi-globe2"></i><span id="langCodeDesk">EN</span>
+        </button>
+        <ul class="lang-menu" role="listbox" aria-label="Language">
+          <li data-language="en" role="option">English</li>
+          <li data-language="es" role="option">Español</li>
+        </ul>
       </div>
 
     </div>
@@ -211,60 +223,117 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
   <script>
+  // =========================
+  // 1) Tabs de #massing
+  // =========================
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll('#massing .nav-link');
+    const contents = document.querySelectorAll('#massing .tab-content');
 
-    // Funcion del menu nav-bar
-    document.addEventListener("DOMContentLoaded", function () {
-      const tabs = document.querySelectorAll('#massing .nav-link');
-      const contents = document.querySelectorAll('#massing .tab-content');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = this.getAttribute('data-target');
 
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = this.getAttribute('data-target');
+        tabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
 
-          tabs.forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
+        contents.forEach(content => {
+          if (content.id === target) content.classList.add('show');
+          else content.classList.remove('show');
+        });
+      });
+    });
+  });
 
-          contents.forEach(content => {
-            if (content.id === target) {
-              content.classList.add('show');
-            } else {
-              content.classList.remove('show');
-            }
-          });
+  // =========================
+  // 2) i18n helpers
+  // =========================
+  const textsToChange = document.querySelectorAll("[data-section]");
+
+  async function changeLanguage(language) {
+    try {
+      const res = await fetch(`./traducciones/${language}.json`, { cache: "no-store" });
+      if (!res.ok) throw new Error("Missing translation file");
+      const texts = await res.json();
+
+      for (const el of textsToChange) {
+        const section = el.dataset.section;
+        const value = el.dataset.value;
+        // Solo cambia si existe la clave; si no, deja el fallback en el HTML
+        const next = texts?.[section]?.[value];
+        if (typeof next === "string") el.innerHTML = next;
+      }
+    } catch (err) {
+      // Si falla, nos quedamos con el contenido por defecto (inglés en HTML)
+      console.warn("[i18n] Could not load language:", language, err);
+    }
+  }
+
+  // Guarda/lee preferencia
+  function saveLang(lang){ try{ localStorage.setItem("lang", lang); }catch(e){} }
+  function getSavedLang(){ try{ return localStorage.getItem("lang"); }catch(e){ return null; } }
+
+  // =========================
+  // 3) Language Switch (nuevo)
+  // =========================
+  (function(){
+    const switches = document.querySelectorAll(".lang-switch");
+    const codeDesk   = document.getElementById("langCodeDesk");
+    const codeMobile = document.getElementById("langCodeMobile");
+
+    function setCodeLabel(lang){
+      if (codeDesk)   codeDesk.textContent   = lang.toUpperCase();
+      if (codeMobile) codeMobile.textContent = lang.toUpperCase();
+    }
+
+    // Inicialización: EN por defecto; si hay saved, úsalo; si no, detecta navegador
+    let initial = getSavedLang();
+    if (!initial) {
+      const navLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+      initial = navLang.startsWith("es") ? "es" : "en";
+    }
+    setCodeLabel(initial);
+    changeLanguage(initial);
+
+    // Toggle abrir/cerrar
+    switches.forEach(sw => {
+      const btn = sw.querySelector(".btn-lang");
+      const menu = sw.querySelector(".lang-menu");
+      if (!btn || !menu) return;
+
+      btn.addEventListener("click", (e)=>{
+        e.stopPropagation();
+        sw.classList.toggle("open");
+        // Cerrar los demás
+        switches.forEach(other => { if (other !== sw) other.classList.remove("open"); });
+      });
+
+      // Selección de idioma
+      menu.querySelectorAll("li[data-language]").forEach(item => {
+        item.addEventListener("click", ()=>{
+          const lang = item.getAttribute("data-language") || "en";
+          setCodeLabel(lang);
+          saveLang(lang);
+          changeLanguage(lang);
+          sw.classList.remove("open");
         });
       });
     });
 
+    // Cerrar al hacer click fuera o con ESC
+    document.addEventListener("click", ()=> switches.forEach(sw=>sw.classList.remove("open")));
+    document.addEventListener("keydown", (e)=> { if(e.key==="Escape") switches.forEach(sw=>sw.classList.remove("open")); });
+  })();
+
+  // =========================
+  // 4) Preloader secundario que tienes
+  // =========================
+  document.addEventListener("DOMContentLoaded", function () {
+    const preloader2 = document.getElementById("preloader2");
+    if (preloader2) preloader2.style.display = "none";
+  });
   </script>
-
-  <script>
-    const flagsElement = document.getElementById("flags");
-
-    const textsToChange = document.querySelectorAll("[data-section]")
-
-    const changeLanguage = async (language) => {
-      const requestJson = await fetch(`./traducciones/d${language}.json`)
-      const texts = await requestJson.json();
-
-      for (const textToChange of textsToChange) {
-        const section = textToChange.dataset.section;
-        const value = textToChange.dataset.value;
-
-        textToChange.innerHTML = texts[section][value];
-      }
-    }
-    flagsElement.addEventListener("click", (e) => {
-      changeLanguage(e.target.parentElement.dataset.language);
-    });
-
-    // Mostrar u ocultar el preloader
-    document.addEventListener("DOMContentLoaded", function () {
-      const preloader2 = document.getElementById("preloader2");
-      preloader2.style.display = "none";
-    });
-  </script>
-
 
 
 
