@@ -75,8 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         try {
             // Insertar en base de datos
             $stmt = $pdo->prepare("
-                INSERT INTO new_people (fullName, email, phoneNumber, direc, descr, created_at)
-                VALUES (:fullName, :email, :phoneNumber, :direc, :descr, CURDATE())
+                INSERT INTO ztp_contact (fullName, email, phoneNumber, direc, descr)
+                VALUES (:fullName, :email, :phoneNumber, :direc, :descr)
             ");
             $stmt->execute([
                 ":fullName" => $fullName,
