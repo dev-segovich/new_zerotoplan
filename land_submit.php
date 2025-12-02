@@ -260,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // ====================================
         $mail->clearAddresses();
         $mail->addAddress("info@zerotoplan.com");
-        $mail->Subject = "📩 New Land Form Submission - {$name_agent}";
+        $mail->Subject = "📩 New Land Intake Form (Brokers) - {$name_agent}";
         $mail->Body = "
         <html>
         <body style='font-family:Arial,sans-serif;color:#333;'>
@@ -277,6 +277,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p><strong>Zoning:</strong> {$property_zoning}</p>
             <p><strong>Compliance:</strong> {$site_criteria}</p>
             <p><em>Submitted on " . date('Y-m-d H:i:s') . "</em></p>
+            <h5>FZTP - #002</h5>
         </body>
         </html>";
 
