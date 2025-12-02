@@ -228,6 +228,12 @@
     "inv_b4": "Professional analysis that mirrors institutional standards",
     "inv_b5": "Faster deployment into investment-ready projects",
     "inv_b6": "Confidence in sponsors with feasibility verified by public agencies"
+  },
+  "flipbook":{
+    "title": "Interactive Brochure",
+    "subtitle": "Explore our latest presentation",
+    "btn_next": "Next",
+    "btn_prev": "Previous"
   }
   
   }

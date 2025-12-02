@@ -193,7 +193,7 @@
     "q4": "¿Cuál es la tasa de capitalización de salida proyectada a cinco años?",
     "q5": "¿Qué tan rápido se arrendaron proyectos comparables y a qué renta?"
   },
-    "serve": {
+  "serve": {
     "title": "A quién servimos",
 
     "dev_title": "Desarrolladores",
@@ -229,8 +229,11 @@
     "inv_b4": "Análisis profesional que refleja estándares institucionales",
     "inv_b5": "Despliegue más rápido en proyectos listos para inversión",
     "inv_b6": "Confianza en los patrocinadores con factibilidad verificada por agencias públicas"
+  },
+  "flipbook":{
+    "title": "Brochure Interactivo",
+    "subtitle": "Explora nuestra presentación más reciente",
+    "btn_next": "Siguiente",
+    "btn_prev": "Anterior"
   }
-
-
-
-  }
+}

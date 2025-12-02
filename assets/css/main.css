@@ -65,6 +65,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  overflow-x: hidden;
 }
 
 a {
@@ -3220,4 +3221,52 @@ section,
     0%, 100% { transform: translateY(0); opacity: 0.8; }
     50% { transform: translateY(5px); opacity: 1; }
   }
+}
+
+/* Flipbook Section */
+.flipbook {
+  padding: 60px 0;
+  /* background-color: #f9f9f9; */
+  z-index: 10;
+  position: relative;
+  overflow: visible;
+}
+
+.flipbook-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  /* overflow: hidden; <-- Removed to allow pages to flip 'over' */
+  position: relative;
+  z-index: 10;
+}
+
+.page {
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.page canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.flipbook-controls button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.flipbook-controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }

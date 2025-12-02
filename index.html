@@ -607,6 +607,23 @@
       </div>
     </section><!-- /Massing Section -->
 
+    <!-- Flipbook Section -->
+    <section id="flipbook" class="flipbook section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-section="flipbook" data-value="title">Interactive Brochure</h2>
+        <p data-section="flipbook" data-value="subtitle">Explore our latest presentation</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="flipbook-container" id="flipbook-container">
+            <!-- Pages will be inserted here by JS -->
+        </div>
+        <div class="flipbook-controls text-center mt-3">
+            <button id="prev-btn" class="btn-getstarted" style="border:none; cursor:pointer;" data-section="flipbook" data-value="btn_prev"><i class="bi bi-arrow-left"></i> Previous</button>
+            <button id="next-btn" class="btn-getstarted" style="border:none; cursor:pointer;" data-section="flipbook" data-value="btn_next">Next <i class="bi bi-arrow-right"></i></button>
+        </div>
+      </div>
+    </section><!-- /Flipbook Section -->
+
     <section id="videos" class="section">
       <!-- Video arriba (lo que ya tenías) -->
       <div class="container mb-5" data-aos="fade-up">
@@ -1624,6 +1641,11 @@
 
 
 
+
+  <!-- Flipbook Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+  <script src="assets/js/flipbook_init.js"></script>
 
 </body>
 
