@@ -67,29 +67,29 @@
         <div class="card-h">Client Information</div>
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label class="label" for="full_name">Your Full Name</label>
+            <label class="label" for="full_name">Your Full Name <span class="text-red-500">*</span></label>
             <input class="field" id="full_name" name="full_name" type="text" required />
           </div>
           <div>
-            <label class="label" for="entity">Entity holding the land</label>
-            <input class="field" id="entity" name="entity" type="text" />
+            <label class="label" for="entity">Entity holding the land <span class="text-red-500">*</span></label>
+            <input class="field" id="entity" name="entity" type="text" required />
           </div>
           <div>
             <label class="label" for="phone">Phone Number</label>
-            <input class="field" id="phone" name="phone" type="tel" placeholder="+1 (___) ___‑____" required />
+            <input class="field" id="phone" name="phone" type="tel" placeholder="+1 (___) ___‑____" />
           </div>
           <div>
-            <label class="label" for="email">Email Address</label>
+            <label class="label" for="email">Email Address <span class="text-red-500">*</span></label>
             <input class="field" id="email" name="email" type="email" required />
           </div>
           <div class="md:col-span-2">
-            <label class="label" for="address">Mailing Address</label>
-            <input class="field" id="address" name="address" type="text" />
+            <label class="label" for="address">Mailing Address <span class="text-red-500">*</span></label>
+            <input class="field" id="address" name="address" type="text" required />
           </div>
 
           <div>
-            <label class="label" for="has_broker">Is a broker or agent involved?</label>
-            <select class="field" id="has_broker" name="has_broker">
+            <label class="label" for="has_broker">Is a broker or agent involved? <span class="text-red-500">*</span></label>
+            <select class="field" id="has_broker" name="has_broker" required>
               <option value="">Select...</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
@@ -112,7 +112,7 @@
         <div class="card-h">Study Scope & Intent</div>
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label class="label" for="scope">Select the scope of the study</label>
+            <label class="label" for="scope">Select the scope of the study <span class="text-red-500">*</span></label>
             <select class="field" id="scope" name="scope" required>
               <option value="">Select...</option>
               <option value="massing_only">Massing Only</option>
@@ -120,7 +120,7 @@
             </select>
           </div>
           <div>
-            <span class="label block mb-2">Intent of the study</span>
+            <span class="label block mb-2">Intent of the study <span class="text-red-500">*</span></span>
             <label class="flex items-center gap-2 mb-1"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="intent" value="acquire" required> <span>Acquire the property</span></label>
             <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="intent" value="sell"> <span>Sell the property</span></label>
           </div>
@@ -132,8 +132,8 @@
         <div class="card-h">Property Information</div>
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label class="label" for="acreage">Acreage</label>
-            <input class="field" id="acreage" name="acreage" type="number" step="0.01" min="0" placeholder="e.g., 25" />
+            <label class="label" for="acreage">Acreage <span class="text-red-500">*</span></label>
+            <input class="field" id="acreage" name="acreage" type="number" step="0.01" min="0" placeholder="e.g., 25" required />
           </div>
           <div>
             <label class="label" for="zoning">Zoning</label>
@@ -144,8 +144,8 @@
             <input class="field" id="density" name="density" type="text" placeholder="Units/acre" />
           </div>
           <div>
-            <label class="label" for="entitled">Entitled</label>
-            <select class="field" id="entitled" name="entitled">
+            <label class="label" for="entitled">Entitled <span class="text-red-500">*</span></label>
+            <select class="field" id="entitled" name="entitled" required>
               <option value="">Select...</option>
               <option>Yes</option>
               <option>No</option>
@@ -154,12 +154,12 @@
             </select>
           </div>
           <div class="md:col-span-2">
-            <label class="label" for="area">Area of Parcel</label>
-            <input class="field" id="area" name="area" type="text" placeholder="City, County, State" />
+            <label class="label" for="area">Jurisdiction <span class="text-red-500">*</span></label>
+            <input class="field" id="area" name="area" type="text" placeholder="City, County, State" required />
           </div>
           <div>
-            <label class="label" for="folio">Property Folio Number</label>
-            <input class="field" id="folio" name="folio" type="text" />
+            <label class="label" for="folio">Property Folio Number <span class="text-red-500">*</span></label>
+            <input class="field" id="folio" name="folio" type="text" required />
           </div>
           <div></div>
 
