@@ -103,7 +103,10 @@
       <!-- Client Information -->
       <section class="card">
         <div class="card-h">Client Information</div>
-        <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <p class="px-5 md:px-6 pt-4 text-xs text-gray-500">
+            We will not use this information to contact your client. It is collected only for our internal records and analysis.
+          </p>
+        <div class="p-5 pt-2 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
             <label class="label" for="client_name">Client Name <span class="text-red-500">*</span></label>
             <input class="field" id="client_name" name="client_name" type="text" required />
@@ -114,7 +117,7 @@
           </div>
           <div>
             <label class="label" for="client_phone">Client Phone Number</label>
-            <input class="field" id="client_phone" name="client_phone" type="tel" placeholder="+1 (___) ___‑____" />
+            <input class="field" id="client_phone" name="client_phone" type="tel" placeholder="+1 (___) ___-____" />
           </div>
           <div>
             <label class="label" for="client_email">Client Email</label>
@@ -130,6 +133,7 @@
           </div>
         </div>
       </section>
+
 
       <section class="card">
         <div class="card-h">Study Scope & Intent</div>
@@ -178,7 +182,7 @@
             </select>
           </div>
           <div class="md:col-span-2">
-            <label class="label" for="area">Area of Parcel <span class="text-red-500">*</span></label>
+            <label class="label" for="area">Jurisdiction<span class="text-red-500">*</span></label>
             <input class="field" id="area" name="area" type="text" placeholder="City, County, State" required />
           </div>
           <div>
