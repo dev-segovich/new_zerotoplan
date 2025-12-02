@@ -70,11 +70,11 @@
         <div class="card-h">Broker Information</div>
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label class="label" for="agent_name">Name of the Agent</label>
+            <label class="label" for="agent_name">Name of the Agent <span class="text-red-500">*</span></label>
             <input class="field" id="agent_name" name="agent_name" type="text" required />
           </div>
           <div>
-            <label class="label" for="broker_name">Name of the Broker</label>
+            <label class="label" for="broker_name">Name of the Broker <span class="text-red-500">*</span></label>
             <input class="field" id="broker_name" name="broker_name" type="text" required />
           </div>
           <div>
@@ -86,7 +86,7 @@
             <input class="field" id="broker_phone" name="broker_phone" type="tel" placeholder="+1 (___) ___‑____" />
           </div>
           <div>
-            <label class="label" for="broker_email">Email Address</label>
+            <label class="label" for="broker_email">Email Address <span class="text-red-500">*</span></label>
             <input class="field" id="broker_email" name="broker_email" type="email" required />
           </div>
           <div>
@@ -94,7 +94,7 @@
             <input class="field" id="broker_website" name="broker_website" type="url" placeholder="https://" />
           </div>
           <div class="md:col-span-2">
-            <label class="label" for="broker_address">Broker Mailing Address</label>
+            <label class="label" for="broker_address">Broker Mailing Address <span class="text-red-500">*</span></label>
             <input class="field" id="broker_address" name="broker_address" type="text" required />
           </div>
         </div>
@@ -105,11 +105,11 @@
         <div class="card-h">Client Information</div>
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label class="label" for="client_name">Client Name</label>
+            <label class="label" for="client_name">Client Name <span class="text-red-500">*</span></label>
             <input class="field" id="client_name" name="client_name" type="text" required />
           </div>
           <div>
-            <label class="label" for="client_entity">Entity holding the land</label>
+            <label class="label" for="client_entity">Entity holding the land <span class="text-red-500">*</span></label>
             <input class="field" id="client_entity" name="client_entity" type="text" required />
           </div>
           <div>
@@ -121,7 +121,7 @@
             <input class="field" id="client_email" name="client_email" type="email" />
           </div>
           <div class="md:col-span-2">
-            <label class="label" for="client_address">Client Mailing Address</label>
+            <label class="label" for="client_address">Client Mailing Address <span class="text-red-500">*</span></label>
             <input class="field" id="client_address" name="client_address" type="text" required />
           </div>
           <div class="md:col-span-2">
@@ -135,7 +135,7 @@
         <div class="card-h">Study Scope & Intent</div>
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label class="label" for="scope">Select the scope of the study</label>
+            <label class="label" for="scope">Select the scope of the study <span class="text-red-500">*</span></label>
             <select class="field" id="scope" name="scope" required>
               <option value="">Select...</option>
               <option value="massing_only">Massing Only</option>
@@ -144,7 +144,7 @@
             </select>
           </div>
           <div>
-            <span class="label block mb-2">Intent of the study</span>
+            <span class="label block mb-2">Intent of the study <span class="text-red-500">*</span></span>
             <label class="flex items-center gap-2 mb-1"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="intent" value="acquire" required> <span>Acquire the property</span></label>
             <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="intent" value="sell"> <span>Sell the property</span></label>
           </div>
@@ -156,7 +156,7 @@
         <div class="card-h">Property Information</div>
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label class="label" for="acreage">Acreage</label>
+            <label class="label" for="acreage">Acreage <span class="text-red-500">*</span></label>
             <input class="field" id="acreage" name="acreage" type="number" step="0.01" min="0" placeholder="e.g., 25" required />
           </div>
           <div>
@@ -168,7 +168,7 @@
             <input class="field" id="density" name="density" type="text" placeholder="Units/acre" />
           </div>
           <div>
-            <label class="label" for="entitled">Entitled</label>
+            <label class="label" for="entitled">Entitled <span class="text-red-500">*</span></label>
             <select class="field" id="entitled" name="entitled" required>
               <option value="">Select...</option>
               <option>Yes</option>
@@ -178,11 +178,11 @@
             </select>
           </div>
           <div class="md:col-span-2">
-            <label class="label" for="area">Area of Parcel</label>
+            <label class="label" for="area">Area of Parcel <span class="text-red-500">*</span></label>
             <input class="field" id="area" name="area" type="text" placeholder="City, County, State" required />
           </div>
           <div>
-            <label class="label" for="folio">Property Folio Number</label>
+            <label class="label" for="folio">Property Folio Number <span class="text-red-500">*</span></label>
             <input class="field" id="folio" name="folio" type="text" required />
           </div>
           <div></div>
@@ -238,7 +238,7 @@
       <section class="card">
         <div class="card-h">Site Compliance & Analysis</div>
         <div class="p-5 md:p-6">
-          <p class="text-sm md:text-[15px] text-gray-700 mb-3">How does the land comply with our acquisition criteria? <a class="text-[color:var(--ztp-blue)] underline decoration-dotted" href="broker-criteria.html" target="_blank" rel="noopener">View Our Acquisition Criteria</a></p>
+          <p class="text-sm md:text-[15px] text-gray-700 mb-3">How does the land comply with our acquisition criteria? <span class="text-red-500">*</span> <a class="text-[color:var(--ztp-blue)] underline decoration-dotted" href="broker-criteria.html" target="_blank" rel="noopener">View Our Acquisition Criteria</a></p>
           <fieldset class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="compliance" value="all" required> <span>Complies with all criteria</span></label>
             <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="compliance" value="most"> <span>Complies with most criteria</span></label>
