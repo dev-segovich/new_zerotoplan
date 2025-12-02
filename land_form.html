@@ -83,7 +83,7 @@
           </div>
           <div>
             <label class="label" for="broker_phone">Telephone Number</label>
-            <input class="field" id="broker_phone" name="broker_phone" type="tel" placeholder="+1 (___) ___‑____" required />
+            <input class="field" id="broker_phone" name="broker_phone" type="tel" placeholder="+1 (___) ___‑____" />
           </div>
           <div>
             <label class="label" for="broker_email">Email Address</label>
@@ -95,7 +95,7 @@
           </div>
           <div class="md:col-span-2">
             <label class="label" for="broker_address">Broker Mailing Address</label>
-            <input class="field" id="broker_address" name="broker_address" type="text" />
+            <input class="field" id="broker_address" name="broker_address" type="text" required />
           </div>
         </div>
       </section>
@@ -110,7 +110,7 @@
           </div>
           <div>
             <label class="label" for="client_entity">Entity holding the land</label>
-            <input class="field" id="client_entity" name="client_entity" type="text" />
+            <input class="field" id="client_entity" name="client_entity" type="text" required />
           </div>
           <div>
             <label class="label" for="client_phone">Client Phone Number</label>
@@ -122,7 +122,7 @@
           </div>
           <div class="md:col-span-2">
             <label class="label" for="client_address">Client Mailing Address</label>
-            <input class="field" id="client_address" name="client_address" type="text" />
+            <input class="field" id="client_address" name="client_address" type="text" required />
           </div>
           <div class="md:col-span-2">
             <label class="label" for="client_notes">Additional Notes</label>
@@ -157,7 +157,7 @@
         <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
             <label class="label" for="acreage">Acreage</label>
-            <input class="field" id="acreage" name="acreage" type="number" step="0.01" min="0" placeholder="e.g., 25" />
+            <input class="field" id="acreage" name="acreage" type="number" step="0.01" min="0" placeholder="e.g., 25" required />
           </div>
           <div>
             <label class="label" for="zoning">Zoning</label>
@@ -169,7 +169,7 @@
           </div>
           <div>
             <label class="label" for="entitled">Entitled</label>
-            <select class="field" id="entitled" name="entitled">
+            <select class="field" id="entitled" name="entitled" required>
               <option value="">Select...</option>
               <option>Yes</option>
               <option>No</option>
@@ -179,11 +179,11 @@
           </div>
           <div class="md:col-span-2">
             <label class="label" for="area">Area of Parcel</label>
-            <input class="field" id="area" name="area" type="text" placeholder="City, County, State" />
+            <input class="field" id="area" name="area" type="text" placeholder="City, County, State" required />
           </div>
           <div>
             <label class="label" for="folio">Property Folio Number</label>
-            <input class="field" id="folio" name="folio" type="text" />
+            <input class="field" id="folio" name="folio" type="text" required />
           </div>
           <div></div>
 

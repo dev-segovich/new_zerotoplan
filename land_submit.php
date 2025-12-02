@@ -123,11 +123,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $required_fields = [
         'Agent Name' => $name_agent,
         'Broker Name' => $name_broker,
-        'Broker Phone' => $phone_number_broker,
         'Broker Email' => $email_broker,
+        'Mailing Broker' => $mailing_broker,
         'Client Name' => $name_client,
+        'Land Entity' => $land_entity,
+        'Mailing Client' => $mailing_client,
         'Scope' => $scope_study,
         'Intent' => $intent_study,
+        'Property Acreage' => $property_acreage,
+        'Property Entitled' => $property_entitled,
+        'Property Area Parcel' => $property_area_parcel,
+        'Property Folio Number' => $property_folio_number,
+        'Site Criteria' => $site_criteria,
     ];
 
     $missing = [];

@@ -114,10 +114,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // 🛑 VALIDACIÓN DE CAMPOS REQUERIDOS
     $required_fields = [
         'Full Name' => $full_name,
-        'Phone Number' => $phone_number,
+        'Land Entity' => $land_entity,
         'Email Address' => $email,
+        'Mailing Address' => $mailing_address,
+        'Has Broker' => $has_broker,
         'Scope of Study' => $scope_study,
-        'Intent of Study' => $intent_study
+        'Intent of Study' => $intent_study,
+        'Property Acreage' => $property_acreage,
+        'Property Entitled' => $property_entitled,
+        'Property Area Parcel' => $property_area_parcel,
+        'Property Folio Number' => $property_folio_number,
     ];
 
     $missing = [];
@@ -208,6 +214,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->Port = $smtpPort;
         $mail->CharSet = 'UTF-8';
 
+        // ====================================
+        // ENVÍO AL CLIENTE (Confirmación)
+        // ====================================
         // ====================================
         // ENVÍO AL CLIENTE (Confirmación)
         // ====================================
