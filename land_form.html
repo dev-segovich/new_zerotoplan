@@ -64,7 +64,7 @@
       </p>
     </div>
 
-    <form class="mt-6 space-y-6" action="land_submit.php" method="POST" novalidate>
+    <form class="mt-6 space-y-6" action="land_submit.php" method="POST" id="landForm">
       <!-- Broker Information -->
       <section class="card">
         <div class="card-h">Broker Information</div>
@@ -127,6 +127,26 @@
           <div class="md:col-span-2">
             <label class="label" for="client_notes">Additional Notes</label>
             <textarea class="field" id="client_notes" name="client_notes" rows="3" placeholder="Context, timeline, special considerations..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-h">Study Scope & Intent</div>
+        <div class="p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div>
+            <label class="label" for="scope">Select the scope of the study</label>
+            <select class="field" id="scope" name="scope" required>
+              <option value="">Select...</option>
+              <option value="massing_only">Massing Only</option>
+              <option value="full_feasibility">Full Feasibility</option>
+              <option value="broker_partnership">Broker Partnership</option>
+            </select>
+          </div>
+          <div>
+            <span class="label block mb-2">Intent of the study</span>
+            <label class="flex items-center gap-2 mb-1"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="intent" value="acquire" required> <span>Acquire the property</span></label>
+            <label class="flex items-center gap-2"><input type="radio" class="accent-[color:var(--ztp-blue)]" name="intent" value="sell"> <span>Sell the property</span></label>
           </div>
         </div>
       </section>
@@ -312,6 +332,31 @@
       const sync = ()=>{ if(!target) return; target.disabled = !cb.checked; if(cb.checked && !target.value) target.focus(); };
       cb.addEventListener('change', sync); sync();
     });
+
+    // Form validation before submission
+    const form = document.getElementById('landForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        // Check if intent radio button is selected
+        const intentSelected = document.querySelector('input[name="intent"]:checked');
+        if (!intentSelected) {
+          e.preventDefault();
+          alert('⚠️ Please select the intent of the study (Acquire or Sell)');
+          return false;
+        }
+
+        // Check if compliance radio button is selected
+        const complianceSelected = document.querySelector('input[name="compliance"]:checked');
+        if (!complianceSelected) {
+          e.preventDefault();
+          alert('⚠️ Please select how the land complies with the acquisition criteria');
+          return false;
+        }
+
+        // Let HTML5 validation handle the rest
+        // If we reach here, custom validations passed
+      });
+    }
   </script>
 </body>
 </html>

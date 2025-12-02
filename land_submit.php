@@ -51,6 +51,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mailing_client      = trim($_POST['client_address'] ?? '');
     $additional_notes_client = trim($_POST['client_notes'] ?? '');
 
+    // Scope Mapping
+    $scope_input = $_POST['scope'] ?? '';
+    $scope_study = '';
+    if ($scope_input === 'massing_only') $scope_study = 'Massing Only';
+    elseif ($scope_input === 'full_feasibility') $scope_study = 'Full Feasibility';
+    elseif ($scope_input === 'broker_partnership') $scope_study = 'Broker Partnership';
+
+    // Intent Mapping
+    $intent_input = $_POST['intent'] ?? '';
+    $intent_study = '';
+    if ($intent_input === 'acquire') $intent_study = 'Acquire';
+    elseif ($intent_input === 'sell') $intent_study = 'Sell';
+
     // Property Info
     $property_acreage    = $_POST['acreage'] ?? 0;
     $property_zoning     = trim($_POST['zoning'] ?? '');
@@ -112,7 +125,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         'Broker Name' => $name_broker,
         'Broker Phone' => $phone_number_broker,
         'Broker Email' => $email_broker,
-        'Client Name' => $name_client
+        'Client Name' => $name_client,
+        'Scope' => $scope_study,
+        'Intent' => $intent_study,
     ];
 
     $missing = [];
@@ -152,14 +167,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $sql = "INSERT INTO ztp_land (
             name_agent, name_broker, dba, phone_number_broker, email_broker, website_broker, mailing_broker,
             name_client, land_entity, phone_number_client, email_client, mailing_client, additional_notes_client,
-            property_acreage, property_zoning, property_density, property_entitled, property_area_parcel,
+            scope_study, intent_study, property_acreage, property_zoning, property_density, property_entitled, property_area_parcel,
             property_folio_number, property_additional_folios, property_additional_zonings, zoning_notes,
             site_criteria, enviroment_phase_one, enviroment_phase_two, survey, geo_report, sketch_site_plan,
             know_encumbrances
         ) VALUES (
             :name_agent, :name_broker, :dba, :phone_number_broker, :email_broker, :website_broker, :mailing_broker,
             :name_client, :land_entity, :phone_number_client, :email_client, :mailing_client, :additional_notes_client,
-            :property_acreage, :property_zoning, :property_density, :property_entitled, :property_area_parcel,
+            :scope_study, :intent_study, :property_acreage, :property_zoning, :property_density, :property_entitled, :property_area_parcel,
             :property_folio_number, :property_additional_folios, :property_additional_zonings, :zoning_notes,
             :site_criteria, :enviroment_phase_one, :enviroment_phase_two, :survey, :geo_report, :sketch_site_plan,
             :know_encumbrances
@@ -180,6 +195,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ':email_client' => $email_client,
             ':mailing_client' => $mailing_client,
             ':additional_notes_client' => $additional_notes_client,
+            ':scope_study' => $scope_study,
+            ':intent_study' => $intent_study,
             ':property_acreage' => $property_acreage,
             ':property_zoning' => $property_zoning,
             ':property_density' => $property_density,

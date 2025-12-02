@@ -61,7 +61,7 @@
       </p>
     </div>
 
-    <form class="mt-6 space-y-6" action="client_submit.php" method="POST" novalidate>
+    <form class="mt-6 space-y-6" action="client_submit.php" method="POST" id="clientForm">
       <!-- Client Information -->
       <section class="card">
         <div class="card-h">Client Information</div>
@@ -298,6 +298,23 @@
       const sync = ()=>{ if(!target) return; target.disabled = !cb.checked; if(cb.checked && !target.value) target.focus(); };
       cb.addEventListener('change', sync); sync();
     });
+
+    // Form validation before submission
+    const form = document.getElementById('clientForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        // Check if intent radio button is selected
+        const intentSelected = document.querySelector('input[name="intent"]:checked');
+        if (!intentSelected) {
+          e.preventDefault();
+          alert('⚠️ Please select the intent of the study (Acquire or Sell)');
+          return false;
+        }
+
+        // Let HTML5 validation handle the rest
+        // If we reach here, custom validations passed
+      });
+    }
   </script>
 </body>
 </html>
