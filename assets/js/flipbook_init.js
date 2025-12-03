@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fetch all pages
         for (let i = 1; i <= numPages; i++) {
             promises.push(pdf.getPage(i).then(function(page) {
-                // We use a higher scale for better quality
                 const scale = 1.5; 
                 const viewport = page.getViewport({ scale: scale });
                 const canvas = document.createElement('canvas');
@@ -68,24 +67,79 @@ document.addEventListener('DOMContentLoaded', function() {
                 height: baseHeight,
                 size: 'stretch',
                 maxShadowOpacity: 0.5,
-                showCover: true, // This is key for the "closed book" start
-                mobileScrollSupport: false
+                showCover: true, // Shows first page on the right (like a closed book)
+                mobileScrollSupport: false,
+                useMouseEvents: true, // Enable for dragging
+                clickEventForward: true, // Enable click on pages
+                swipeDistance: 30 // Enable swipe/drag gestures
             });
 
             pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
+            // Function to center the flipbook when on cover page
+            function updateFlipbookPosition() {
+                const currentPage = pageFlip.getCurrentPageIndex();
+                const wrapper = container.querySelector('.stf__wrapper');
+                
+                if (currentPage === 0) {
+                    // On cover page - center the single page
+                    container.classList.add('showing-cover');
+                    
+                    if (wrapper) {
+                        wrapper.style.transform = 'translateX(-25%)';
+                        wrapper.style.transition = 'transform 0.3s ease';
+                    }
+                } else {
+                    // On other pages - show both pages (open book)
+                    container.classList.remove('showing-cover');
+                    
+                    if (wrapper) {
+                        wrapper.style.transform = 'translateX(0)';
+                        wrapper.style.transition = 'transform 0.3s ease';
+                    }
+                }
+            }
+
+            // Initial position
+            setTimeout(updateFlipbookPosition, 500);
+
             // Controls
             prevBtn.addEventListener('click', () => {
                 pageFlip.flipPrev();
+                // Update position immediately after click, before animation completes
+                setTimeout(updateFlipbookPosition, 50);
             });
 
             nextBtn.addEventListener('click', () => {
+                // Update position IMMEDIATELY when clicking next from cover
+                const currentPage = pageFlip.getCurrentPageIndex();
+                if (currentPage === 0) {
+                    const wrapper = container.querySelector('.stf__wrapper');
+                    if (wrapper) {
+                        wrapper.style.transform = 'translateX(0)';
+                        container.classList.remove('showing-cover');
+                    }
+                }
+                
                 pageFlip.flipNext();
             });
 
-            // Optional: Update UI on flip
+            // Update position on manual flip (drag)
             pageFlip.on('flip', (e) => {
-                // console.log('Current page: ' + e.data);
+                setTimeout(updateFlipbookPosition, 100);
+            });
+
+            // Detect when flip animation starts (during drag)
+            pageFlip.on('changeState', (e) => {
+                // When user starts dragging from cover, immediately center
+                const currentPage = pageFlip.getCurrentPageIndex();
+                if (currentPage === 0 && e.data === 'flipping') {
+                    const wrapper = container.querySelector('.stf__wrapper');
+                    if (wrapper) {
+                        wrapper.style.transform = 'translateX(0)';
+                        container.classList.remove('showing-cover');
+                    }
+                }
             });
 
         });

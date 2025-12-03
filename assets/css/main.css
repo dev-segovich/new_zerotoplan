@@ -3246,16 +3246,36 @@ section,
 .page {
   background-color: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
 }
 
 .page canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Center the cover page when showing single page */
+.flipbook-container .stf__parent {
+  margin: 0 auto;
+}
+
+/* When showing cover - hide left page and center the right page */
+.flipbook-container.showing-cover .stf__parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50% !important; /* Reduce to half width when showing only one page */
+}
+
+.flipbook-container.showing-cover .stf__parent .stf__block:first-child {
+  display: none !important;
+  width: 0 !important;
+  visibility: hidden !important;
+}
+
+.flipbook-container.showing-cover .stf__parent .stf__block:last-child {
+  margin: 0 auto;
+  width: 100% !important;
 }
 
 .flipbook-controls button {
@@ -3264,6 +3284,11 @@ section,
   border-radius: 30px;
   font-weight: 600;
   transition: all 0.3s;
+  min-width: 150px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .flipbook-controls button:hover {
