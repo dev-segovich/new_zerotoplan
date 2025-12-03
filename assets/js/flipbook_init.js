@@ -124,6 +124,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 pageFlip.flipNext();
             });
 
+
+
             // Update position on manual flip (drag)
             pageFlip.on('flip', (e) => {
                 setTimeout(updateFlipbookPosition, 100);
@@ -141,6 +143,48 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
+
+            // Fullscreen functionality
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
+            const flipbookSection = document.getElementById('flipbook');
+
+            if (fullscreenBtn && closeFullscreenBtn && flipbookSection) {
+                fullscreenBtn.addEventListener('click', () => {
+                    flipbookSection.classList.add('fullscreen-mode');
+                    document.body.style.overflow = 'hidden'; // Block scroll
+                    // Trigger resize to update flipbook dimensions
+                    setTimeout(() => {
+                        pageFlip.update(); // Try update method if available
+                        window.dispatchEvent(new Event('resize')); // Fallback
+                        updateFlipbookPosition();
+                    }, 100);
+                });
+
+                closeFullscreenBtn.addEventListener('click', () => {
+                    flipbookSection.classList.remove('fullscreen-mode');
+                    document.body.style.overflow = ''; // Restore scroll
+                    // Trigger resize to update flipbook dimensions
+                    setTimeout(() => {
+                        pageFlip.update(); 
+                        window.dispatchEvent(new Event('resize'));
+                        updateFlipbookPosition();
+                    }, 100);
+                });
+                
+                // Close on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && flipbookSection.classList.contains('fullscreen-mode')) {
+                        flipbookSection.classList.remove('fullscreen-mode');
+                        document.body.style.overflow = ''; // Restore scroll
+                        setTimeout(() => {
+                            pageFlip.update();
+                            window.dispatchEvent(new Event('resize'));
+                            updateFlipbookPosition();
+                        }, 100);
+                    }
+                });
+            }
 
         });
 

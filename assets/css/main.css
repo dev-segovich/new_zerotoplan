@@ -3291,7 +3291,135 @@ section,
   gap: 8px;
 }
 
-.flipbook-controls button:hover {
+.flipbook-controls-sup button, a {
+  margin: 0 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s;
+  min-width: 150px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.flipbook-controls-sup button:hover, a:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.flipbook-controls button:hover, a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Fullscreen Flipbook Mode */
+.flipbook.fullscreen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.flipbook.fullscreen-mode .section-title {
+  display: none;
+}
+
+.flipbook.fullscreen-mode .container {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flipbook.fullscreen-mode .flipbook-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Adjust controls in fullscreen */
+.flipbook.fullscreen-mode .flipbook-controls {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0;
+  z-index: 100000;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.flipbook.fullscreen-mode .flipbook-controls button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.flipbook.fullscreen-mode .flipbook-controls button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Close button for fullscreen */
+#close-fullscreen-btn {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100001;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.flipbook.fullscreen-mode #close-fullscreen-btn {
+  display: block;
+}
+
+.flipbook.fullscreen-mode #fullscreen-btn {
+    display: none;
+}
+
+/* Mobile Portrait Fullscreen Rotation */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .flipbook.fullscreen-mode .container {
+    transform: rotate(90deg);
+    width: 100vh;
+    height: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flipbook.fullscreen-mode .flipbook-container {
+    width: 100% !important;
+    height: 75% !important;
+  }
+
+  .flipbook.fullscreen-mode .flipbook-controls {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: auto;
+    margin-top: 20px;
+  }
 }
