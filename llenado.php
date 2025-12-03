@@ -64,6 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $phoneNumber  = trim($_POST["phoneNumber"] ?? "");
     $direc        = trim($_POST["address"] ?? "");
     $descr        = trim($_POST["description"] ?? "");
+    $brokerInvolvedRaw = trim($_POST["brokerInvolved"] ?? "");
+    $brokerInvolved = ($brokerInvolvedRaw === "yes") ? 1 : 0;
 
     // Validar email real
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -75,15 +77,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         try {
             // Insertar en base de datos
             $stmt = $pdo->prepare("
-                INSERT INTO ztp_contact (fullName, email, phoneNumber, direc, descr)
-                VALUES (:fullName, :email, :phoneNumber, :direc, :descr)
+                INSERT INTO ztp_contact (fullName, email, phoneNumber, direc, descr, broker_involved)
+                VALUES (:fullName, :email, :phoneNumber, :direc, :descr, :brokerInvolved)
             ");
             $stmt->execute([
                 ":fullName" => $fullName,
                 ":email" => $email,
                 ":phoneNumber" => $phoneNumber,
                 ":direc" => $direc,
-                ":descr" => $descr
+                ":descr" => $descr,
+                ":brokerInvolved" => $brokerInvolved
             ]);
 
             // ====================================
@@ -170,6 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               <p><strong>Email:</strong> {$email}</p>
               <p><strong>Phone:</strong> {$phoneNumber}</p>
               <p><strong>Address:</strong> {$direc}</p>
+              <p><strong>Broker/Agent Involved:</strong> " . ($brokerInvolved === 1 ? 'Yes' : 'No') . "</p>
               <p><strong>Message:</strong></p>
               <blockquote style='border-left:3px solid #ccc;padding-left:10px;color:#555;'>{$descr}</blockquote>
               <p><em>Submitted on " . date('Y-m-d H:i:s') . "</em><br></p>
@@ -178,6 +182,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </html>";
 
             $mail->send();
+
+            // ====================================
+            // ENVÍO ADICIONAL SI HAY BROKER
+            // ====================================
+            if ($brokerInvolved === 1) {
+                $mail->clearAddresses();
+                $mail->addAddress($email, $fullName);
+                $mail->Subject = "Additional Information Needed: Broker/Agent Details";
+                $mail->Body = "
+                <html>
+                <body style='font-family: Arial, sans-serif; color:#333;'>
+                    <h2>Dear {$fullName},</h2>
+                    <p>Thank you for your submission. As you indicated that there is a <strong>broker or agent involved</strong> in your project, we need some additional information.</p>
+                    <p>Please take a moment to fill out our <strong>Broker/Agent Information Form</strong> so we can better understand your project and provide you with the best service.</p>
+                    <p style='text-align:center; margin: 30px 0;'>
+                        <a href='https://zerotoplan.com/land_form.html' style='display:inline-block; padding:15px 30px; background-color:#003f61; color:#ffffff; text-decoration:none; border-radius:5px; font-weight:bold;'>Complete Broker/Agent Form</a>
+                    </p>
+                    <p>We appreciate your time and look forward to working with you.</p>
+                    <br><br>
+                    <p>Best regards,</p>
+                    
+                    <!-- Firma corporativa -->
+                    <table style='font-family:Arial,sans-serif;width:100%;max-width:500px;margin-top:10px;border-top:1px solid #ccc;padding-top:15px;'>
+                    <tr>
+                        <td style='vertical-align:middle;padding-right:15px;width:90px;'>
+                        <img src='https://zerotoplan.com/assets/img/Zerotoplan.webp' alt='Zero to Plan' style='max-width:90px;'>
+                        </td>
+                        <td style='vertical-align:middle;font-size:14px;color:#333;'>
+                        <strong style='font-size:16px;color:#001b29;'>Zero to Plan Team</strong><br>
+                        <span>Real Estate Feasibility Platform</span><br>
+                        <span style= 'font-size:12px;color:#575757;'>Website: </span><a href='https://zerotoplan.com' style='color:#003f61;text-decoration:none;'>www.zerotoplan.com</a><br>
+                        <span style= 'font-size:12px;color:#575757;'>Mail: </span><a href='mailto:info@zerotoplan.com' style='color:#003f61;text-decoration:none;'>info@zerotoplan.com</a><br>
+                        <span style= 'font-size:12px;color:#575757;'>Number: </span><a href='tel:+19547305416' style='color:#003f61;text-decoration:none;'>+1 (954) 730-5416</a>
+                        </td>
+                    </tr>
+                    </table>
+                </body>
+                </html>";
+                
+                $mail->send();
+            }
 
             // ====================================
             // CONFIRMACIÓN VISUAL AL USUARIO

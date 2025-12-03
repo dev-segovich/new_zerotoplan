@@ -1445,6 +1445,14 @@
                   placeholder="Lot or site address for your project" required>
               </div>
               <div class="mb-3">
+                <label for="brokerInvolved" class="form-label" data-section="send-request" data-value="t13">Is a broker or agent involved?</label>
+                <select class="form-control" id="brokerInvolved" name="brokerInvolved" required>
+                  <option value="">-- Select an option --</option>
+                  <option value="yes" data-section="send-request" data-value="t14">Yes</option>
+                  <option value="no" data-section="send-request" data-value="t15">No</option>
+                </select>
+              </div>
+              <div class="mb-3">
                 <label for="description" class="form-label" data-section="send-request" data-value="t7">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="3" required
                   placeholder="Additional comments or project description"></textarea>
