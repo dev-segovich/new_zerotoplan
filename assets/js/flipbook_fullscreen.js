@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fetch all pages
         for (let i = 1; i <= numPages; i++) {
             promises.push(pdf.getPage(i).then(function(page) {
-                const scale = 1.5; 
+                // Increased scale for fullscreen quality
+                const scale = 2.0; 
                 const viewport = page.getViewport({ scale: scale });
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
@@ -62,16 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Initialize PageFlip
+            // We use 'contain' mode or similar to ensure it fits in the screen
             const pageFlip = new St.PageFlip(container, {
                 width: baseWidth, 
                 height: baseHeight,
-                size: 'stretch',
+                size: 'stretch', // 'stretch' allows it to fit the parent container
                 maxShadowOpacity: 0.5,
-                showCover: true, // Shows first page on the right (like a closed book)
+                showCover: true, 
                 mobileScrollSupport: false,
-                useMouseEvents: true, // Enable for dragging
-                clickEventForward: true, // Enable click on pages
-                swipeDistance: 30 // Enable swipe/drag gestures
+                useMouseEvents: true,
+                clickEventForward: true,
+                swipeDistance: 30
             });
 
             pageFlip.loadFromHTML(document.querySelectorAll('.page'));
@@ -106,12 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Controls
             prevBtn.addEventListener('click', () => {
                 pageFlip.flipPrev();
-                // Update position immediately after click, before animation completes
                 setTimeout(updateFlipbookPosition, 50);
             });
 
             nextBtn.addEventListener('click', () => {
-                // Update position IMMEDIATELY when clicking next from cover
                 const currentPage = pageFlip.getCurrentPageIndex();
                 if (currentPage === 0) {
                     const wrapper = container.querySelector('.stf__wrapper');
@@ -120,11 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         container.classList.remove('showing-cover');
                     }
                 }
-                
                 pageFlip.flipNext();
             });
-
-
 
             // Update position on manual flip (drag)
             pageFlip.on('flip', (e) => {
@@ -133,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Detect when flip animation starts (during drag)
             pageFlip.on('changeState', (e) => {
-                // When user starts dragging from cover, immediately center
                 const currentPage = pageFlip.getCurrentPageIndex();
                 if (currentPage === 0 && e.data === 'flipping') {
                     const wrapper = container.querySelector('.stf__wrapper');
