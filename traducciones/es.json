@@ -235,5 +235,12 @@
     "subtitle": "Explora nuestra presentación más reciente",
     "btn_next": "Siguiente",
     "btn_prev": "Anterior"
+  },
+  "disclaimer":{
+    "t1": "Aviso Legal",
+    "t2": "Zero to Plan es una empresa de factibilidad y consultoría inmobiliaria. El contenido de este sitio web es meramente informativo y no constituye asesoramiento legal, financiero o de inversión. Nuestros servicios incluyen estudios de factibilidad, volumetría arquitectónica y modelado financiero. No actuamos como asesores financieros o abogados licenciados.",
+    "t3": "Cualquier estudio de caso, insight del mercado o ejemplo proporcionado es ilustrativo de proyectos anteriores y no promueve o garantiza el rendimiento futuro. Los resultados de los proyectos pueden variar según una variedad de factores del mercado, reguladores y económicos.",
+    "t4": "Todos los medios y contenido presentados en este sitio web son propiedad de Zero to Plan o se utilizan con los derechos correspondientes. Nos esforzamos por creditar a todos los creadores apropiadamente y nos complace recibir notificaciones de cualquier posible problema.",
+    "t5": "El uso de este sitio implica acuerdo con nuestros términos. Los visitantes se animan a buscar asesoramiento independiente antes de tomar decisiones sobre la propiedad inmobiliaria o la inversión basadas en la información proporcionada aquí."
   }
 }

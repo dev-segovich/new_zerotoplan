@@ -234,6 +234,12 @@
     "subtitle": "Explore our latest presentation",
     "btn_next": "Next",
     "btn_prev": "Previous"
+  },
+  "disclaimer": {
+    "t1": "Disclaimer",
+    "t2": "Zero to Plan is a real estate feasibility and consulting firm. The content on this website is for informational purposes only and does not constitute legal, financial, or investment advice. Our services involve feasibility studies, architectural massing, and financial modeling. We do not act as licensed financial advisors or legal counsel.",
+    "t3": "Any case studies, market insights, or examples provided are illustrative of past projects and are not promises or guarantees of future performance. Project results may vary based on a variety of market, regulatory, and economic factors.",
+    "t4": "All media and content featured on this website are either owned by Zero to Plan or used under proper license or attribution. We strive to credit all creators appropriately and welcome notifications of any potential issues.",
+    "t5": "Use of this site implies agreement with our terms. Visitors are encouraged to seek independent advice before making real estate or investment decisions based on any information provided here."
   }
-  
-  }
+}
