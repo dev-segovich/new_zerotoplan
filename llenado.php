@@ -74,8 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if ($fullName && $email && $direc && $descr) {
+        // 1. PROCESO DE BASE DE DATOS
+        $dbError = null;
         try {
-            // Insertar en base de datos
             $stmt = $pdo->prepare("
                 INSERT INTO ztp_contact (fullName, email, phoneNumber, direc, descr, broker_involved)
                 VALUES (:fullName, :email, :phoneNumber, :direc, :descr, :brokerInvolved)
@@ -88,7 +89,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 ":descr" => $descr,
                 ":brokerInvolved" => $brokerInvolved
             ]);
+        } catch (PDOException $e) {
+            $dbError = $e->getMessage();
+            error_log("❌ Database Error: " . $dbError);
+        }
 
+        // 2. PROCESO DE CORREO (Independiente)
+        $mailError = null;
+        try {
             // ====================================
             // CONFIGURAR CORREO (PHPMailer)
             // ====================================
@@ -98,13 +106,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $mail->SMTPAuth = true;
             $mail->Username = $smtpUser;
             $mail->Password = $smtpPass;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // o STARTTLS si usas 587
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = $smtpPort;
             $mail->CharSet = 'UTF-8';
 
-            // ====================================
             // ENVÍO AL CLIENTE
-            // ====================================
             $mail->setFrom($smtpUser, 'Zero to Plan');
             $mail->addAddress($email, $fullName);
             $mail->Subject = "Welcome to Zero to Plan: Your Founder Pricing is Confirmed!";
@@ -159,9 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $mail->send();
 
-            // ====================================
             // ENVÍO INTERNO AL EQUIPO
-            // ====================================
             $mail->clearAddresses();
             $mail->addAddress("info@zerotoplan.com");
             $mail->Subject = "📩 New Quotation Form Submission - {$fullName}";
@@ -183,9 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $mail->send();
 
-            // ====================================
             // ENVÍO ADICIONAL SI HAY BROKER
-            // ====================================
             if ($brokerInvolved === 1) {
                 $mail->clearAddresses();
                 $mail->addAddress($email, $fullName);
@@ -220,27 +222,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </table>
                 </body>
                 </html>";
-                
                 $mail->send();
             }
+        } catch (Exception $e) {
+            $mailError = $e->getMessage();
+            error_log("❌ Mail Error: " . $mailError);
+        }
 
-            // ====================================
-            // CONFIRMACIÓN VISUAL AL USUARIO
-            // ====================================
+        // 3. RESPUESTA FINAL
+        if ($dbError && $mailError) {
+            // Ambos fallaron
             echo "<script>
-                alert('✅ Thank you for contacting us! A confirmation email has been sent to your inbox.');
+                alert('⚠️ Total failure: Database and Email could not be processed.');
+                window.history.back();
+            </script>";
+        } elseif ($dbError) {
+            // Solo falló DB, mail enviado
+            echo "<script>
+                alert('✅ Email sent, but there was a database issue. Our team is notified.');
                 window.location.href='index.html';
             </script>";
-
-        } catch (Exception $e) {
+        } elseif ($mailError) {
+            // Solo falló Mail, DB guardada
             echo "<script>
-                alert('⚠️ Mail error: " . addslashes($e->getMessage()) . "');
-                window.history.back();
+                alert('✅ Data saved, but there was an email issue. We will contact you soon.');
+                window.location.href='index.html';
             </script>";
-        } catch (PDOException $e) {
+        } else {
+            // Todo éxito
             echo "<script>
-                alert('⚠️ Database error: " . addslashes($e->getMessage()) . "');
-                window.history.back();
+                alert('✅ Thank you! Your request has been received and confirmed.');
+                window.location.href='index.html';
             </script>";
         }
     } else {
