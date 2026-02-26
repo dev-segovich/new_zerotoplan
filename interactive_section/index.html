@@ -227,14 +227,57 @@
 				font-size: 0.8rem;
 				color: rgba(255, 255, 255, 0.5);
 			}
+
+			/* Lenis recommendations */
+			html.lenis,
+			html.lenis body {
+				height: auto;
+			}
+
+			.lenis.lenis-smooth {
+				scroll-behavior: auto !important;
+			}
+
+			.lenis.lenis-smooth [data-lenis-prevent] {
+				overscroll-behavior: contain;
+			}
+
+			.lenis.lenis-stopped {
+				overflow: hidden;
+			}
+
+			.lenis.lenis-scrolling iframe {
+				pointer-events: none;
+			}
 		</style>
 
 		<script type="module">
+			import Lenis from "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/+esm";
+
 			const MAX_FRAMES = 300;
 			const canvas = document.getElementById("video-canvas");
 			const context = canvas.getContext("2d");
 			const texts = document.querySelectorAll(".scroll-text");
 			const indicator = document.querySelector(".scroll-indicator");
+
+			// --- Smooth Scroll Initialization (Lenis) ---
+			const lenis = new Lenis({
+				duration: 1.2,
+				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+				direction: "vertical",
+				gestureDirection: "vertical",
+				smooth: true,
+				mouseMultiplier: 1,
+				smoothTouch: false,
+				touchMultiplier: 2,
+				infinite: false,
+			});
+
+			function raf(time) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+			requestAnimationFrame(raf);
 
 			// Configuración de texto
 			const config = [
@@ -259,14 +302,14 @@
 				if (loadedCount === MAX_FRAMES) {
 					setTimeout(() => {
 						loader.classList.add("fade-out");
-						document.body.style.overflowY = "auto";
+						lenis.start();
 						renderCanvas(1);
 					}, 500);
 				}
 			};
 
 			const preloadImages = () => {
-				document.body.style.overflowY = "hidden"; // Bloquear scroll mientras carga
+				lenis.stop(); // Bloquear scroll mientras carga
 				for (let i = 1; i <= MAX_FRAMES; i++) {
 					const img = new Image();
 					const id = i.toString().padStart(3, "0");
@@ -304,14 +347,9 @@
 				context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 			};
 
-			// 3. LÓGICA DE SCROLL
-			window.addEventListener("scroll", () => {
-				const maxScroll =
-					document.documentElement.scrollHeight - window.innerHeight;
-				const scrollFraction = Math.min(
-					Math.max(window.scrollY / maxScroll, 0),
-					0.99
-				);
+			// 3. LÓGICA DE SCROLL (Sincronizada con Lenis)
+			lenis.on("scroll", ({ scroll, limit, velocity, direction, progress }) => {
+				const scrollFraction = Math.min(Math.max(progress, 0), 0.99);
 
 				// Actualizar Imagen
 				const frameIndex = Math.floor(scrollFraction * MAX_FRAMES) || 1;
