@@ -159,43 +159,84 @@
 				letter-spacing: 2px;
 				color: rgba(255, 255, 255, 0.6);
 			}
+
+			#video-canvas {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				z-index: -1;
+				object-fit: cover;
+			}
 		</style>
 
 		<script type="module">
 			const MAX_FRAMES = 300;
-			const img = document.querySelector("img");
+			const canvas = document.getElementById("video-canvas");
+			const context = canvas.getContext("2d");
 			const texts = document.querySelectorAll(".scroll-text");
 			const indicator = document.querySelector(".scroll-indicator");
 
-			// Configuration for text visibility ranges (0.0 to 1.0)
+			// Configuración de texto
 			const config = [
 				{ id: "text-1", start: 0.1, end: 0.3 },
 				{ id: "text-2", start: 0.4, end: 0.6 },
 				{ id: "text-3", start: 0.7, end: 0.9 },
 			];
 
-			// Simple frame cache to improve performance
-			const frameCache = new Map();
+			// 1. PRECARGA DE IMÁGENES
+			const images = [];
+			const preloadImages = () => {
+				for (let i = 1; i <= MAX_FRAMES; i++) {
+					const img = new Image();
+					const id = i.toString().padStart(3, "0");
+					img.src = `/interactive_section/frames/ezgif-frame-${id}.jpg`;
+					images.push(img);
+				}
+			};
 
+			// 2. MANEJO DEL CANVAS (AJUSTE DE TAMAÑO)
+			const renderCanvas = (index) => {
+				const img = images[index - 1];
+				if (!img || !img.complete) return;
+
+				// Ajuste tipo "object-fit: cover" manual para canvas
+				const canvasAspect = window.innerWidth / window.innerHeight;
+				const imgAspect = img.width / img.height;
+				let drawWidth, drawHeight, offsetX, offsetY;
+
+				if (canvasAspect > imgAspect) {
+					drawWidth = window.innerWidth;
+					drawHeight = window.innerWidth / imgAspect;
+					offsetX = 0;
+					offsetY = -(drawHeight - window.innerHeight) / 2;
+				} else {
+					drawWidth = window.innerHeight * imgAspect;
+					drawHeight = window.innerHeight;
+					offsetX = -(drawWidth - window.innerWidth) / 2;
+					offsetY = 0;
+				}
+
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+				context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+			};
+
+			// 3. LÓGICA DE SCROLL
 			window.addEventListener("scroll", () => {
 				const maxScroll =
 					document.documentElement.scrollHeight - window.innerHeight;
-				const scrollPosition = window.scrollY;
 				const scrollFraction = Math.min(
-					Math.max(scrollPosition / maxScroll, 0),
+					Math.max(window.scrollY / maxScroll, 0),
 					0.99
 				);
 
-				// 1. Update Image Frame
-				const frame = Math.floor(scrollFraction * MAX_FRAMES) || 1;
-				const id = frame.toString().padStart(3, "0");
-				const framePath = `/interactive_section/frames/ezgif-frame-${id}.jpg`;
+				// Actualizar Imagen
+				const frameIndex = Math.floor(scrollFraction * MAX_FRAMES) || 1;
+				requestAnimationFrame(() => renderCanvas(frameIndex));
 
-				if (img.src !== framePath) {
-					img.src = framePath;
-				}
-
-				// 2. Update Text Visibility
+				// Actualizar Textos e Indicador
 				config.forEach((item) => {
 					const el = document.getElementById(item.id);
 					if (scrollFraction >= item.start && scrollFraction <= item.end) {
@@ -205,21 +246,28 @@
 					}
 				});
 
-				// 3. Hide scroll indicator after starting
-				if (scrollFraction > 0.05) {
-					indicator.classList.add("hidden");
-				} else {
-					indicator.classList.remove("hidden");
-				}
+				if (scrollFraction > 0.05) indicator.classList.add("hidden");
+				else indicator.classList.remove("hidden");
+			});
+
+			// Inicialización
+			preloadImages();
+			// Dibujar el primer frame cuando cargue la primera imagen
+			images[0].onload = () => renderCanvas(1);
+
+			// Ajustar canvas si cambia el tamaño de ventana
+			window.addEventListener("resize", () => {
+				const scrollFraction =
+					window.scrollY /
+					(document.documentElement.scrollHeight - window.innerHeight);
+				const frameIndex = Math.floor(scrollFraction * MAX_FRAMES) || 1;
+				renderCanvas(frameIndex);
 			});
 		</script>
 	</head>
 	<body>
 		<main>
-			<img
-				src="/interactive_section/frames/ezgif-frame-001.jpg"
-				alt="Video Background"
-			/>
+			<canvas id="video-canvas"></canvas>
 
 			<div class="content-overlay">
 				<section id="text-1" class="scroll-text">
