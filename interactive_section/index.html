@@ -1,0 +1,57 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Interactive Section</title>
+		<style>
+			*,
+			*::after,
+			*::before {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+			}
+
+			img {
+				width: 100vw;
+				height: 100vh;
+				object-fit: cover;
+				position: fixed;
+			}
+
+			main {
+				height: 300dvh;
+			}
+		</style>
+
+		<script type="module">
+			const MAX_FRAMES = 300;
+			const img = document.querySelector("img");
+
+			window.addEventListener("scroll", () => {
+				const maxScroll =
+					document.documentElement.scrollHeight - window.innerHeight;
+
+				const scrollPosition = window.scrollY;
+
+				const scrollFraction = scrollPosition / maxScroll;
+
+				const frame = Math.floor(scrollFraction * MAX_FRAMES) || 1;
+
+				const id = frame.toString().padStart(3, "0");
+
+				img.src = `/interactive_section/frames/ezgif-frame-${id}.jpg`;
+			});
+		</script>
+	</head>
+	<body>
+		<main>
+			<img
+				src="/interactive_section/frames/ezgif-frame-001.jpg"
+				alt="Video_bg"
+			/>
+		</main>
+	</body>
+</html>
