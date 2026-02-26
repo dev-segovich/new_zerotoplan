@@ -1,9 +1,23 @@
-<html lang="en">
+<!doctype html>
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Interactive Section</title>
+		<title>Interactive Section | Scroll Experience</title>
+		<!-- Google Fonts for a premium look -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
+			:root {
+				--text-color: #ffffff;
+				--bg-glass: rgba(0, 0, 0, 0.4);
+				--accent-color: #00d2ff;
+			}
+
 			*,
 			*::after,
 			*::before {
@@ -12,37 +26,191 @@
 
 			body {
 				margin: 0;
+				background-color: #000;
+				color: var(--text-color);
+				font-family: "Outfit", sans-serif;
+				overflow-x: hidden;
 			}
 
+			/* Pre-loading the background image to avoid flicker */
 			img {
 				width: 100vw;
 				height: 100vh;
 				object-fit: cover;
 				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: -1;
+				filter: brightness(0.8);
 			}
 
 			main {
-				height: 300dvh;
+				height: 500dvh; /* Longer scroll for more text space */
+				position: relative;
+			}
+
+			/* Container for all text sections */
+			.content-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				pointer-events: none;
+				z-index: 10;
+			}
+
+			.scroll-text {
+				position: absolute;
+				text-align: center;
+				max-width: 600px;
+				padding: 2rem;
+				border-radius: 20px;
+				backdrop-filter: blur(10px);
+				background: var(--bg-glass);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				opacity: 0;
+				transform: translateY(30px);
+				transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+			}
+
+			.scroll-text.active {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			.scroll-text h1 {
+				margin: 0 0 1rem;
+				font-size: 3rem;
+				font-weight: 600;
+				letter-spacing: -0.02em;
+				background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			.scroll-text p {
+				margin: 0;
+				font-size: 1.25rem;
+				font-weight: 300;
+				color: rgba(255, 255, 255, 0.9);
+				line-height: 1.6;
+			}
+
+			/* Visual scroll indicator */
+			.scroll-indicator {
+				position: fixed;
+				bottom: 30px;
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 10px;
+				opacity: 1;
+				transition: opacity 0.5s ease;
+			}
+
+			.scroll-indicator.hidden {
+				opacity: 0;
+			}
+
+			.mouse {
+				width: 26px;
+				height: 42px;
+				border: 2px solid #fff;
+				border-radius: 13px;
+				position: relative;
+			}
+
+			.mouse::before {
+				content: "";
+				width: 4px;
+				height: 8px;
+				background: #fff;
+				position: absolute;
+				left: 50%;
+				top: 8px;
+				transform: translateX(-50%);
+				border-radius: 2px;
+				animation: scroll-wheel 1.5s infinite;
+			}
+
+			@keyframes scroll-wheel {
+				0% {
+					opacity: 1;
+					transform: translate(-50%, 0);
+				}
+				100% {
+					opacity: 0;
+					transform: translate(-50%, 15px);
+				}
+			}
+
+			.scroll-indicator span {
+				font-size: 0.75rem;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				color: rgba(255, 255, 255, 0.6);
 			}
 		</style>
 
 		<script type="module">
 			const MAX_FRAMES = 300;
 			const img = document.querySelector("img");
+			const texts = document.querySelectorAll(".scroll-text");
+			const indicator = document.querySelector(".scroll-indicator");
+
+			// Configuration for text visibility ranges (0.0 to 1.0)
+			const config = [
+				{ id: "text-1", start: 0.1, end: 0.3 },
+				{ id: "text-2", start: 0.4, end: 0.6 },
+				{ id: "text-3", start: 0.7, end: 0.9 },
+			];
+
+			// Simple frame cache to improve performance
+			const frameCache = new Map();
 
 			window.addEventListener("scroll", () => {
 				const maxScroll =
 					document.documentElement.scrollHeight - window.innerHeight;
-
 				const scrollPosition = window.scrollY;
+				const scrollFraction = Math.min(
+					Math.max(scrollPosition / maxScroll, 0),
+					0.99
+				);
 
-				const scrollFraction = scrollPosition / maxScroll;
-
+				// 1. Update Image Frame
 				const frame = Math.floor(scrollFraction * MAX_FRAMES) || 1;
-
 				const id = frame.toString().padStart(3, "0");
+				const framePath = `/interactive_section/frames/ezgif-frame-${id}.jpg`;
 
-				img.src = `/interactive_section/frames/ezgif-frame-${id}.jpg`;
+				if (img.src !== framePath) {
+					img.src = framePath;
+				}
+
+				// 2. Update Text Visibility
+				config.forEach((item) => {
+					const el = document.getElementById(item.id);
+					if (scrollFraction >= item.start && scrollFraction <= item.end) {
+						el.classList.add("active");
+					} else {
+						el.classList.remove("active");
+					}
+				});
+
+				// 3. Hide scroll indicator after starting
+				if (scrollFraction > 0.05) {
+					indicator.classList.add("hidden");
+				} else {
+					indicator.classList.remove("hidden");
+				}
 			});
 		</script>
 	</head>
@@ -50,8 +218,39 @@
 		<main>
 			<img
 				src="/interactive_section/frames/ezgif-frame-001.jpg"
-				alt="Video_bg"
+				alt="Video Background"
 			/>
+
+			<div class="content-overlay">
+				<section id="text-1" class="scroll-text">
+					<h1>Bienvenido</h1>
+					<p>
+						Explora una nueva dimensión de interacción digital diseñada para
+						sorprender.
+					</p>
+				</section>
+
+				<section id="text-2" class="scroll-text">
+					<h1>Inmersión Total</h1>
+					<p>
+						Cada frame está sincronizado con tu movimiento para crear una
+						experiencia fluida.
+					</p>
+				</section>
+
+				<section id="text-3" class="scroll-text">
+					<h1>El Futuro es Hoy</h1>
+					<p>
+						Lleva tu visión al siguiente nivel con tecnologías web de
+						vanguardia.
+					</p>
+				</section>
+			</div>
+
+			<div class="scroll-indicator">
+				<div class="mouse"></div>
+				<span>Desliza para explorar</span>
+			</div>
 		</main>
 	</body>
 </html>
