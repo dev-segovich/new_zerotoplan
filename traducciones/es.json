@@ -148,7 +148,7 @@
     "t2":"Dirección",
     "t3":"924 NW 1st St, Fort Lauderdale, FL 33311",
     "t4":"Llámennos",
-    "t5":"+1 305-686-9343",
+    "t5":"+1 954-730-5416",
     "t6":"Envíenos un correo electrónico",
     "t7":"info@zerotoplan.com"
   },
@@ -175,62 +175,76 @@
     "m4_text": "Reunión previa con la ciudad",
     "m5_text": "Estudio final de volumetría con comentarios y recomendaciones",
 
-    "fin_title": "Análisis Financiero y de Mercado",
-    "f1_text": "Estudio de mercado – Demografía (Esri), condiciones de mercado (CoStar y otros)",
-    "f2_text": "Proforma de desarrollo a partir del Estudio de Mercado y Volumetría",
-    "f3_text": "Cartas de opinión sobre seguro, préstamo y costos de construcción (empresas locales)",
-    "f4_text": "Revisión con el propietario",
-    "f5_text": "Informe final con análisis de sensibilidad y recomendaciones"
-  },
-    "aihuman": {
-      "title": "Impulsado por IA, Verificado por Expertos",
-      "desc": "Combinamos la velocidad de la IA con la supervisión de expertos para ofrecer análisis precisos y accionables. Nuestras herramientas evalúan terrenos, normativa y datos financieros en segundos, recortando semanas de la planificación inicial. Cada informe se valida con gobiernos locales, planificadores, actores comunitarios y, cuando corresponde, con insumos ambientales y de ingeniería. Los diseños se refinan si el feedback revela restricciones u oportunidades que afectan el valor, reduciendo el riesgo de adquisición, guiando la construcción y fortaleciendo tu posición al vender al mejor precio."
-  },
-  "aichat": {
-    "q1": "¿Existen incentivos o programas de financiamiento para este sitio?",
-    "q2": "¿Cuáles son los límites de altura y densidad de la zonificación?",
-    "q3": "¿Cómo se compara mi mezcla de unidades con la de los competidores?",
-    "q4": "¿Cuál es la tasa de capitalización de salida proyectada a cinco años?",
-    "q5": "¿Qué tan rápido se arrendaron proyectos comparables y a qué renta?"
-  },
-    "serve": {
-    "title": "A quién servimos",
+		"fin_title": "Análisis Financiero y de Mercado",
+		"f1_text": "Estudio de mercado – Demografía (Esri), condiciones de mercado (CoStar y otros)",
+		"f2_text": "Proforma de desarrollo a partir del Estudio de Mercado y Volumetría",
+		"f3_text": "Cartas de opinión sobre seguro, préstamo y costos de construcción (empresas locales)",
+		"f4_text": "Revisión con el propietario",
+		"f5_text": "Informe final con análisis de sensibilidad y recomendaciones"
+	},
+	"aihuman": {
+		"title": "Impulsado por IA, Verificado por Expertos",
+		"desc": "Combinamos la velocidad de la IA con la supervisión de expertos para ofrecer análisis precisos y accionables. Nuestras herramientas evalúan terrenos, normativa y datos financieros en segundos, recortando semanas de la planificación inicial. Cada informe se valida con gobiernos locales, planificadores, actores comunitarios y, cuando corresponde, con insumos ambientales y de ingeniería. Los diseños se refinan si el feedback revela restricciones u oportunidades que afectan el valor, reduciendo el riesgo de adquisición, guiando la construcción y fortaleciendo tu posición al vender al mejor precio."
+	},
+	"aichat": {
+		"q1": "¿Existen incentivos o programas de financiamiento para este sitio?",
+		"q2": "¿Cuáles son los límites de altura y densidad de la zonificación?",
+		"q3": "¿Cómo se compara mi mezcla de unidades con la de los competidores?",
+		"q4": "¿Cuál es la tasa de capitalización de salida proyectada a cinco años?",
+		"q5": "¿Qué tan rápido se arrendaron proyectos comparables y a qué renta?"
+	},
+	"serve": {
+		"title": "A quién servimos",
 
-    "dev_title": "Desarrolladores",
-    "dev_tagline": "Construye de manera más inteligente, rápida y eficiente.",
-    "dev_b1": "Avanza más rápido sin necesidad de contratar personal extra",
-    "dev_b2": "Información verificada de funcionarios municipales, servicios públicos y entidades estatales",
-    "dev_b3": "Visuales profesionales para departamentos de planificación, bancos y socios de capital",
-    "dev_b4": "Valida si un concepto funciona antes de invertir capital",
-    "dev_b5": "Herramientas para negociar el verdadero valor residual del terreno",
-    "dev_b6": "Paquetes listos para inversionistas que aceleran el financiamiento",
+		"dev_title": "Desarrolladores",
+		"dev_tagline": "Construye de manera más inteligente, rápida y eficiente.",
+		"dev_b1": "Avanza más rápido sin necesidad de contratar personal extra",
+		"dev_b2": "Información verificada de funcionarios municipales, servicios públicos y entidades estatales",
+		"dev_b3": "Visuales profesionales para departamentos de planificación, bancos y socios de capital",
+		"dev_b4": "Valida si un concepto funciona antes de invertir capital",
+		"dev_b5": "Herramientas para negociar el verdadero valor residual del terreno",
+		"dev_b6": "Paquetes listos para inversionistas que aceleran el financiamiento",
 
-    "arch_title": "Arquitectos",
-    "arch_tagline": "Mantén a tu equipo diseñando mientras nosotros gestionamos la viabilidad.",
-    "arch_b1": "Tiempos de respuesta más rápidos en fases clave de adquisición de terrenos",
-    "arch_b2": "Mantén a los equipos enfocados en el diseño, no en tareas de factibilidad",
-    "arch_b3": "Reduce costos generales y entrenamiento en áreas no esenciales",
-    "arch_b4": "Se establecen límites financieros desde el inicio, evitando ciclos de diseño desperdiciados",
-    "arch_b5": "Apoya a los clientes con claridad cuando están inseguros",
+		"arch_title": "Arquitectos",
+		"arch_tagline": "Mantén a tu equipo diseñando mientras nosotros gestionamos la viabilidad.",
+		"arch_b1": "Tiempos de respuesta más rápidos en fases clave de adquisición de terrenos",
+		"arch_b2": "Mantén a los equipos enfocados en el diseño, no en tareas de factibilidad",
+		"arch_b3": "Reduce costos generales y entrenamiento en áreas no esenciales",
+		"arch_b4": "Se establecen límites financieros desde el inicio, evitando ciclos de diseño desperdiciados",
+		"arch_b5": "Apoya a los clientes con claridad cuando están inseguros",
 
-    "broker_title": "Agentes y Corredores Inmobiliarios",
-    "broker_tagline": "Cierra acuerdos con confianza y descubre valor oculto.",
-    "broker_b1": "Cierra transacciones más rápido eliminando incertidumbre",
-    "broker_b2": "Confirma el potencial de desarrollo con gobiernos locales y servicios públicos",
-    "broker_b3": "Descubre valor oculto y fija precios más precisos a las propiedades",
-    "broker_b4": "Diferénciate como asesor estratégico, no solo como vendedor",
-    "broker_b5": "Genera confianza con compradores internacionales",
+		"broker_title": "Agentes y Corredores Inmobiliarios",
+		"broker_tagline": "Cierra acuerdos con confianza y descubre valor oculto.",
+		"broker_b1": "Cierra transacciones más rápido eliminando incertidumbre",
+		"broker_b2": "Confirma el potencial de desarrollo con gobiernos locales y servicios públicos",
+		"broker_b3": "Descubre valor oculto y fija precios más precisos a las propiedades",
+		"broker_b4": "Diferénciate como asesor estratégico, no solo como vendedor",
+		"broker_b5": "Genera confianza con compradores internacionales",
 
-    "inv_title": "Inversores Locales e Internacionales",
-    "inv_tagline": "Reduce riesgos y coloca capital con confianza.",
-    "inv_b1": "Identifica la mayor cantidad de incógnitas antes de comprometer capital",
-    "inv_b2": "Verifica el mejor uso del suelo con gobiernos locales",
-    "inv_b3": "Obtén herramientas para negociar y reducir riesgos",
-    "inv_b4": "Análisis profesional que refleja estándares institucionales",
-    "inv_b5": "Despliegue más rápido en proyectos listos para inversión",
-    "inv_b6": "Confianza en los patrocinadores con factibilidad verificada por agencias públicas"
-  }
-
-
-
-  }
+		"inv_title": "Inversores Locales e Internacionales",
+		"inv_tagline": "Reduce riesgos y coloca capital con confianza.",
+		"inv_b1": "Identifica la mayor cantidad de incógnitas antes de comprometer capital",
+		"inv_b2": "Verifica el mejor uso del suelo con gobiernos locales",
+		"inv_b3": "Obtén herramientas para negociar y reducir riesgos",
+		"inv_b4": "Análisis profesional que refleja estándares institucionales",
+		"inv_b5": "Despliegue más rápido en proyectos listos para inversión",
+		"inv_b6": "Confianza en los patrocinadores con factibilidad verificada por agencias públicas"
+	},
+	"flipbook": {
+		"title": "Informe de muestra",
+		"subtitle": "Explora nuestra presentación más reciente",
+		"btn_next": "Siguiente",
+		"btn_prev": "Anterior"
+	},
+	"disclaimer": {
+		"t1": "Aviso Legal",
+		"t2": "Zero to Plan es una empresa de factibilidad y consultoría inmobiliaria. El contenido de este sitio web es meramente informativo y no constituye asesoramiento legal, financiero o de inversión. Nuestros servicios incluyen estudios de factibilidad, volumetría arquitectónica y modelado financiero. No actuamos como asesores financieros o abogados licenciados.",
+		"t3": "Cualquier estudio de caso, insight del mercado o ejemplo proporcionado es ilustrativo de proyectos anteriores y no promueve o garantiza el rendimiento futuro. Los resultados de los proyectos pueden variar según una variedad de factores del mercado, reguladores y económicos.",
+		"t4": "Todos los medios y contenido presentados en este sitio web son propiedad de Zero to Plan o se utilizan con los derechos correspondientes. Nos esforzamos por creditar a todos los creadores apropiadamente y nos complace recibir notificaciones de cualquier posible problema.",
+		"t5": "El uso de este sitio implica acuerdo con nuestros términos. Los visitantes se animan a buscar asesoramiento independiente antes de tomar decisiones sobre la propiedad inmobiliaria o la inversión basadas en la información proporcionada aquí."
+	},
+	"renders": {
+		"t1": "También hacemos Renders y Visuales",
+		"view_gallery": "Ver Galería"
+	}
+}

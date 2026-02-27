@@ -1,384 +1,482 @@
 /**
-* Template Name: QuickStart
-* Template URL: https://bootstrapmade.com/quickstart-bootstrap-startup-website-template/
-* Updated: May 10 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+ * Template Name: QuickStart
+ * Template URL: https://bootstrapmade.com/quickstart-bootstrap-startup-website-template/
+ * Updated: May 10 2024 with Bootstrap v5.3.3
+ * Author: BootstrapMade.com
+ * License: https://bootstrapmade.com/license/
+ */
 
-(function() {
-  "use strict";
+(function () {
+	"use strict";
 
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
-  function toggleScrolled() {
-    const selectBody = document.querySelector('body');
-    const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
-  }
+	/**
+	 * Apply .scrolled class to the body as the page is scrolled down
+	 */
+	function toggleScrolled() {
+		const selectBody = document.querySelector("body");
+		const selectHeader = document.querySelector("#header");
+		if (
+			!selectHeader.classList.contains("scroll-up-sticky") &&
+			!selectHeader.classList.contains("sticky-top") &&
+			!selectHeader.classList.contains("fixed-top")
+		)
+			return;
+		window.scrollY > 100
+			? selectBody.classList.add("scrolled")
+			: selectBody.classList.remove("scrolled");
+	}
 
-  document.addEventListener('scroll', toggleScrolled);
-  window.addEventListener('load', toggleScrolled);
+	document.addEventListener("scroll", toggleScrolled);
+	window.addEventListener("load", toggleScrolled);
 
-  /**
-   * Mobile nav toggle
-   */
-  const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+	/**
+	 * Mobile nav toggle
+	 */
+	const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
 
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
-  }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+	function mobileNavToogle() {
+		document.querySelector("body").classList.toggle("mobile-nav-active");
+		mobileNavToggleBtn.classList.toggle("bi-list");
+		mobileNavToggleBtn.classList.toggle("bi-x");
+	}
+	mobileNavToggleBtn.addEventListener("click", mobileNavToogle);
 
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
-      }
-    });
+	/**
+	 * Hide mobile nav on same-page/hash links
+	 */
+	document.querySelectorAll("#navmenu a").forEach((navmenu) => {
+		navmenu.addEventListener("click", () => {
+			if (document.querySelector(".mobile-nav-active")) {
+				mobileNavToogle();
+			}
+		});
+	});
 
-  });
+	/**
+	 * Toggle mobile nav dropdowns
+	 */
+	document.querySelectorAll(".navmenu .toggle-dropdown").forEach((navmenu) => {
+		navmenu.addEventListener("click", function (e) {
+			if (document.querySelector(".mobile-nav-active")) {
+				e.preventDefault();
+				this.parentNode.classList.toggle("active");
+				this.parentNode.nextElementSibling.classList.toggle("dropdown-active");
+				e.stopImmediatePropagation();
+			}
+		});
+	});
 
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      if (document.querySelector('.mobile-nav-active')) {
-        e.preventDefault();
-        this.parentNode.classList.toggle('active');
-        this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-        e.stopImmediatePropagation();
-      }
-    });
-  });
+	/**
+	 * Preloader
+	 */
+	const preloader = document.querySelector("#preloader");
+	if (preloader) {
+		window.addEventListener("load", () => {
+			preloader.remove();
+		});
+	}
 
-  /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
-  }
+	/**
+	 * Scroll top button
+	 */
+	let scrollTop = document.querySelector(".scroll-top");
 
-  /**
-   * Scroll top button
-   */
-  let scrollTop = document.querySelector('.scroll-top');
+	function toggleScrollTop() {
+		if (scrollTop) {
+			window.scrollY > 100
+				? scrollTop.classList.add("active")
+				: scrollTop.classList.remove("active");
+		}
+	}
+	scrollTop.addEventListener("click", (e) => {
+		e.preventDefault();
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	});
 
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
-    }
-  }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
+	window.addEventListener("load", toggleScrollTop);
+	document.addEventListener("scroll", toggleScrollTop);
 
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
+	/**
+	 * Animation on scroll function and init
+	 */
+	function aosInit() {
+		AOS.init({
+			duration: 600,
+			easing: "ease-in-out",
+			once: true,
+			mirror: false,
+		});
+	}
+	window.addEventListener("load", aosInit);
 
-  /**
-   * Animation on scroll function and init
-   */
-  function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
-  }
-  window.addEventListener('load', aosInit);
+	/**
+	 * Initiate glightbox with custom pagination dots
+	 */
+	const glightbox = GLightbox({
+		selector: ".glightbox",
+		loop: true,
+		zoomable: true,
+	});
 
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+	let dotsContainer = null;
 
-  /**
-   * Frequently Asked Questions Toggle
-   */
-  document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
-    faqItem.addEventListener('click', () => {
-      faqItem.parentNode.classList.toggle('faq-active');
-    });
-  });
+	function updateDots(index) {
+		if (!dotsContainer) return;
+		const dots = dotsContainer.querySelectorAll("span");
+		if (!dots.length) return;
 
-  /**
-   * Init swiper sliders
-   */
-  function initSwiper() {
-    document.querySelectorAll('.swiper').forEach(function(swiper) {
-      let config = JSON.parse(swiper.querySelector('.swiper-config').innerHTML.trim());
-      new Swiper(swiper, config);
-    });
-  }
-  window.addEventListener('load', initSwiper);
+		// Ensure index is within bounds
+		const safeIndex = Math.max(0, Math.min(index, dots.length - 1));
 
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
-  window.addEventListener('load', function(e) {
-    if (window.location.hash) {
-      if (document.querySelector(window.location.hash)) {
-        setTimeout(() => {
-          let section = document.querySelector(window.location.hash);
-          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
-          window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
-            behavior: 'smooth'
-          });
-        }, 100);
-      }
-    }
-  });
+		dots.forEach((dot, i) => {
+			if (i === safeIndex) {
+				dot.classList.add("active");
+			} else {
+				dot.classList.remove("active");
+			}
+		});
+	}
 
-  /**
-   * Navmenu Scrollspy
-   */
-  let navmenulinks = document.querySelectorAll('.navmenu a');
+	glightbox.on("open", () => {
+		// Look for the lightbox container
+		const lightbox = document.querySelector(".glightbox-container");
+		if (!lightbox) return;
 
-  function navmenuScrollspy() {
-    navmenulinks.forEach(navmenulink => {
-      if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
-      if (!section) return;
-      let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
-      }
-    })
-  }
-  window.addEventListener('load', navmenuScrollspy);
-  document.addEventListener('scroll', navmenuScrollspy);
+		// Create dots container
+		dotsContainer = document.createElement("div");
+		dotsContainer.className = "glightbox-pagination";
+		dotsContainer.addEventListener("click", (e) => e.stopPropagation());
+		lightbox.appendChild(dotsContainer);
 
+		// Create a dot for each slide in the current gallery
+		const slides = glightbox.elements;
+		if (slides && slides.length > 0) {
+			slides.forEach((_, i) => {
+				const dot = document.createElement("span");
+				dot.addEventListener("click", (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					glightbox.goToSlide(i);
+				});
+				dotsContainer.appendChild(dot);
+			});
+		}
+
+		updateDots(glightbox.index);
+	});
+
+	// Update dots on change
+	const handleSlideChange = () => {
+		setTimeout(() => {
+			updateDots(glightbox.index);
+		}, 10);
+	};
+
+	glightbox.on("slide_changed", handleSlideChange);
+	glightbox.on("slide_after_change", handleSlideChange);
+
+	glightbox.on("close", () => {
+		if (dotsContainer) {
+			dotsContainer.remove();
+			dotsContainer = null;
+		}
+	});
+
+	/**
+	 * Frequently Asked Questions Toggle
+	 */
+	document
+		.querySelectorAll(".faq-item h3, .faq-item .faq-toggle")
+		.forEach((faqItem) => {
+			faqItem.addEventListener("click", () => {
+				faqItem.parentNode.classList.toggle("faq-active");
+			});
+		});
+
+	/**
+	 * Init swiper sliders
+	 */
+	function initSwiper() {
+		document.querySelectorAll(".swiper").forEach(function (swiper) {
+			let config = JSON.parse(
+				swiper.querySelector(".swiper-config").innerHTML.trim()
+			);
+			new Swiper(swiper, config);
+		});
+	}
+	window.addEventListener("load", initSwiper);
+
+	/**
+	 * Correct scrolling position upon page load for URLs containing hash links.
+	 */
+	window.addEventListener("load", function (e) {
+		if (window.location.hash) {
+			if (document.querySelector(window.location.hash)) {
+				setTimeout(() => {
+					let section = document.querySelector(window.location.hash);
+					let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
+					window.scrollTo({
+						top: section.offsetTop - parseInt(scrollMarginTop),
+						behavior: "smooth",
+					});
+				}, 100);
+			}
+		}
+	});
+
+	/**
+	 * Navmenu Scrollspy
+	 */
+	let navmenulinks = document.querySelectorAll(".navmenu a");
+
+	function navmenuScrollspy() {
+		navmenulinks.forEach((navmenulink) => {
+			if (!navmenulink.hash) return;
+			let section = document.querySelector(navmenulink.hash);
+			if (!section) return;
+			let position = window.scrollY + 200;
+			if (
+				position >= section.offsetTop &&
+				position <= section.offsetTop + section.offsetHeight
+			) {
+				document
+					.querySelectorAll(".navmenu a.active")
+					.forEach((link) => link.classList.remove("active"));
+				navmenulink.classList.add("active");
+			} else {
+				navmenulink.classList.remove("active");
+			}
+		});
+	}
+	window.addEventListener("load", navmenuScrollspy);
+	document.addEventListener("scroll", navmenuScrollspy);
 })();
 
+(function () {
+	const steps = document.querySelectorAll("#process .step");
+	if (!("IntersectionObserver" in window) || steps.length === 0) {
+		steps.forEach((s) => s.classList.add("in-view"));
+		return;
+	}
+	const io = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((e, i) => {
+				if (e.isIntersecting) {
+					// retraso escalonado para efecto "cascada"
+					setTimeout(() => e.target.classList.add("in-view"), (i % 5) * 90);
+					io.unobserve(e.target);
+				}
+			});
+		},
+		{ threshold: 0.2 }
+	);
+	steps.forEach((s) => io.observe(s));
+})();
 
+(function () {
+	const modalEl = document.getElementById("videoModal");
+	const iframe = document.getElementById("heroVideo");
+	const src = iframe.getAttribute("data-src");
 
-  (function () {
-    const steps = document.querySelectorAll('#process .step');
-    if (!('IntersectionObserver' in window) || steps.length === 0) {
-      steps.forEach(s => s.classList.add('in-view'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          // retraso escalonado para efecto "cascada"
-          setTimeout(() => e.target.classList.add('in-view'), (i % 5) * 90);
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    steps.forEach(s => io.observe(s));
-  })();
+	modalEl.addEventListener("show.bs.modal", () => {
+		// setea el src al abrir para que haga autoplay dentro del modal
+		iframe.setAttribute("src", src);
+	});
 
-  (function () {
-    const modalEl = document.getElementById('videoModal');
-    const iframe = document.getElementById('heroVideo');
-    const src = iframe.getAttribute('data-src');
+	modalEl.addEventListener("hidden.bs.modal", () => {
+		// limpia el src para pausar el video al cerrar
+		iframe.setAttribute("src", "");
+	});
+})();
 
-    modalEl.addEventListener('show.bs.modal', () => {
-      // setea el src al abrir para que haga autoplay dentro del modal
-      iframe.setAttribute('src', src);
-    });
+document.addEventListener("DOMContentLoaded", () => {
+	const messagesEl = document.getElementById("chat-messages");
+	const fakeText = document.getElementById("fakeText");
+	const fakeCaret = document.getElementById("fakeCaret");
+	const i18nBox = document.getElementById("aichat-i18n");
 
-    modalEl.addEventListener('hidden.bs.modal', () => {
-      // limpia el src para pausar el video al cerrar
-      iframe.setAttribute('src', '');
-    });
-  })();
+	function readQuestions() {
+		const items = i18nBox
+			? i18nBox.querySelectorAll('[data-section="aichat"]')
+			: [];
+		const list = [];
+		items.forEach((el) => {
+			const txt = (el.textContent || "").trim();
+			if (txt) list.push(txt);
+		});
+		return list.length
+			? list
+			: [
+					"Are there incentives or funding programs for this site?",
+					"What are the zoning height and density limits?",
+					"How does my unit mix compare with competitors?",
+					"What is the projected exit cap rate over five years?",
+					"How fast did comparable projects lease and at what rent?",
+				];
+	}
 
-  document.addEventListener("DOMContentLoaded", () => {
-  const messagesEl = document.getElementById("chat-messages");
-  const fakeText   = document.getElementById("fakeText");
-  const fakeCaret  = document.getElementById("fakeCaret");
-  const i18nBox    = document.getElementById("aichat-i18n");
+	let questions = readQuestions();
+	let idx = 0;
+	const TYPE_MS = 50;
+	const THINK_MS = 3000;
+	const GAP_AFTER_SEND = 400;
 
-  function readQuestions(){
-    const items = i18nBox ? i18nBox.querySelectorAll('[data-section="aichat"]') : [];
-    const list = [];
-    items.forEach(el => {
-      const txt = (el.textContent || "").trim();
-      if (txt) list.push(txt);
-    });
-    return list.length ? list : [
-      "Are there incentives or funding programs for this site?",
-      "What are the zoning height and density limits?",
-      "How does my unit mix compare with competitors?",
-      "What is the projected exit cap rate over five years?",
-      "How fast did comparable projects lease and at what rent?"
-    ];
-  }
+	function wait(ms) {
+		return new Promise((res) => setTimeout(res, ms));
+	}
+	function jitter(n) {
+		return Math.round((Math.random() - 0.5) * n);
+	}
 
-  let questions = readQuestions();
-  let idx = 0;
-  const TYPE_MS = 50;
-  const THINK_MS = 3000;
-  const GAP_AFTER_SEND = 400;
+	// 🔑 Control de ciclo único
+	let currentRunId = 0; // identificador único de cada loop
 
-  function wait(ms){ return new Promise(res => setTimeout(res, ms)); }
-  function jitter(n){ return Math.round((Math.random()-0.5)*n); }
+	async function typeIntoFake(text, runId) {
+		fakeText.textContent = "";
+		fakeCaret.style.display = "inline-block";
+		for (let i = 0; i < text.length; i++) {
+			// si cambió el idioma/ciclo, abortamos y limpiamos
+			if (runId !== currentRunId) {
+				fakeText.textContent = "";
+				return;
+			}
+			fakeText.textContent += text[i];
+			await wait(TYPE_MS + jitter(8));
+		}
+		await wait(150);
+	}
 
-  // 🔑 Control de ciclo único
-  let currentRunId = 0; // identificador único de cada loop
+	function createUserBubble(text) {
+		const b = document.createElement("div");
+		b.className = "message user enter";
+		b.textContent = text;
+		return b;
+	}
 
-  async function typeIntoFake(text, runId){
-    fakeText.textContent = "";
-    fakeCaret.style.display = "inline-block";
-    for (let i = 0; i < text.length; i++){
-      // si cambió el idioma/ciclo, abortamos y limpiamos
-      if (runId !== currentRunId) { 
-        fakeText.textContent = "";
-        return;
-      }
-      fakeText.textContent += text[i];
-      await wait(TYPE_MS + jitter(8));
-    }
-    await wait(150);
-  }
-
-  function createUserBubble(text){
-    const b = document.createElement("div");
-    b.className = "message user enter";
-    b.textContent = text;
-    return b;
-  }
-
-  function createAIThinking(){
-    const a = document.createElement("div");
-    a.className = "message ai";
-    a.innerHTML = `<span class="thinking">
+	function createAIThinking() {
+		const a = document.createElement("div");
+		a.className = "message ai";
+		a.innerHTML = `<span class="thinking">
       <span class="dot"></span><span class="dot"></span><span class="dot"></span>
     </span>`;
-    return a;
-  }
+		return a;
+	}
 
-  function clearHistory(){ messagesEl.innerHTML = ""; }
+	function clearHistory() {
+		messagesEl.innerHTML = "";
+	}
 
-  async function cycle(runId){
-    while (runId === currentRunId) {
-      clearHistory();
+	async function cycle(runId) {
+		while (runId === currentRunId) {
+			clearHistory();
 
-      const q = questions[idx];
-      await typeIntoFake(q, runId);
-      if (runId !== currentRunId) return;
+			const q = questions[idx];
+			await typeIntoFake(q, runId);
+			if (runId !== currentRunId) return;
 
-      const userBubble = createUserBubble(q);
-      messagesEl.appendChild(userBubble);
-      fakeText.textContent = "";
-      fakeCaret.style.display = "none";
-      await wait(GAP_AFTER_SEND);
-      if (runId !== currentRunId) return;
+			const userBubble = createUserBubble(q);
+			messagesEl.appendChild(userBubble);
+			fakeText.textContent = "";
+			fakeCaret.style.display = "none";
+			await wait(GAP_AFTER_SEND);
+			if (runId !== currentRunId) return;
 
-      const aiBubble = createAIThinking();
-      messagesEl.appendChild(aiBubble);
-      await wait(THINK_MS);
+			const aiBubble = createAIThinking();
+			messagesEl.appendChild(aiBubble);
+			await wait(THINK_MS);
 
-      idx = (idx + 1) % questions.length;
-      await wait(350);
-    }
-  }
+			idx = (idx + 1) % questions.length;
+			await wait(350);
+		}
+	}
 
-  function startCycle(){
-    currentRunId++;
-    cycle(currentRunId);
-  }
+	function startCycle() {
+		currentRunId++;
+		cycle(currentRunId);
+	}
 
-  // Arranque inicial (pequeño delay por si tu i18n setea EN en load)
-  setTimeout(startCycle, 20);
+	// Arranque inicial (pequeño delay por si tu i18n setea EN en load)
+	setTimeout(startCycle, 20);
 
-  // 🛑 Debounce del observer para no reiniciar varias veces
-  if (i18nBox && "MutationObserver" in window){
-    let debounceTimer = null;
-    const obs = new MutationObserver(() => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        questions = readQuestions();
-        idx = 0;
-        startCycle();
-      }, 120); // espera a que terminen todos los cambios del i18n
-    });
-    obs.observe(i18nBox, { childList: true, subtree: true, characterData: true });
-  }
+	// 🛑 Debounce del observer para no reiniciar varias veces
+	if (i18nBox && "MutationObserver" in window) {
+		let debounceTimer = null;
+		const obs = new MutationObserver(() => {
+			clearTimeout(debounceTimer);
+			debounceTimer = setTimeout(() => {
+				questions = readQuestions();
+				idx = 0;
+				startCycle();
+			}, 120); // espera a que terminen todos los cambios del i18n
+		});
+		obs.observe(i18nBox, {
+			childList: true,
+			subtree: true,
+			characterData: true,
+		});
+	}
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const counters = document.querySelectorAll(".counter");
+	const counters = document.querySelectorAll(".counter");
 
-  counters.forEach(counter => {
-    const target = +counter.getAttribute("data-target");
-    const startValue = target * 0.9; // inicia al 90% del valor final
-    const duration = 7000; // duración total (ms)
-    let startTime = null;
+	counters.forEach((counter) => {
+		const target = +counter.getAttribute("data-target");
+		const startValue = target * 0.9; // inicia al 90% del valor final
+		const duration = 7000; // duración total (ms)
+		let startTime = null;
 
-    function animateCountUp(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const progress = (timestamp - startTime) / duration;
-      const eased = Math.sin(progress * Math.PI / 2); // animación suave (ease-out)
+		function animateCountUp(timestamp) {
+			if (!startTime) startTime = timestamp;
+			const progress = (timestamp - startTime) / duration;
+			const eased = Math.sin((progress * Math.PI) / 2); // animación suave (ease-out)
 
-      // Interpolación desde el valor inicial al final
-      const value = Math.floor(startValue + (target - startValue) * eased);
-      counter.textContent = value.toLocaleString();
+			// Interpolación desde el valor inicial al final
+			const value = Math.floor(startValue + (target - startValue) * eased);
+			counter.textContent = value.toLocaleString();
 
-      if (progress < 1) {
-        requestAnimationFrame(animateCountUp);
-      } else {
-        counter.textContent = target.toLocaleString(); // asegúrate de terminar exacto
-      }
-    }
+			if (progress < 1) {
+				requestAnimationFrame(animateCountUp);
+			} else {
+				counter.textContent = target.toLocaleString(); // asegúrate de terminar exacto
+			}
+		}
 
-    // Dispara animación cuando entra en pantalla
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          requestAnimationFrame(animateCountUp);
-          observer.unobserve(counter);
-        }
-      });
-    }, { threshold: 0.4 });
+		// Dispara animación cuando entra en pantalla
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						requestAnimationFrame(animateCountUp);
+						observer.unobserve(counter);
+					}
+				});
+			},
+			{ threshold: 0.4 }
+		);
 
-    observer.observe(counter);
-  });
+		observer.observe(counter);
+	});
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Solo si es mobile
-  if (window.innerWidth <= 768) {
-    document.querySelectorAll(".flow-row").forEach(flow => {
-      const steps = flow.querySelectorAll(".step");
-      steps.forEach((step, i) => {
-        if (i < steps.length - 1) {
-          const arrowWrapper = document.createElement("div");
-          arrowWrapper.className = "arrow-wrapper";
-          arrowWrapper.innerHTML = `
+	// Solo si es mobile
+	if (window.innerWidth <= 768) {
+		document.querySelectorAll(".flow-row").forEach((flow) => {
+			const steps = flow.querySelectorAll(".step");
+			steps.forEach((step, i) => {
+				if (i < steps.length - 1) {
+					const arrowWrapper = document.createElement("div");
+					arrowWrapper.className = "arrow-wrapper";
+					arrowWrapper.innerHTML = `
             <div class="flow-arrow"></div>
           `;
-          step.insertAdjacentElement("afterend", arrowWrapper);
-        }
-      });
-    });
-  }
+					step.insertAdjacentElement("afterend", arrowWrapper);
+				}
+			});
+		});
+	}
 });
-

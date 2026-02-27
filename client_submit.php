@@ -157,8 +157,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("<br><strong>❌ Database connection error:</strong> " . $e->getMessage());
     }
 
+    // 1. PROCESO DE BASE DE DATOS
+    $dbError = null;
     try {
-        // Insertar en base de datos
         $sql = "INSERT INTO ztp_client (
             full_name, land_entity, phone_number, email, mailing_address, broker_agent_info, additional_notes,
             scope_study, intent_study, property_acreage, property_zoning, property_density, property_entitled,
@@ -200,7 +201,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ':sketch_site_plan' => $sketch_site_plan,
             ':know_encumbrances' => $know_encumbrances
         ]);
+    } catch (PDOException $e) {
+        $dbError = $e->getMessage();
+        error_log("❌ Database Error (Client): " . $dbError);
+    }
 
+    // 2. PROCESO DE CORREO (Independiente)
+    $mailError = null;
+    try {
         // ====================================
         // CONFIGURAR CORREO (PHPMailer)
         // ====================================
@@ -214,12 +222,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->Port = $smtpPort;
         $mail->CharSet = 'UTF-8';
 
-        // ====================================
         // ENVÍO AL CLIENTE (Confirmación)
-        // ====================================
-        // ====================================
-        // ENVÍO AL CLIENTE (Confirmación)
-        // ====================================
         $mail->setFrom($smtpUser, 'Zero to Plan');
         $mail->addAddress($email, $full_name);
         $mail->Subject = "Client Intake Form Received - Zero to Plan";
@@ -242,9 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $mail->send();
 
-        // ====================================
         // ENVÍO INTERNO AL EQUIPO
-        // ====================================
         $mail->clearAddresses();
         $mail->addAddress("info@zerotoplan.com");
         $mail->Subject = "📩 New Land Intake Form (Clients) - {$full_name}";
@@ -268,24 +269,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </html>";
 
         $mail->send();
+    } catch (Exception $e) {
+        $mailError = $e->getMessage();
+        error_log("❌ Mail Error (Client): " . $mailError);
+    }
 
-        // ====================================
-        // CONFIRMACIÓN VISUAL
-        // ====================================
+    // 3. RESPUESTA FINAL
+    if ($dbError && $mailError) {
+        echo "<script>
+            alert('⚠️ Total failure: Database and Email could not be processed.');
+            window.history.back();
+        </script>";
+    } elseif ($dbError) {
+        echo "<script>
+            alert('✅ Email sent, but there was a database issue.');
+            window.location.href='index.html';
+        </script>";
+    } elseif ($mailError) {
+        echo "<script>
+            alert('✅ Data saved, but there was an email issue.');
+            window.location.href='index.html';
+        </script>";
+    } else {
         echo "<script>
             alert('✅ Form submitted successfully! We will be in touch shortly.');
             window.location.href='index.html';
-        </script>";
-
-    } catch (Exception $e) {
-        echo "<script>
-            alert('⚠️ Mail error: " . addslashes($e->getMessage()) . "');
-            window.history.back();
-        </script>";
-    } catch (PDOException $e) {
-        echo "<script>
-            alert('⚠️ Database error: " . addslashes($e->getMessage()) . "');
-            window.history.back();
         </script>";
     }
 

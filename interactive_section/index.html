@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Interactive Section | Scroll Experience</title>
+		<!-- Google Fonts for a premium look -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--text-color: #ffffff;
+				--bg-glass: rgba(0, 0, 0, 0.4);
+				--accent-color: #00d2ff;
+			}
+
+			*,
+			*::after,
+			*::before {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				background-color: #000;
+				color: var(--text-color);
+				font-family: "Outfit", sans-serif;
+				overflow-x: hidden;
+			}
+
+			/* Pre-loading the background image to avoid flicker */
+			img {
+				width: 100vw;
+				height: 100vh;
+				object-fit: cover;
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: -1;
+				filter: brightness(0.8);
+			}
+
+			main {
+				height: 500dvh; /* Longer scroll for more text space */
+				position: relative;
+			}
+
+			/* Container for all text sections */
+			.content-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				pointer-events: none;
+				z-index: 10;
+			}
+
+			.scroll-text {
+				position: absolute;
+				text-align: center;
+				max-width: 600px;
+				padding: 2rem;
+				border-radius: 20px;
+				backdrop-filter: blur(10px);
+				background: var(--bg-glass);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				opacity: 0;
+				transform: translateY(30px);
+				transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+			}
+
+			.scroll-text.active {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			.scroll-text h1 {
+				margin: 0 0 1rem;
+				font-size: 3rem;
+				font-weight: 600;
+				letter-spacing: -0.02em;
+				background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			.scroll-text p {
+				margin: 0;
+				font-size: 1.25rem;
+				font-weight: 300;
+				color: rgba(255, 255, 255, 0.9);
+				line-height: 1.6;
+			}
+
+			/* Visual scroll indicator */
+			.scroll-indicator {
+				position: fixed;
+				bottom: 30px;
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 10px;
+				opacity: 1;
+				transition: opacity 0.5s ease;
+			}
+
+			.scroll-indicator.hidden {
+				opacity: 0;
+			}
+
+			.mouse {
+				width: 26px;
+				height: 42px;
+				border: 2px solid #fff;
+				border-radius: 13px;
+				position: relative;
+			}
+
+			.mouse::before {
+				content: "";
+				width: 4px;
+				height: 8px;
+				background: #fff;
+				position: absolute;
+				left: 50%;
+				top: 8px;
+				transform: translateX(-50%);
+				border-radius: 2px;
+				animation: scroll-wheel 1.5s infinite;
+			}
+
+			@keyframes scroll-wheel {
+				0% {
+					opacity: 1;
+					transform: translate(-50%, 0);
+				}
+				100% {
+					opacity: 0;
+					transform: translate(-50%, 15px);
+				}
+			}
+
+			.scroll-indicator span {
+				font-size: 0.75rem;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				color: rgba(255, 255, 255, 0.6);
+			}
+
+			#video-canvas {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				z-index: -1;
+				object-fit: cover;
+			}
+
+			/* --- Loader Styles --- */
+			#loader {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: #000;
+				z-index: 1000;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				transition:
+					opacity 0.8s ease-out,
+					visibility 0.8s;
+			}
+
+			#loader.fade-out {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.loader-content {
+				text-align: center;
+				width: 300px;
+			}
+
+			.loader-text {
+				font-size: 1rem;
+				letter-spacing: 4px;
+				text-transform: uppercase;
+				margin-bottom: 20px;
+				color: var(--accent-color);
+			}
+
+			.progress-container {
+				width: 100%;
+				height: 2px;
+				background: rgba(255, 255, 255, 0.1);
+				border-radius: 2px;
+				overflow: hidden;
+			}
+
+			#progress-bar {
+				width: 0%;
+				height: 100%;
+				background: var(--accent-color);
+				box-shadow: 0 0 15px var(--accent-color);
+				transition: width 0.3s ease;
+			}
+
+			.percentage {
+				margin-top: 15px;
+				font-size: 0.8rem;
+				color: rgba(255, 255, 255, 0.5);
+			}
+
+			/* Lenis recommendations */
+			html.lenis,
+			html.lenis body {
+				height: auto;
+			}
+
+			.lenis.lenis-smooth {
+				scroll-behavior: auto !important;
+			}
+
+			.lenis.lenis-smooth [data-lenis-prevent] {
+				overscroll-behavior: contain;
+			}
+
+			.lenis.lenis-stopped {
+				overflow: hidden;
+			}
+
+			.lenis.lenis-scrolling iframe {
+				pointer-events: none;
+			}
+		</style>
+
+		<script type="module">
+			import Lenis from "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/+esm";
+
+			const MAX_FRAMES = 300;
+			const canvas = document.getElementById("video-canvas");
+			const context = canvas.getContext("2d");
+			const texts = document.querySelectorAll(".scroll-text");
+			const indicator = document.querySelector(".scroll-indicator");
+
+			// --- Smooth Scroll Initialization (Lenis) ---
+			const lenis = new Lenis({
+				duration: 1.2,
+				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+				direction: "vertical",
+				gestureDirection: "vertical",
+				smooth: true,
+				mouseMultiplier: 1,
+				smoothTouch: false,
+				touchMultiplier: 2,
+				infinite: false,
+			});
+
+			function raf(time) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+			requestAnimationFrame(raf);
+
+			// Configuración de texto
+			const config = [
+				{ id: "text-1", start: 0.1, end: 0.3 },
+				{ id: "text-2", start: 0.4, end: 0.6 },
+				{ id: "text-3", start: 0.7, end: 0.9 },
+			];
+
+			// 1. PRECARGA DE IMÁGENES
+			const images = [];
+			let loadedCount = 0;
+			const progressBar = document.getElementById("progress-bar");
+			const percentageText = document.querySelector(".percentage");
+			const loader = document.getElementById("loader");
+
+			const updateProgress = () => {
+				loadedCount++;
+				const progress = (loadedCount / MAX_FRAMES) * 100;
+				progressBar.style.width = `${progress}%`;
+				percentageText.innerText = `${Math.round(progress)}%`;
+
+				if (loadedCount === MAX_FRAMES) {
+					setTimeout(() => {
+						loader.classList.add("fade-out");
+						lenis.start();
+						renderCanvas(1);
+					}, 500);
+				}
+			};
+
+			const preloadImages = () => {
+				lenis.stop(); // Bloquear scroll mientras carga
+				for (let i = 1; i <= MAX_FRAMES; i++) {
+					const img = new Image();
+					const id = i.toString().padStart(3, "0");
+					img.src = `/interactive_section/frames/ezgif-frame-${id}.jpg`;
+					img.onload = updateProgress;
+					img.onerror = updateProgress; // Evitar que el loader se bloquee si falla una imagen
+					images.push(img);
+				}
+			};
+
+			// 2. MANEJO DEL CANVAS (AJUSTE DE TAMAÑO)
+			const renderCanvas = (index) => {
+				const img = images[index - 1];
+				if (!img || !img.complete) return;
+
+				// Ajuste tipo "object-fit: cover" manual para canvas
+				const canvasAspect = window.innerWidth / window.innerHeight;
+				const imgAspect = img.width / img.height;
+				let drawWidth, drawHeight, offsetX, offsetY;
+
+				if (canvasAspect > imgAspect) {
+					drawWidth = window.innerWidth;
+					drawHeight = window.innerWidth / imgAspect;
+					offsetX = 0;
+					offsetY = -(drawHeight - window.innerHeight) / 2;
+				} else {
+					drawWidth = window.innerHeight * imgAspect;
+					drawHeight = window.innerHeight;
+					offsetX = -(drawWidth - window.innerWidth) / 2;
+					offsetY = 0;
+				}
+
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+				context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+			};
+
+			// 3. LÓGICA DE SCROLL (Sincronizada con Lenis)
+			lenis.on("scroll", ({ scroll, limit, velocity, direction, progress }) => {
+				const scrollFraction = Math.min(Math.max(progress, 0), 0.99);
+
+				// Actualizar Imagen
+				const frameIndex = Math.floor(scrollFraction * MAX_FRAMES) || 1;
+				requestAnimationFrame(() => renderCanvas(frameIndex));
+
+				// Actualizar Textos e Indicador
+				config.forEach((item) => {
+					const el = document.getElementById(item.id);
+					if (scrollFraction >= item.start && scrollFraction <= item.end) {
+						el.classList.add("active");
+					} else {
+						el.classList.remove("active");
+					}
+				});
+
+				if (scrollFraction > 0.05) indicator.classList.add("hidden");
+				else indicator.classList.remove("hidden");
+			});
+
+			// Inicialización
+			preloadImages();
+
+			// Ajustar canvas si cambia el tamaño de ventana
+			window.addEventListener("resize", () => {
+				const scrollFraction =
+					window.scrollY /
+					(document.documentElement.scrollHeight - window.innerHeight);
+				const frameIndex = Math.floor(scrollFraction * MAX_FRAMES) || 1;
+				renderCanvas(frameIndex);
+			});
+		</script>
+	</head>
+	<body>
+		<div id="loader">
+			<div class="loader-content">
+				<div class="loader-text">Iniciando Experiencia</div>
+				<div class="progress-container">
+					<div id="progress-bar"></div>
+				</div>
+				<div class="percentage">0%</div>
+			</div>
+		</div>
+
+		<main>
+			<canvas id="video-canvas"></canvas>
+
+			<div class="content-overlay">
+				<section id="text-1" class="scroll-text">
+					<h1>Bienvenido</h1>
+					<p>
+						Explora una nueva dimensión de interacción digital diseñada para
+						sorprender.
+					</p>
+				</section>
+
+				<section id="text-2" class="scroll-text">
+					<h1>Inmersión Total</h1>
+					<p>
+						Cada frame está sincronizado con tu movimiento para crear una
+						experiencia fluida.
+					</p>
+				</section>
+
+				<section id="text-3" class="scroll-text">
+					<h1>El Futuro es Hoy</h1>
+					<p>
+						Lleva tu visión al siguiente nivel con tecnologías web de
+						vanguardia.
+					</p>
+				</section>
+			</div>
+
+			<div class="scroll-indicator">
+				<div class="mouse"></div>
+				<span>Desliza para explorar</span>
+			</div>
+		</main>
+	</body>
+</html>
