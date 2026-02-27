@@ -148,7 +148,7 @@
 		"t2": "Address",
 		"t3": "924 NW 1st St, Fort Lauderdale, FL 33311",
 		"t4": "Call Us",
-		"t5": "+1 954-730-5416",
+		"t5": "+1 305-686-9343",
 		"t6": "Email Us",
 		"t7": "info@zerotoplan.com"
 	},
@@ -173,7 +173,6 @@
 		"m3_text": "Review with ownership",
 		"m4_text": "Pre-app meeting with City",
 		"m5_text": "Final massing study with comments & recommendations",
-
 		"fin_title": "Financial and Market Analysis",
 		"f1_text": "Market study – Demographics (Esri), Market conditions (CoStar & others)",
 		"f2_text": "Development proforma from Market & Massing study",
@@ -194,7 +193,6 @@
 	},
 	"serve": {
 		"title": "Who We Serve",
-
 		"dev_title": "Developers",
 		"dev_tagline": "Build smarter, faster, and leaner.",
 		"dev_b1": "Move faster without hiring extra staff",
@@ -203,7 +201,6 @@
 		"dev_b4": "Validate if a concept works before spending capital",
 		"dev_b5": "Tools to negotiate true residual land value",
 		"dev_b6": "Investor-ready packages that speed up financing",
-
 		"arch_title": "Architects",
 		"arch_tagline": "Keep your team designing while we handle feasibility.",
 		"arch_b1": "Faster turnaround in crucial land acquisition phases",
@@ -211,7 +208,6 @@
 		"arch_b3": "Reduce overhead and training on non-core work",
 		"arch_b4": "Financial limits are set early, preventing wasted design cycles",
 		"arch_b5": "Support clients with clarity when they are uncertain",
-
 		"broker_title": "Real Estate Agents & Brokers",
 		"broker_tagline": "Close deals with confidence and uncover hidden value.",
 		"broker_b1": "Close transactions faster by removing uncertainty",
@@ -219,7 +215,6 @@
 		"broker_b3": "Unlock hidden value and price properties more accurately",
 		"broker_b4": "Differentiate as strategic advisors, not just salespeople",
 		"broker_b5": "Build trust with international buyers",
-
 		"inv_title": "Local & International Investors",
 		"inv_tagline": "Reduce risks and deploy capital with confidence.",
 		"inv_b1": "Identify as many unknowns as possible before committing capital",
